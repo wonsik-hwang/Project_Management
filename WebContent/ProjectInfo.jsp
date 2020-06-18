@@ -195,8 +195,8 @@
 						<label class="txtlabel" style="min-height: 100px; word-wrap: break-word; padding-right: 20px"><%=rs.getString("PJContent")%></label>
 					</div>
 					<div style="float:right; padding: 0px 20px 20px 0px ;">
-						<input class="primary" type="button" value="수정" onClick="location.href = 'ProjectUpdate.jsp'">
-						<input class="primary" type="button" value="삭제" onClick="location.href = 'ProjectUpdate.jsp'">
+						<input class="primary" type="button" value="수정" onClick="location.href = 'ProjectInfo_Modify.jsp'">
+						<input class="primary" type="button" value="삭제" onClick="location.href = 'ProjectDelete.jsp'">
 						<input type="button" value="목록" onClick="location.href = 'ProjectList.jsp'">
 					</div>
 				</div>
@@ -243,6 +243,29 @@ catch(SQLException ex) {
 			<script src="js/browser.min.js"></script>
 			<script src="js/breakpoints.min.js"></script>
 			<script src="js/util.js"></script>
+<<<<<<< HEAD
+			<script src="js/main.js"></script>		
+=======
 			<script src="js/main.js"></script>
+>>>>>>> branch 'master' of https://github.com/wonsik-hwang/Project_Management.git
 </body>
 </html>
+
+
+<!--   String PJNo = request.getParameter("PJNo"); -->
+<!-- 				   PreparedStatement pstmt; -->
+<!-- 				   String dbURL="jdbc:mysql://192.168.0.71:3306/ProjectManagement?serverTimezone=UTC";  -->
+<!-- 				   String dbID="hidata";  -->
+<!-- 				   String dbPassword="hidata2312357!"; -->
+<!-- 				   Class.forName("com.mysql.jdbc.Driver"); -->
+				   
+<!-- 				   Connection conn=DriverManager.getConnection(dbURL, dbID, dbPassword); -->
+				   
+<!-- 				   Statement stmt = conn.createStatement(); -->
+<!-- 				   String sql = "DELETE FROM MA_Project WHERE PJNo = " + PJNo; -->
+<!-- 				   pstmt = conn.prepareStatement(sql); -->
+<!-- 			       stmt.executeUpdate(sql); -->
+			       
+<!-- 			       pstmt.close(); -->
+<!-- 			       stmt.close(); -->
+<!-- 			       conn.close(); -->
