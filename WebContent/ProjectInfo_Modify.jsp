@@ -63,6 +63,25 @@
 	</style>
 
 </head>
+
+<%
+try{
+	String PJNo = request.getParameter("PJNo");
+	String dbURL="jdbc:mysql://192.168.0.71:3306/ProjectManagement"; 
+	String dbID="hidata"; 
+	String dbPassword="hidata2312357!";
+	
+	Class.forName("com.mysql.jdbc.Driver");
+	System.out.println("드라이버 로드를 완료 하였습니다.");
+	
+	ResultSet rs = null;
+	Connection conn=DriverManager.getConnection(dbURL, dbID, dbPassword);
+	System.out.println("MySQL 데이터베이스 db에 성공적으로 접속했습니다. ");
+								   
+	Statement stmt = conn.createStatement();
+	String sql = "SELECT * FROM MA_Project ORDER BY PJNo DESC";
+	rs = stmt.executeQuery(sql);
+%>	
 <body class="is-preload">
 	<!-- Wrapper -->
 	<div id="wrapper">

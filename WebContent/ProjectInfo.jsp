@@ -101,8 +101,8 @@
 						<div style="width:74.7%; float:right;">
 							<ul class="snip1398">
 								<li class="rowLi">
-										<a href="ProjectInfo.jsp" data-hover="프로젝트">
-										프로젝트
+										<a href="ProjectInfo.jsp" data-hover="기본정보">
+										기본정보
 									</a>
 								</li>
 								<li class="rowLi ">
@@ -139,7 +139,7 @@
 
 			</div>
 			<div class="row" style="margin-Left:5%; margin-right:5%;padding-top:30px; background: #FFFFFF; border-radius: 10px;">
-				<div style="width: 100%;">
+			<div style="width: 100%;">
 				
 				<%
 				try{
@@ -159,7 +159,7 @@
 				   while(rs.next()){
 				%>
 				<div style="width:50%; float: left">
-						<div>
+					<div>
 						<label class="toppadding">프로젝트명</label>
 						<label id="PJNm" class="txtlabel"><%=rs.getString("PJNm")%></label>
 	
@@ -168,16 +168,10 @@
 	
 						<label class="toppadding">주관 담당자(정)</label>
 						<label id="HostManager" class="txtlabel"><%=rs.getString("HostManager")%></label>
-						</div>
-						<div>
-							<label class="toppadding" id="DATE">기간</label>
-							
-							<label><%= rs.getString("PJStartDt").split(" ")[0]%></label>
-							&nbsp&nbsp~&nbsp&nbsp
-							<label><%= rs.getString("PJEndDt").split(" ")[0]%></label>
-						</div>
-				</div>		
-					<div>
+					</div>
+				</div>
+						
+				<div>
 						<label class="toppadding">프로젝트 PM</label>
 						<label id="PJPM" class="txtlabel"><%=rs.getString("PJPM")%></label>
 	
@@ -186,8 +180,19 @@
 	
 						<label class="toppadding">주관 담당자(부)</label>
 						<label id="HostSubManager" class="txtlabel"><%=rs.getString("HostSubManager")%></label>
-					</div>
 				</div>
+				
+					
+			</div>
+			<div style="width:100%">
+				<div style="width:100%">
+				<label class="toppadding" id="DATE">기간</label>
+				</div>
+					<label style="float: left;"><%= rs.getString("PJStartDt")%></label>
+					<label style="width: 3%; float: left; text-align: center">~</label>
+					<label style="float: left;"><%= rs.getString("PJEndDt")%></label>
+			</div>
+					
 
 				<div style="width: 100%;">
 					<div>
@@ -195,8 +200,15 @@
 						<label class="txtlabel" style="min-height: 100px; word-wrap: break-word; padding-right: 20px"><%=rs.getString("PJContent")%></label>
 					</div>
 					<div style="float:right; padding: 0px 20px 20px 0px ;">
-						<input class="primary" type="button" value="수정" onClick="location.href = 'ProjectInfo_Modify.jsp'">
-						<input class="primary" type="button" value="삭제" onClick="location.href = 'ProjectDelete.jsp'">
+
+						<a href="ProjectInfo_Modify.jsp?PJNo=<%=PJNo%>">
+						<input class="primary" type="button" value="수정">
+						</a>
+						
+						<a href='ProjectDelete.jsp?PJNo=<%=PJNo%>'>
+						<input class="primary" type="button" value="삭제">
+						</a>
+						
 						<input type="button" value="목록" onClick="location.href = 'ProjectList.jsp'">
 					</div>
 				</div>
@@ -243,11 +255,8 @@ catch(SQLException ex) {
 			<script src="js/browser.min.js"></script>
 			<script src="js/breakpoints.min.js"></script>
 			<script src="js/util.js"></script>
-<<<<<<< HEAD
 			<script src="js/main.js"></script>		
-=======
 			<script src="js/main.js"></script>
->>>>>>> branch 'master' of https://github.com/wonsik-hwang/Project_Management.git
 </body>
 </html>
 
