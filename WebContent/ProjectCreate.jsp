@@ -127,7 +127,7 @@
 					<div style="height: 100px; float:right; padding-top: 15px;">
 						<button id = "btnSave" name = "btnSave" class="primary" type="button">등록</button>
 						&nbsp&nbsp
-						<input type="button" value="취소"  onclick="home()">
+						<input type="button" value="취소"  onClick="location.href='ProjectList.jsp'">
 					</div>
 				</div>
 			</div>
@@ -232,10 +232,6 @@
 				$(this).removeClass("hover");
 			}
 		);
-
-		function home() {
-			location.href = "ProjectList.jsp";
-		}
 
 		function update() {
 			location.href = 'update_info.html';
