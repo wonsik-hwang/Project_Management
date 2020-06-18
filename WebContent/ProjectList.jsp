@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.util.regex.Pattern" %>
-<%-- <%@page import="javax.sql.*" %> --%>
-<%-- <%@page import="javax.naming.*" %> --%>
 <%@page import="java.sql.*"%>   
 <%
  response.setHeader("Cache-Control","no-cache");
@@ -88,11 +86,6 @@
 		}
 	</style>
 </head>
-
-<%
-
-%>
-
 <body>
 	<!-- Wrapper -->
 	<div id="wrapper">
@@ -236,12 +229,11 @@ try{
 	rs = stmt.executeQuery(sql);
 	
 	int rs_Count = 0; 
-	
 	while(rs.next()){
 		out.print("<tr>");
 		out.print("<td>" + "<span>" + "&nbsp" + "</span>" + "</td>");
-		out.print("<td>  <a href='ProjectInfo.jsp?PJNo="+ rs.getString("PJNo") +"'>" + "<span>" + rs.getString("PJNm") + "<span>" + " </a></td>");
-		out.print("<td>" + "<span>" + rs.getString("PJPM") + "</td>");
+		out.print("<td>  <a href='ProjectInfo.jsp?PJNo="+ rs.getString("PJNo") +"'>" + "<span>" + rs.getString("PJNm") + "</span>" + " </a></td>");
+		out.print("<td>" + "<span>" + rs.getString("PJPM") + "</span>" + "</td>");
 		out.print("<td>" + "<span>" + rs.getString("PJState") + "</span>" + "</td>");
 		out.print("<td>" + "<span>" + rs.getString("PJStartDt") + "</span>" + "</td>");
 		out.print("<td>" + "<span>" + rs.getString("PJEndDt") +"</span>" +  "</td>");
@@ -270,7 +262,7 @@ catch(ClassNotFoundException ex) {
 										<tr>
 									<td colspan="9">
 										<div style="margin:0 auto;position:static;text-align:center">
-											No records available.
+											저장된 데이터가 없습니다.
 										</div>
 									</td>
 								</tr>
@@ -284,7 +276,7 @@ catch(SQLException ex) {
 										<tr>
 									<td colspan="9">
 										<div style="margin:0 auto;position:static;text-align:center">
-											No records available.
+											저장된 데이터가 없습니다.
 										</div>
 									</td>
 								</tr>

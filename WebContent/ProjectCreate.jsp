@@ -98,10 +98,10 @@
 						<input name = "PJNm"  id="PJNm"  type="text">
 	
 						<label class="toppadding">업체 명</label>
-						<input type="text" id="PartnerNm">
+						<input type="text" id="PartnerNm" name="PartnerNm">
 	
 						<label class="toppadding">주관 담당자(정)</label>
-						<input type="text" id="HostManager">
+						<input type="text" id="HostManager" name="HostManager">
 	
 						<div>
 							<label class="toppadding" id="DATE">기간</label>
