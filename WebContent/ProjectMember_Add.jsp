@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
-<%@page import="ProjectManagement.MemberDao"%>
-<%@page import="ProjectManagement.MemberDto"%>
+<%@page import= "ProjectManagement.MemberDao" %>
+<%@page import= "ProjectManagement.MemberDto" %>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <!DOCTYPE HTML>
 <!--
@@ -19,9 +19,9 @@
 	<link rel="stylesheet" href="CSS/mouseover3.css" />
 
 	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="js/ProjectMember_Add.js"></script>
-	<script type="text/javascript" src="js/gsWrite.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+	</script>
+
 	<script>
 		$(".hover").mouseleave(
 			function() {
@@ -30,14 +30,6 @@
 		);
 	</script>
 
-	<%
-	
-	MemberDao mdao = MemberDao.getInstance();
-    MemberDto mdto = new MemberDto();
-    
-    List<MemberDto> memlist = mdao.user_name();
-	
-	%>
 
 	<style>
 		.body {
@@ -85,7 +77,6 @@
 			color: white !important;
 		}
 	</style>
-
 </head>
 
 <body>
@@ -158,34 +149,34 @@
 
 
 
-		<section div class="row" style="margin-Left:5%; padding-top:50px; background-color: white; margin-Right:5%">
-			<div>
-				<select>
-					<option value="">직책을 선택하세요</option>
-					<option value="인턴">인턴</option>
-					<option value="사원">사원</option>
-					<option value="주임">주임</option>
-					<option value="대리">대리</option>
-					<option value="차장">차장</option>
-					<option value="부장">부장</option>
-					<option value="이사">이사</option>
-					<option value="프로젝트 매니저">프로젝트 매니저</option>
-				</select>
-			</div>
+<!-- 		<section div class="row" style="margin-Left:5%; padding-top:50px; background-color: white; margin-Right:5%"> -->
+<!-- 			<div> -->
+<!-- 				<select> -->
+<!-- 					<option value="">직책을 선택하세요</option> -->
+<!-- 					<option value="인턴">인턴</option> -->
+<!-- 					<option value="사원">사원</option> -->
+<!-- 					<option value="주임">주임</option> -->
+<!-- 					<option value="대리">대리</option> -->
+<!-- 					<option value="차장">차장</option> -->
+<!-- 					<option value="부장">부장</option> -->
+<!-- 					<option value="이사">이사</option> -->
+<!-- 					<option value="프로젝트 매니저">프로젝트 매니저</option> -->
+<!-- 				</select> -->
+<!-- 			</div> -->
 
-			&nbsp &nbsp &nbsp &nbsp &nbsp
-			<div>
-				<input id="search" type="text" class="form-control" placeholder="Search...">
-				<span>
-					<span><i class="search"></i></span>
-				</span>
-			</div>
-			&nbsp &nbsp &nbsp &nbsp &nbsp<div style="float:left; padding-left:20px">
-					<input type="button" value="검색">
-				</div>
-			&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+<!-- 			&nbsp &nbsp &nbsp &nbsp &nbsp -->
+<!-- 			<div> -->
+<!-- 				<input id="search" type="text" class="form-control" placeholder="Search..."> -->
+<!-- 				<span> -->
+<!-- 					<span><i class="search"></i></span> -->
+<!-- 				</span> -->
+<!-- 			</div> -->
+<!-- 			&nbsp &nbsp &nbsp &nbsp &nbsp<div style="float:left; padding-left:20px"> -->
+<!-- 					<input type="button" value="검색"> -->
+<!-- 				</div> -->
+<!-- 			&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp -->
 
-		</section>
+<!-- 		</section> -->
 
 
 

@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE HTML>
 <!--
 	Editorial by HTML5 UP
@@ -8,7 +9,7 @@
 
 
 <head>
-	<title>프로젝트 관리 솔루션</title>
+	<title>������Ʈ ���� �ַ��</title>
 
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -67,6 +68,7 @@
 			font-size: 18px;
 		}
 	</style>
+
 </head>
 
 
@@ -83,7 +85,7 @@
 					<div id="main">
 						<br />
 						<div style="height:2px;">
-							<a1 class="nanum" ; style="font-size:28px; color:black; margin-left:5%;">프로젝트 등록</a1>
+							<a1 class="nanum" ; style="font-size:28px; color:black; margin-left:5%;">������Ʈ ����</a1>
 						</div>
 						<br />
 					</div>
@@ -93,17 +95,17 @@
 
 			<div class="row" style="margin-Left:5%; margin-right:5%; padding-top:30px;background: #FFFFFF; border-radius: 10px;">
 				<div class="col-5">
-					<label>프로젝트명</label>
+					<label>������Ʈ��</label>
 					<input name = "PJNm"  id="PJNm"  type="text">
 
-					<label class="toppadding">업체 명</label>
+					<label class="toppadding">��ü ��</label>
 					<input type="text" id="PartnerNm">
 
-					<label class="toppadding">주관 담당자(정)</label>
+					<label class="toppadding">�ְ� �����(��)</label>
 					<input type="text" id="HostManager">
 
 					<div>
-						<label class="toppadding" id="DATE">기간</label>
+						<label class="toppadding" id="DATE">�Ⱓ</label>
 						<input name = "StartDt"  id="StartDt"  type="date">
 						&nbsp&nbsp~&nbsp&nbsp
 						<input name = "EndDt"  id="EndDt"  type="date">
@@ -111,23 +113,23 @@
 				</div>
 
 				<div class="col-5">
-					<label>프로젝트 PM</label>
+					<label>������Ʈ PM</label>
 					<input name = "PJPM" id="PJPM" type="text">
 
-					<label class="toppadding">주관 명</label>
+					<label class="toppadding">�ְ� ��</label>
 					<input name = "HostNm" id="HostNm" type="text">
 
-					<label class="toppadding">주관 담당자(부)</label>
+					<label class="toppadding">�ְ� �����(��)</label>
 					<input name = "HostSubManager" id="HostSubManager" type="text">
 				</div>
 
 				<div class="col-10">
-					<label class="toppadding">프로젝트 내용</label>
+					<label class="toppadding">������Ʈ ����</label>
 					<textarea name = "PJContent" id="PJContent" rows="5"> </textarea>
 					<div style="height: 100px; float:right; padding-top: 15px;">
-						<button id = "btnSave" name = "btnSave" class="primary" type="button">등록</button>
+						<button id = "btnSave" name = "btnSave" class="primary" type="button">���</button>
 						&nbsp&nbsp
-						<input type="button" value="취소"  onclick="home()">
+						<input type="button" value="���"  onclick="home()">
 					</div>
 				</div>
 			</div>
@@ -143,9 +145,9 @@
 						<h2 class=nanum> HIDATA PROJECT CENTER</h2>
 					</header>
 					<ul>
-						<li class="nanum"><a href="ProjectCreate.jsp">프로젝트 등록</a></li>
-						<li class="nanum"><a href="ProjectList.jsp"> 프로젝트 목록</a></li>
-<!-- 						<li class="nanum"><a href="project_user.html">사용자 관리</a></li> -->
+						<li class="nanum"><a href="ProjectCreate.jsp">������Ʈ ���</a></li>
+						<li class="nanum"><a href="ProjectList.jsp"> ������Ʈ ���</a></li>
+<!-- 						<li class="nanum"><a href="project_user.html">����� ����</a></li> -->
 					</ul>
 				</nav>
 			</div>
@@ -160,83 +162,14 @@
 	<script src="js/breakpoints.min.js"></script>
 	<script src="js/util.js"></script>
 	<script src="js/main.js"></script>
-	<script type="text/javascript" >
-	$(function () {
-		$("#btnSave").click(function () {
-			if ($("#PJNm").val() == "")
-			{
-				alert('프로젝트 명이 기입되지 않았습니다.');
-				return;
-			}
-			if ($("#PJPM").val() == "")
-			{
-				alert('프로젝트 PM이 기입되지 않았습니다.');
-				return;
-			}
-			if ($("#PartnerNm").val() == "")
-			{
-				alert('업체 명이 기입되지 않았습니다.');
-				return;
-			}
-			if ($("#HostNm").val() == "")
-			{
-				alert('주관 명이 기입되지 않았습니다.');
-				return;
-			}
-			if ($("#HostManager").val() == "")
-			{
-				alert('주관 담당자(정)이 기입되지 않았습니다.');
-				return;
-			}
-			if ($("#HostSubManager").val() == "")
-			{
-				alert('주관 담당자(부)가 기입되지 않았습니다.');
-				return;
-			}
-			if ($("#StartDt").val() == "")
-			{
-				alert('시작 일자가 기입되지 않았습니다.');
-				return;
-			}
-			if ($("#EndDt").val() == "")
-			{
-				alert('종료 일자가 기입되지 않았습니다.');
-				return;
-			}
-			$.ajax({
-			    url:"./ProjectCreate_Check.jsp",
-			    async:false,
-			    type:"POST",
-			    data: { PJNm: $("#PJNm").val() },// 전송할 데이터					 
-			    success:function(data) {
-			    	if(data.indexOf("중복") != -1) {
-		    			alert("중복된 프로젝트 명이 존재합니다.");
-		    		}
-			    	else {
-			    		$("#PJCreate").submit();
-			    	}
-			    }// 요청 완료 시
-			});
-		})
-	})
-	</script>
-	<script type="text/javascript">
-		document.getElementById("StartDt").value = new Date().toISOString().substring(0, 10);;
-		document.getElementById("EndDt").value = new Date().toISOString().substring(0, 10);;
-	</script>
 	<script>
-		$(".hover").mouseleave(
-			function() {
-				$(this).removeClass("hover");
-			}
-		);
-
-		function home() {
-			location.href = "ProjectList.jsp";
+		function hmoe() {
+			location.href = 'ProjectList.jsp';
 		}
 
-		function update() {
-			location.href = 'update_info.html';
+		function form_submit() {
+			document.id.action = "link_page.html";
+			document.id.submit();
 		}
 	</script>
 </body>

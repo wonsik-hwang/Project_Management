@@ -88,9 +88,7 @@
 			color: white !important;
 		}
 	</style>
-
 </head>
-
 <body>
 	<!-- Wrapper -->
 	<div id="wrapper">
@@ -99,23 +97,17 @@
 		<div id="main" style="background:#F5F5F5">
 			<div style="background: white">
 				<div class="inner">
-
-
-				<!-- Header -->
-				<div id="main">
-					<br />
-					<div style="height:2px;">
-						<a1 class="nanum"; style="font-size:28px; color:black; margin-left:5%;">프로젝트 정보</a1>
+					<!-- Header -->
+					<div id="main">
+						<br />
+						<div style="height:2px;">
+							<a1 class="nanum"; style="font-size:28px; color:black; margin-left:5%;">프로젝트 정보</a1>
+						</div>
 					</div>
 				</div>
-				</div>
-
 					<div>
-
 						<div style="width:74.7%; float:right;">
-
 							<ul class="snip1398">
-
 								<li class="rowLi">
 										<a href="project_list.html" data-hover="프로젝트">
 										프로젝트
@@ -244,10 +236,9 @@ catch(SQLException ex) {
 								<h2 class="nanum"> HIDATA PROJECT CENTER</h2>
 							</header>
 							<ul>
-						<li class="nanum"><a href="ProjectCreate.jsp">프로젝트 등록</a></li>
-						<li class="nanum"><a href="ProjectList.jsp"> 프로젝트 목록</a></li>
-<!-- 						<li class="nanum"><a href="project_user.html">사용자 관리</a></li> -->
-								<li class="nanum"><a></a></li>
+								<li class="nanum"><a href="ProjectCreate.jsp">프로젝트 등록</a></li>
+								<li class="nanum"><a href="ProjectList.jsp"> 프로젝트 목록</a></li>
+		<!-- 						<li class="nanum"><a href="project_user.html">사용자 관리</a></li> -->
 							</ul>
 						</nav>
 					</div>
