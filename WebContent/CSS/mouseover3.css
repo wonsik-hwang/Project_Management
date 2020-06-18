@@ -1,0 +1,64 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
+.snip1398 {
+  font-family: 'Raleway', Arial, sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.snip1398 * {
+  box-sizing: border-box;
+  -webkit-transition: all 0.35s linear;
+  transition: all 0.35s linear;
+}
+.snip1398 li {
+  display: inline-block;
+  list-style: outside none none;
+  margin: 0.5em em;
+  overflow: hidden;
+}
+.snip1398 a {
+  padding: 0.3em 0.8em;
+  backface-visibility: hidden;
+  color: #5D5D5D;
+  display: block;
+  line-height: 2em;
+  padding: 0 1em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  -webkit-transform-origin: 0 50%;
+  -ms-transform-origin: 0 50%;
+  transform-origin: 0 50%;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+.snip1398 a:after {
+  -webkit-transition: all 0.35s linear;
+  transition: all 0.35s linear;
+  background-color: #353535;  /*e67e22*/
+  color: transparent;
+  content: attr(data-hover);
+  left: 0;
+  line-height: 2em;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  opacity: 0.4;
+}
+.snip1398 li:hover a,
+.snip1398 li.current a {
+  -webkit-transform: rotateX(90deg);
+  transform: rotateX(90deg);
+  color: transparent;
+}
+.snip1398 li:hover a:after,
+.snip1398 li.current a:after {
+  opacity: 1;
+  color: #ffffff;
+  -webkit-transform: rotateX(-90deg);
+  transform: rotateX(-90deg);
+}
+/* Demo purposes only */
+body {
+  background-color: #FFFFFF;
+}
