@@ -110,6 +110,28 @@
 							<input name = "EndDt"  id="EndDt"  type="date">
 						</div>
 					</div>
+<<<<<<< HEAD
+				</div>
+
+				<div class="col-5">
+					<label>프로젝트 PM</label>
+					<input name = "PJPM" id="PJPM" type="text">
+
+					<label class="toppadding">주관 명</label>
+					<input name = "HostNm" id="HostNm" type="text">
+
+					<label class="toppadding">주관 담당자(부)</label>
+					<input name = "HostSubManager" id="HostSubManager" type="text">
+				</div>
+
+				<div class="col-10">
+					<label class="toppadding">프로젝트 내용</label>
+					<textarea name = "PJContent" id="PJContent" rows="5"> </textarea>
+					<div style="height: 100px; float:right; padding-top: 15px;">
+						<button id = "btnSave" name = "btnSave" class="primary" type="button">등록</button>
+						&nbsp&nbsp
+						<input type="button" value="취소"  onClick="location.href='ProjectList.jsp'">
+=======
 	
 					<div class="col-5">
 						<label>프로젝트 PM</label>
@@ -120,6 +142,7 @@
 	
 						<label class="toppadding">주관 담당자(부)</label>
 						<input name = "HostSubManager" id="HostSubManager" type="text">
+>>>>>>> branch 'master' of https://github.com/wonsik-hwang/Project_Management.git
 					</div>
 	
 					<div class="col-10">
@@ -232,10 +255,6 @@
 				$(this).removeClass("hover");
 			}
 		);
-
-		function home() {
-			location.href = "ProjectList.jsp";
-		}
 
 		function update() {
 			location.href = 'update_info.html';

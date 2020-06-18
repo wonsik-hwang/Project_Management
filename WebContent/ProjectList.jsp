@@ -3,7 +3,11 @@
 <%-- <%@page import="javax.sql.*" %> --%>
 <%-- <%@page import="javax.naming.*" %> --%>
 <%@page import="java.sql.*"%>   
-
+<%
+ response.setHeader("Cache-Control","no-cache");
+ response.setHeader("Pragma","no-cache");
+ response.setDateHeader("Expires",0);
+%>
 <!DOCTYPE HTML>
 <html>
 
@@ -155,8 +159,7 @@
 					</div>
 					&nbsp &nbsp &nbsp &nbsp &nbsp
 						<div style="width:80px; float:right;">
-					<a href="project_create.jsp">
-					<input type="button" value="프로젝트 등록" >
+					<input type="button" value="프로젝트 등록"  onClick="location.href='ProjectCreate.jsp'">
 					</a>
 				</div>
 
@@ -323,7 +326,6 @@ catch(SQLException ex) {
 	<script src="js/breakpoints.min.js"></script>
 	<script src="js/util.js"></script>
 	<script src="js/main.js"></script>
-
 </body>
 
 </html>

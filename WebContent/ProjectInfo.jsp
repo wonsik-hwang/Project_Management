@@ -23,14 +23,6 @@
 				$(this).removeClass("hover");
 			}
 		);
-
-		function home() {
-			location.href = 'ProjectList.jsp';
-		}
-
-		function update() {
-			location.href = 'update_info.html';
-		}
 	</script>
 
 	<style>
@@ -180,9 +172,9 @@
 						<div>
 							<label class="toppadding" id="DATE">기간</label>
 							
-							<input type="date" id="startDate" style="border: none; background: transparent;" disabled value="<%= rs.getString("PJStartDt")%>">
+							<label><%= rs.getString("PJStartDt").split(" ")[0]%></label>
 							&nbsp&nbsp~&nbsp&nbsp
-							<input type="date" id="endDate" style="border: none; background: transparent;" disabled value="<%= rs.getString("PJEndDt")%>">
+							<label><%= rs.getString("PJEndDt").split(" ")[0]%></label>
 						</div>
 				</div>		
 					<div>
@@ -203,8 +195,9 @@
 						<label class="txtlabel" style="min-height: 100px; word-wrap: break-word; padding-right: 20px"><%=rs.getString("PJContent")%></label>
 					</div>
 					<div style="float:right; padding: 0px 20px 20px 0px ;">
-						<input class="primary" type="button" value="수정" onClick="update()">
-						<input type="button" value="취소" onClick="home()">
+						<input class="primary" type="button" value="수정" onClick="location.href = 'ProjectUpdate.jsp'">
+						<input class="primary" type="button" value="삭제" onClick="location.href = 'ProjectUpdate.jsp'">
+						<input type="button" value="목록" onClick="location.href = 'ProjectList.jsp'">
 					</div>
 				</div>
 		</div>
@@ -251,6 +244,15 @@ catch(SQLException ex) {
 			<script src="js/breakpoints.min.js"></script>
 			<script src="js/util.js"></script>
 			<script src="js/main.js"></script>
+			
+			<script>
+			
+			
+			
+			
+			
+			
+			</script>
 
 </body>
 </html>
