@@ -244,15 +244,5 @@ catch(SQLException ex) {
 			<script src="js/breakpoints.min.js"></script>
 			<script src="js/util.js"></script>
 			<script src="js/main.js"></script>
-			
-			<script>
-			
-			
-			
-			
-			
-			
-			</script>
-
 </body>
 </html>

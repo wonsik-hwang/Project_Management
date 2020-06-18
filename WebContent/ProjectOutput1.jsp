@@ -119,42 +119,39 @@
 				</div>
 				<div>
 					<div style="width:74.7%; float:right">
-
-						<ul class="snip1398">
-
-							<li class="rowLi">
-								<a href="project_list.html" data-hover="프로젝트">
-									프로젝트
-								</a>
-							</li>
-							<li class="rowLi ">
-								<a href="project_document.html" data-hover="서류관리">
-									<span>서류관리</span>
-								</a>
-							</li>
-							<li class="rowLi">
-								<a href="project_output.html" data-hover="산출물관리">
-									<span>산출물관리</span>
-								</a>
-							</li>
-							<li class="rowLi">
-								<a href="project_member.html" data-hover="인원관리">
-									<span>인원관리</span>
-								</a>
-							</li>
-							<li class="rowLi">
-								<a href="project_work.html" data-hover="작업관리">
-									<span>작업관리</span>
-								</a>
-							</li>
-							<li class="rowLi">
-								<a href="project_cost.html" data-hover="비용관리">
-									<span>비용관리</span>
-								</a>
-							</li>
-						</ul>
+					<ul class="snip1398">
+						<li class="rowLi">
+								<a href="ProjectInfo.jsp" data-hover="프로젝트">
+								프로젝트
+							</a>
+						</li>
+						<li class="rowLi ">
+							<a href="ProjectDocument1.jsp" data-hover="서류관리">
+								<span>서류관리</span>
+							</a>
+						</li>
+						<li class="rowLi">
+							<a href="ProjectOutput1.jsp" data-hover="산출물관리">
+								<span>산출물관리</span>
+							</a>
+						</li>
+						<li class="rowLi">
+							<a href="ProjectMember_Add.jsp" data-hover="인원관리">
+								<span>인원관리</span>
+							</a>
+						</li>
+						<li class="rowLi">
+							<a href="project_work.html" data-hover="작업관리">
+								<span>작업관리</span>
+							</a>
+						</li>
+						<li class="rowLi">
+							<a href="ProjectCost1.jsp" data-hover="비용관리">
+								<span>비용관리</span>
+							</a>
+						</li>
+					</ul>
 					</div>
-
 				</div>
 				<br />
 				<hr style="border: solid 1px black;">
