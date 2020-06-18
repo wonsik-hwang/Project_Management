@@ -91,46 +91,48 @@
 				<hr style="border: solid 1px black;">
 			</div>
 
+			<form id="PJCreate" name="PJCreate" action="ProjectCreate_OK.jsp"  method="post">
 			<div class="row" style="margin-Left:5%; margin-right:5%; padding-top:30px;background: #FFFFFF; border-radius: 10px;">
-				<div class="col-5">
-					<label>프로젝트명</label>
-					<input name = "PJNm"  id="PJNm"  type="text">
-
-					<label class="toppadding">업체 명</label>
-					<input type="text" id="PartnerNm">
-
-					<label class="toppadding">주관 담당자(정)</label>
-					<input type="text" id="HostManager">
-
-					<div>
-						<label class="toppadding" id="DATE">기간</label>
-						<input name = "StartDt"  id="StartDt"  type="date">
-						&nbsp&nbsp~&nbsp&nbsp
-						<input name = "EndDt"  id="EndDt"  type="date">
+					<div class="col-5">
+						<label>프로젝트 명</label>
+						<input name = "PJNm"  id="PJNm"  type="text">
+	
+						<label class="toppadding">업체 명</label>
+						<input type="text" id="PartnerNm">
+	
+						<label class="toppadding">주관 담당자(정)</label>
+						<input type="text" id="HostManager">
+	
+						<div>
+							<label class="toppadding" id="DATE">기간</label>
+							<input name = "StartDt"  id="StartDt"  type="date">
+							&nbsp&nbsp~&nbsp&nbsp
+							<input name = "EndDt"  id="EndDt"  type="date">
+						</div>
 					</div>
-				</div>
-
-				<div class="col-5">
-					<label>프로젝트 PM</label>
-					<input name = "PJPM" id="PJPM" type="text">
-
-					<label class="toppadding">주관 명</label>
-					<input name = "HostNm" id="HostNm" type="text">
-
-					<label class="toppadding">주관 담당자(부)</label>
-					<input name = "HostSubManager" id="HostSubManager" type="text">
-				</div>
-
-				<div class="col-10">
-					<label class="toppadding">프로젝트 내용</label>
-					<textarea name = "PJContent" id="PJContent" rows="5"> </textarea>
-					<div style="height: 100px; float:right; padding-top: 15px;">
-						<button id = "btnSave" name = "btnSave" class="primary" type="button">등록</button>
-						&nbsp&nbsp
-						<input type="button" value="취소"  onclick="home()">
+	
+					<div class="col-5">
+						<label>프로젝트 PM</label>
+						<input name = "PJPM" id="PJPM" type="text">
+	
+						<label class="toppadding">주관 명</label>
+						<input name = "HostNm" id="HostNm" type="text">
+	
+						<label class="toppadding">주관 담당자(부)</label>
+						<input name = "HostSubManager" id="HostSubManager" type="text">
 					</div>
-				</div>
+	
+					<div class="col-10">
+						<label class="toppadding">프로젝트 내용</label>
+						<textarea name = "PJContent" id="PJContent" rows="5"> </textarea>
+						<div style="height: 100px; float:right; padding-top: 15px;">
+							<button id = "btnSave" name = "btnSave" class="primary" type="button">등록</button>
+							&nbsp&nbsp
+							<input type="button" value="취소"  onclick="home()">
+						</div>
+					</div>
 			</div>
+			</form>
 		</div>
 
 		<!-- Sidebar -->
