@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>하이데이타 프로젝트 관리</title>
+<title>(주)하이데이타</title>
 </head>
 <body>
 <%

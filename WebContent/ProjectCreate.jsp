@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <head>
-	<title>프로젝트 관리 솔루션</title>
+	<title>(주)하이데이타</title>
 
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -85,9 +85,9 @@
 			</div>
 
 			<form id="PJCreate" name="PJCreate" action="ProjectCreate_OK.jsp"  method="post">
-			<div class="row" style="margin-Left:5%; margin-right:5%; padding-top:30px;background: #FFFFFF; border-radius: 10px;">
+				<div class="row" style="margin-Left:5%; margin-right:5%; padding-top:30px;background: #FFFFFF; border-radius: 10px;">
 					<div class="col-5">
-						<label>프로젝트 명</label>
+						<label>프로젝트명</label>
 						<input name = "PJNm"  id="PJNm"  type="text">
 	
 						<label class="toppadding">업체 명</label>
@@ -103,6 +103,7 @@
 							<input name = "EndDt"  id="EndDt"  type="date">
 						</div>
 					</div>
+<<<<<<< HEAD
 
 				</div>
 
@@ -124,6 +125,8 @@
 						<button id = "btnSave" name = "btnSave" class="primary" type="button">등록</button>
 						&nbsp&nbsp
 						<input type="button" value="취소"  onClick="location.href='ProjectList.jsp'">
+=======
+>>>>>>> branch 'master' of https://github.com/wonsik-hwang/Project_Management.git
 	
 					<div class="col-5">
 						<label>프로젝트 PM</label>
@@ -133,7 +136,11 @@
 						<input name = "HostNm" id="HostNm" type="text">
 	
 						<label class="toppadding">주관 담당자(부)</label>
+<<<<<<< HEAD
 						<input name = "HostSubManager" id="HostSubManager" type="text">
+=======
+						<input name = "HostSubManager" id="HostSubManager" type="text">
+>>>>>>> branch 'master' of https://github.com/wonsik-hwang/Project_Management.git
 					</div>
 	
 					<div class="col-10">
@@ -145,7 +152,7 @@
 							<input type="button" value="취소"  onclick="home()">
 						</div>
 					</div>
-			</div>
+				</div>
 			</form>
 		</div>
 
