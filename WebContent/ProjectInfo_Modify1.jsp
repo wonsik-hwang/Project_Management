@@ -9,7 +9,7 @@
 
 
 <head>
-	<title>프로젝트 관리 솔루션</title>
+	<title>(주)하이데이타</title>
 
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -85,14 +85,50 @@
 					<div id="main">
 						<br />
 						<div style="height:2px;">
-							<a1 class="nanum" ; style="font-size:28px; color:black; margin-left:5%;">프로젝트 수정</a1>
+							<a1 class="nanum"; style="font-size:28px; color:black; margin-left:5%;">프로젝트 수정</a1>
 						</div>
-						<br />
 					</div>
 				</div>
-				<hr style="border: solid 1px black;">
+					<div>
+						<div style="width:74.7%; float:right;">
+							<ul class="snip1398">
+								<li class="rowLi">
+										<a href="ProjectInfo.jsp" data-hover="프로젝트">
+										프로젝트
+									</a>
+								</li>
+								<li class="rowLi ">
+									<a href="ProjectDocument1.jsp" data-hover="서류관리">
+										<span>서류관리</span>
+									</a>
+								</li>
+								<li class="rowLi">
+									<a href="ProjectOutput1.jsp" data-hover="산출물관리">
+										<span>산출물관리</span>
+									</a>
+								</li>
+								<li class="rowLi">
+									<a href="ProjectMember_Add.jsp" data-hover="인원관리">
+										<span>인원관리</span>
+									</a>
+								</li>
+								<li class="rowLi">
+									<a href="project_work.html" data-hover="작업관리">
+										<span>작업관리</span>
+									</a>
+								</li>
+								<li class="rowLi">
+									<a href="ProjectCost1.jsp" data-hover="비용관리">
+										<span>비용관리</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<br />
+					<hr style="border: solid 1px black;">
 			</div>
-
+					
 			<div class="row" style="margin-Left:5%; margin-right:5%; padding-top:30px;background: #FFFFFF; border-radius: 10px;">
 				<div class="col-5">
 					<label>프로젝트명</label>

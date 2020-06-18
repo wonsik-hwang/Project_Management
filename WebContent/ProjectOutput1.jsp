@@ -9,7 +9,7 @@
 <html>
 
 <head>
-	<title>프로젝트 관리 솔루션</title>
+	<title>(주)하이데이타</title>
 
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />

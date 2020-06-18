@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>(주)하이데이타</title>
 </head>
 <body>
 <%
