@@ -1,13 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE HTML>
-<!--
-	Editorial by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-
-
 <head>
 	<title>프로젝트 관리 솔루션</title>
 
@@ -70,8 +63,6 @@
 	</style>
 
 </head>
-
-
 <body class="is-preload">
 	<!-- Wrapper -->
 	<div id="wrapper">
@@ -127,7 +118,10 @@
 					<label class="toppadding">프로젝트 내용</label>
 					<textarea name = "PJContent" id="PJContent" rows="5"> </textarea>
 					<div style="height: 100px; float:right; padding-top: 15px;">
+					
+						<a href='Info_Modify_Confirm?PJNo="+ rs.getString("idx") +"'>
 						<button id = "btnSave" name = "btnSave" class="primary" type="button">등록</button>
+						</a>
 						&nbsp&nbsp
 						<input type="button" value="취소"  onclick="home()">
 					</div>
@@ -162,15 +156,5 @@
 	<script src="js/breakpoints.min.js"></script>
 	<script src="js/util.js"></script>
 	<script src="js/main.js"></script>
-	<script>
-		function hmoe() {
-			location.href = 'ProjectList.jsp';
-		}
-
-		function form_submit() {
-			document.id.action = "link_page.html";
-			document.id.submit();
-		}
-	</script>
 </body>
 </html>

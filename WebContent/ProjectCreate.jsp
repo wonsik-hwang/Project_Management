@@ -1,12 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
-<!--
-	Editorial by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-
-
 <head>
 	<title>프로젝트 관리 솔루션</title>
 
@@ -110,7 +103,7 @@
 							<input name = "EndDt"  id="EndDt"  type="date">
 						</div>
 					</div>
-<<<<<<< HEAD
+
 				</div>
 
 				<div class="col-5">
@@ -131,7 +124,6 @@
 						<button id = "btnSave" name = "btnSave" class="primary" type="button">등록</button>
 						&nbsp&nbsp
 						<input type="button" value="취소"  onClick="location.href='ProjectList.jsp'">
-=======
 	
 					<div class="col-5">
 						<label>프로젝트 PM</label>
@@ -142,7 +134,6 @@
 	
 						<label class="toppadding">주관 담당자(부)</label>
 						<input name = "HostSubManager" id="HostSubManager" type="text">
->>>>>>> branch 'master' of https://github.com/wonsik-hwang/Project_Management.git
 					</div>
 	
 					<div class="col-10">
