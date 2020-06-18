@@ -146,8 +146,7 @@
 					<ul>
 						<li class="nanum"><a href="ProjectCreate.jsp">프로젝트 등록</a></li>
 						<li class="nanum"><a href="ProjectList.jsp"> 프로젝트 목록</a></li>
-						<li class="nanum"><a href="">프로젝트 관리</a></li>
-						<li class="nanum"><a href="project_user.html">사용자 관리</a></li>
+<!-- 						<li class="nanum"><a href="project_user.html">사용자 관리</a></li> -->
 						<li class="nanum"><a></a></li>
 					</ul>
 				</nav>

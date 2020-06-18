@@ -25,7 +25,7 @@
 		);
 
 		function home() {
-			location.href = 'project_list.html';
+			location.href = 'ProjectList.jsp';
 		}
 
 		function update() {
@@ -103,12 +103,9 @@
 
 				<!-- Header -->
 				<div id="main">
+					<br />
 					<div style="height:2px;">
-						<br />
 						<a1 class="nanum"; style="font-size:28px; color:black; margin-left:5%;">프로젝트 정보</a1>
-					</div>
-					<div>
-						<br />
 					</div>
 				</div>
 				</div>
@@ -151,7 +148,6 @@
 								</li>
 							</ul>
 						</div>
-
 					</div>
 
 					<br />
@@ -236,9 +232,6 @@ catch(SQLException ex) {
 	   	ex.printStackTrace();
 		}
 %>
-		
-		
-
 </div>
 
 				<!-- Sidebar -->
@@ -246,26 +239,20 @@ catch(SQLException ex) {
 					<div class="inner">
 
 						<!-- Menu -->
-
 						<nav id="menu">
 							<header class="major">
 								<h2 class="nanum"> HIDATA PROJECT CENTER</h2>
 							</header>
 							<ul>
-								<li class="nanum"><a href="project_list.html">프로젝트 목록</a></li>
-								<li class="nanum"><a href="project_create.html">프로젝트 등록</a></li>
-								<li class="nanum"><a href="project_user.html">사용자 관리</a></li>
+						<li class="nanum"><a href="ProjectCreate.jsp">프로젝트 등록</a></li>
+						<li class="nanum"><a href="ProjectList.jsp"> 프로젝트 목록</a></li>
+<!-- 						<li class="nanum"><a href="project_user.html">사용자 관리</a></li> -->
 								<li class="nanum"><a></a></li>
 							</ul>
 						</nav>
-
-
 					</div>
 				</div>
-
 			</div>
-
-
 
 			<!-- Scripts -->
 			<script src="js/jquery.min.js"></script>

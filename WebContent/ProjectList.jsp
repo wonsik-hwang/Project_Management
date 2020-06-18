@@ -29,7 +29,7 @@
 		function home() {
 			var msg = confirm("저장하지 않고 취소 하시겠습니까?");
 			if (msg === true) {
-				location.href = 'view_info.html';
+				location.href = 'ProjectList.jsp';
 			} else {
 				return;
 			}
@@ -237,7 +237,7 @@ try{
 	while(rs.next()){
 		out.print("<tr>");
 		out.print("<td>" + "<span>" + "&nbsp" + "</span>" + "</td>");
-		out.print("<td>  <a href='Project_Info.jsp?PJNo="+ rs.getString("PJNo") +"'>" + "<span>" + rs.getString("PJNm") + "<span>" + " </a></td>");
+		out.print("<td>  <a href='ProjectInfo.jsp?PJNo="+ rs.getString("PJNo") +"'>" + "<span>" + rs.getString("PJNm") + "<span>" + " </a></td>");
 		out.print("<td>" + "<span>" + rs.getString("PJPM") + "</td>");
 		out.print("<td>" + "<span>" + rs.getString("PJState") + "</span>" + "</td>");
 		out.print("<td>" + "<span>" + rs.getString("PJStartDt") + "</span>" + "</td>");
@@ -306,10 +306,9 @@ catch(SQLException ex) {
 						<h2 class=nanum> HIDATA PROJECT CENTER</h2>
 					</header>
 					<ul>
-						<li class=nanum><a href="project_search.html"> 프로젝트 검색</a></li>
-						<li class=nanum><a href="project_list.html">프로젝트 목록</a></li>
-						<li class=nanum><a href="project_create.html">프로젝트 등록</a></li>
-						<li class=nanum><a href="project_user.html">사용자 관리</a></li>
+						<li class="nanum"><a href="ProjectCreate.jsp">프로젝트 등록</a></li>
+						<li class="nanum"><a href="ProjectList.jsp"> 프로젝트 목록</a></li>
+<!-- 						<li class="nanum"><a href="project_user.html">사용자 관리</a></li> -->
 						<li class=nanum><a></a></li>
 					</ul>
 				</nav>
