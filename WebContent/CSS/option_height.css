@@ -1,0 +1,26 @@
+@charset "utf-8";
+
+.option_height {
+	height : 25px;
+    margin: 0;
+    padding: 0;
+    vertical-align : middle;
+    text-align : center;
+}
+
+.option_label {
+	height : 25px;
+	line-height: 25px;
+    margin: 0;
+    padding: 0;
+    vertical-align : middle;
+    text-align : center;
+    font-weight : normal;
+}
+
+.span_margin {
+	
+	margin-top: 12px
+	
+	
+}
