@@ -145,7 +145,7 @@
 								<span>累诀包府</span>
 							</a>
 						</li>
-						<li class="rowLi">
+						<li class="current rowLi">
 							<a href="ProjectCost1.jsp" data-hover="厚侩包府">
 								<span>厚侩包府</span>
 							</a>
