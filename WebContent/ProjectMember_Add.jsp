@@ -202,11 +202,15 @@
 
 						</span>
 					</a>
-
 				</div>
+				<div style="float: right; margin-top: 20px">
+					<button id = "btnSave" name = "btnSave" class="primary" type="button">등록</button>
+					&nbsp&nbsp
+					<input type="reset" value="취소"  onclick="location.href = 'ProjectMember_Add.jsp'">
+<!-- 		            <input class="btn btn-primary" type="button" value="저장" onclick="infoConfirm()" style="float: left"> -->
+<!-- 		            <input class="btn btn-primary" type="reset" value="취소" onclick="location.href = 'ProjectMember_Add.jsp'" style="float: left"> -->
+		        </div>
 			</div>
-
-
 
 <!-- 		</section> -->
 	</div>
