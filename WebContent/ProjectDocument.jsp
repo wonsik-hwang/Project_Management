@@ -1,17 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE HTML>
-<!--
-	Editorial by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 
 <head>
 	<title>(주)하이데이타</title>
 
-	<meta charset="utf-8" />
+	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="CSS/main.css" />
 	<link rel="stylesheet" href="CSS/mouseover3.css" />
