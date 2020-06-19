@@ -125,7 +125,7 @@
 								기본정보
 							</a>
 						</li>
-						<li class="rowLi ">
+						<li class="current rowLi ">
 							<a href="ProjectDocument1.jsp" data-hover="서류관리">
 								<span>서류관리</span>
 							</a>
