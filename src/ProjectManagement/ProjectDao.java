@@ -1,13 +1,17 @@
 package ProjectManagement;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import com.mysql.jdbc.exceptions.jdbc4.MySQLDataException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,19 +29,19 @@ public class ProjectDao {
 		String name ="";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet result = null;
+		ResultSet rs = null;
 		
 		try{
 			StringBuffer sb1 = new StringBuffer();
 			StringBuffer sb2 = new StringBuffer();
 			
-			conn = this.getConnection();
+			conn = this.getMySQLConnection();
 			////////////////////////////////////////////////////////////////////
 			sb1.append("select name from members where member_num='"+num+"'");
 			pstmt = conn.prepareStatement(sb1.toString());
-			result = pstmt.executeQuery();
-			if(result.next()){
-				name = result.getString("name");
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				name = rs.getString("name");
 			}
 			pstmt.close();
 			
@@ -54,8 +58,11 @@ public class ProjectDao {
 			System.out.println("fail");
 		}finally {
 			try{
-				pstmt.close();
-				conn.close();
+				MySQLConnect.close(rs);
+				MySQLConnect.close(pstmt);
+				MySQLConnect.close(conn);				
+//				pstmt.close();
+//				conn.close();
 			}catch (Exception e2) {
 				// TODO: handle exception
 				e2.printStackTrace();
@@ -412,9 +419,9 @@ public class ProjectDao {
 	
 	public List<ProjectDto> user_name() {
 		List<ProjectDto> list = new ArrayList<ProjectDto>();
-		Connection connection = null;
+		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet set = null;
+		ResultSet rs = null;
 		String query = "SELECT members.name, CONCAT(IFNULL((SELECT emp_no FROM employee_info WHERE employee_info.member_num = members.member_num), '없음')) emp_no"
 				+ " FROM members"
 				+ " LEFT JOIN employee_info"
@@ -423,23 +430,26 @@ public class ProjectDao {
 				+ " ORDER BY members.name";
 
 		try {
-			connection = getConnection();
-			pstmt = connection.prepareStatement(query);
+			conn = getMySQLConnection();
+			pstmt = conn.prepareStatement(query);
 
-			set = pstmt.executeQuery();
-			while (set.next()) {
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
 				ProjectDto dto = new ProjectDto();
-				dto.setParticipants(set.getString("name"));
-				dto.setEmp_no(set.getString("emp_no"));
+				dto.setParticipants(rs.getString("name"));
+				dto.setEmp_no(rs.getString("emp_no"));
 				list.add(dto);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				set.close();
-				pstmt.close();
-				connection.close();
+				MySQLConnect.close(rs);
+				MySQLConnect.close(pstmt);
+				MySQLConnect.close(conn);				
+//				set.close();
+//				pstmt.close();
+//				connection.close();
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
@@ -611,6 +621,91 @@ public class ProjectDao {
 		}
 
 		return connection;
+	}
+	
+	public static Connection getMySQLConnection() {
+		Connection conn = null;
+		
+		try {
+			String url = "jdbc:mysql://192.168.0.71:3306/ProjectManagement";
+			String user = "hidata";
+			String password = "hidata2312357!";
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(url, user, password);
+		}
+		catch (ClassNotFoundException e)
+		{
+			System.out.println("MySQL 드라이버가 없습니다.<br/>");
+		}
+		catch (MySQLDataException e)
+		{
+			System.out.println("데이터베이스가 없습니다. <br/>");
+		}
+		catch (SQLException e)
+		{
+			System.out.println("사용자 계정 또는 비밀번호가 일치하지 않습니다. <br/>");
+		}
+		return conn;
+	}
+	
+	public static void close (Connection conn)
+	{
+		try
+		{
+			if (conn != null)
+			{
+				conn.close();
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public static void close (Statement stmt)
+	{
+		try
+		{
+			if (stmt != null)
+			{
+				stmt.close();
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public static void close (PreparedStatement pstmt)
+	{
+		try
+		{
+			if (pstmt != null)
+			{
+				pstmt.close();
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public static void close (ResultSet rs)
+	{
+		try
+		{
+			if (rs != null)
+			{
+				rs.close();
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	public int selectTotalProjectDtoCount() {
