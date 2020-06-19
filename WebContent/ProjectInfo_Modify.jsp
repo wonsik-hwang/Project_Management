@@ -1,10 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="com.mysql.jdbc.Messages"%>
+<%@page import= "java.sql.Date"%>
+<%@page import = "java.sql.DriverManager" %>
+<%@page import = "java.sql.PreparedStatement" %>
+<%@page import = "java.sql.Connection" %>
+<%@page import = "java.sql.Timestamp" %>
+<%@page import = "java.util.*" %>
+<%@page import = "java.text.DecimalFormat" %>
+<%@page import = "java.text.SimpleDateFormat" %>
+<%@page import="java.sql.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE HTML>
 <head>
-	<title>га╥на╖ф╝ ╟Э╦╝ ╪ж╥Г╪г</title>
+	<title>М■└К║°Л═²М┼╦ Й╢─К╕╛ Л├■Кё╗Л┘≤</title>
 
-	<meta charset="utf-8" />
+	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="CSS/main.css" />
 	<link rel="stylesheet" href="CSS/mouseover3.css" />
@@ -66,21 +77,24 @@
 
 <%
 try{
+	request.setCharacterEncoding("UTF-8");
 	String PJNo = request.getParameter("PJNo");
 	String dbURL="jdbc:mysql://192.168.0.71:3306/ProjectManagement"; 
 	String dbID="hidata"; 
 	String dbPassword="hidata2312357!";
 	
 	Class.forName("com.mysql.jdbc.Driver");
-	System.out.println("╣Е╤Сюл╧Ж ╥н╣Е╦╕ ©о╥А го©╢╫ю╢о╢ы.");
+	System.out.println("К⌠°К²╪Л²╢К╡└ К║°К⌠°К╔╪ Л≥└Кё▄ М∙≤Л≤─Л┼╣К▀┬К▀╓.");
 	
 	ResultSet rs = null;
 	Connection conn=DriverManager.getConnection(dbURL, dbID, dbPassword);
-	System.out.println("MySQL ╣╔юлем╨ёюл╫╨ db©║ ╪╨╟ЬюШю╦╥н а╒╪сгъ╫ю╢о╢ы. ");
+	System.out.println("MySQL К█╟Л²╢М└╟К╡═Л²╢Л┼╓ dbЛ≈░ Л└╠ЙЁ╣Л═│Л°╪К║° Л═▒Л├█М√┬Л┼╣К▀┬К▀╓. ");
 								   
 	Statement stmt = conn.createStatement();
-	String sql = "SELECT * FROM MA_Project ORDER BY PJNo DESC";
+	String sql = "SELECT * FROM MA_Project WHERE PJNo =" + PJNo;
 	rs = stmt.executeQuery(sql);
+	while(rs.next())
+	{
 %>	
 <body class="is-preload">
 	<!-- Wrapper -->
@@ -95,7 +109,7 @@ try{
 					<div id="main">
 						<br />
 						<div style="height:2px;">
-							<a1 class="nanum" ; style="font-size:28px; color:black; margin-left:5%;">га╥на╖ф╝ ╪Жа╓</a1>
+							<a1 class="nanum" ; style="font-size:28px; color:black; margin-left:5%;">М■└К║°Л═²М┼╦ Л┬≤Л═∙</a1>
 						</div>
 						<br />
 					</div>
@@ -105,46 +119,60 @@ try{
 
 			<div class="row" style="margin-Left:5%; margin-right:5%; padding-top:30px;background: #FFFFFF; border-radius: 10px;">
 				<div class="col-5">
-					<label>га╥на╖ф╝╦М</label>
-					<input name = "PJNm"  id="PJNm"  type="text">
+				<form name="sub1" id="sub1" method="post" action="Info_Modify_Confirm.jsp" onSubmit="return false;">
+					<label>М■└К║°Л═²М┼╦К╙┘</label>
+					<input name = "PJNm"  id="PJNm"  type="text" value= <%=rs.getString("PJNm")%>>
 
-					<label class="toppadding">╬Вц╪ ╦М</label>
-					<input type="text" id="PartnerNm">
+					<label class="toppadding">Л≈┘Л╡╢ К╙┘</label>
+					<input type="text" id="PartnerNm" name="PartnerNm"  value= <%=rs.getString("PartnerNm")%>>
 
-					<label class="toppadding">аж╟Э ╢Ц╢Гюз(а╓)</label>
-					<input type="text" id="HostManager">
+					<label class="toppadding">Лё╪Й╢─ К▀╢К▀╧Л·░(Л═∙)</label>
+					<input type="text" id="HostManager" name="HostManager"  value= <%=rs.getString("HostManager")%>>
 
 					<div>
-						<label class="toppadding" id="DATE">╠Б╟ё</label>
-						<input name = "StartDt"  id="StartDt"  type="date">
+						<label class="toppadding" id="DATE">Й╦╟Й╟└</label>
+						<input name = "StartDt"  id="StartDt"  type="date" value=<%=rs.getString("PJStartDt")%>>
 						&nbsp&nbsp~&nbsp&nbsp
-						<input name = "EndDt"  id="EndDt"  type="date">
+						<input name = "EndDt"  id="EndDt"  type="date" value= <%=rs.getString("PJEndDt")%>>
 					</div>
 				</div>
 
 				<div class="col-5">
-					<label>га╥на╖ф╝ PM</label>
-					<input name = "PJPM" id="PJPM" type="text">
+					<label>М■└К║°Л═²М┼╦ PM</label>
+					<input name = "PJPM" id="PJPM" type="text" value= <%=rs.getString("PJPM")%>>
 
-					<label class="toppadding">аж╟Э ╦М</label>
-					<input name = "HostNm" id="HostNm" type="text">
+					<label class="toppadding">Лё╪Й╢─ К╙┘</label>
+					<input name = "HostNm" id="HostNm" type="text" value= <%=rs.getString("HostNm")%>>
 
-					<label class="toppadding">аж╟Э ╢Ц╢Гюз(╨н)</label>
-					<input name = "HostSubManager" id="HostSubManager" type="text">
+					<label class="toppadding">Лё╪Й╢─ К▀╢К▀╧Л·░(К╤─)</label>
+					<input name = "HostSubManager" id="HostSubManager" type="text" value= <%=rs.getString("HostSubManager")%>>
+					
 				</div>
 
 				<div class="col-10">
-					<label class="toppadding">га╥на╖ф╝ Ё╩©К</label>
-					<textarea name = "PJContent" id="PJContent" rows="5"> </textarea>
+					<label class="toppadding">М■└К║°Л═²М┼╦ К┌╢Л ╘</label>
+					<textarea name = "PJContent" id="PJContent" rows="5" ><%=rs.getString("PJContent")%></textarea>
 					<div style="height: 100px; float:right; padding-top: 15px;">
 					
-						<a href='Info_Modify_Confirm?PJNo="+ rs.getString("idx") +"'>
-						<button id = "btnSave" name = "btnSave" class="primary" type="button">╣Н╥о</button>
-						</a>
+<%-- 						<a href='Info_Modify_Confirm?PJNo=<%=PJNo%>& --%>
+<%-- 						PJNm=<%=PJNo%>&PJPM=<%=PJNo%>&PartnerNm=<%=PJNo%>& --%>
+<%-- 						HostNm=<%=PJNo%>&HostManager=<%=PJNo%>&HostSubManager=<%=HostSubManager%> --%>
+<%-- 						&PJStartDt=, &PJEndDt=, &=PJContent'> --%>
+
+						<button id = "btnSave" name = "btnSave" class="primary"onClick="btnClick()">К⌠╠К║²</button>
+<!-- 						</a> -->
 						&nbsp&nbsp
-						<input type="button" value="цК╪р"  onclick="home()">
+						<input type="button" value="Л╥╗Л├▄"  onclick="home()">
 					</div>
 				</div>
+				<input name = "PJNo" id="PJNo" type="text" value= <%=PJNo%> style="display:none">
+				
+				<%
+				}
+}
+catch(Exception ex){}
+%>
+</form>
 			</div>
 		</div>
 
@@ -158,15 +186,14 @@ try{
 						<h2 class=nanum> HIDATA PROJECT CENTER</h2>
 					</header>
 					<ul>
-						<li class="nanum"><a href="ProjectCreate.jsp">га╥на╖ф╝ ╣Н╥о</a></li>
-						<li class="nanum"><a href="ProjectList.jsp"> га╥на╖ф╝ ╦Я╥о</a></li>
-<!-- 						<li class="nanum"><a href="project_user.html">╩Г©Кюз ╟Э╦╝</a></li> -->
+						<li class="nanum"><a href="ProjectCreate.jsp">М■└К║°Л═²М┼╦ К⌠╠К║²</a></li>
+						<li class="nanum"><a href="ProjectList.jsp"> М■└К║°Л═²М┼╦ К╙╘К║²</a></li>
+<!-- 						<li class="nanum"><a href="project_user.html">Л┌╛Л ╘Л·░ Й╢─К╕╛</a></li> -->
 					</ul>
 				</nav>
 			</div>
 		</div>
 	</div>
-
 
 
 	<!-- Scripts -->
@@ -175,5 +202,19 @@ try{
 	<script src="js/breakpoints.min.js"></script>
 	<script src="js/util.js"></script>
 	<script src="js/main.js"></script>
+	
+	<script>
+				function btnClick(){
+				        if (document.getElementById("PJNm").value == "") {
+				            alert("К┌╢Л ╘Л²└ Л·┘К═╔М∙╢Лё╪Л└╦Л ■");
+				            return false;
+				  			 }
+				       else{
+					   		document.sub1.submit();
+					   		}
+  					}
+	</script>
+	
+
 </body>
 </html>

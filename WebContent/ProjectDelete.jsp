@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 <%@page import = "java.sql.PreparedStatement" %>
     
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 </head>
 <%
 try{
@@ -28,12 +28,12 @@ try{
        conn.close(); }
 
 catch(ClassNotFoundException ex) {
-	   	out.println("µå¶óÀÌ¹ö ·Îµå¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
+	   	out.println("ë“œë¼ì´ë²„ ë¡œë“œì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
 	   	out.println(ex);
 		}
 
 catch(SQLException ex) {
-	   	out.println("DB Á¢¼Ó¿¡ ½ÇÆĞ ÇÏ¿´½À´Ï´Ù.");
+	   	out.println("DB ì ‘ì†ì— ì‹¤íŒ¨ í•˜ì˜€ìŠµë‹ˆë‹¤.");
 	   	out.println(ex.getMessage());
 	   	ex.printStackTrace();
 		}
@@ -41,7 +41,7 @@ catch(SQLException ex) {
 finally{}
 %>
 <script>
-	alert("°Ô½Ã±ÛÀÌ »èÁ¦µÇ¾ú½À´Ï´Ù");
+	alert("ê²Œì‹œê¸€ì´ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤");
 	location.href="ProjectRedirect.jsp";	
 </script>
 <body>		       			      
