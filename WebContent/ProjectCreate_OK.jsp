@@ -8,16 +8,16 @@
 <%@page import = "java.util.*" %>
 <%@page import = "java.text.DecimalFormat" %>
 <%@page import = "java.text.SimpleDateFormat" %>
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>(аж)гоюл╣╔юле╦</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>(Лё╪)М∙≤Л²╢К█╟Л²╢М┐─</title>
 </head>
 <body>
 <%
-	request.setCharacterEncoding("euc-kr");
+	request.setCharacterEncoding("UTF-8");
 	String PJNm = request.getParameter("PJNm");
 	String PartnerNm = request.getParameter("PartnerNm");
 	String PJPM = request.getParameter("PJPM");
@@ -66,7 +66,7 @@
     	pstmt.close();
     	conn.close();
     	
-    	out.println("<script>alert('га╥на╖ф╝╟║ ╣Н╥о ╣г╬З╫ю╢о╢ы.'); location.href = 'ProjectList.jsp'; </script>");
+    	out.println("<script>alert('М■└К║°Л═²М┼╦Й╟─ К⌠╠К║² К░≤Л≈┬Л┼╣К▀┬К▀╓.'); location.href = 'ProjectList.jsp'; </script>");
     }
     catch (Exception ex)
     {

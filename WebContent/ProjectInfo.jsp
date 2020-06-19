@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.util.regex.Pattern" %>
 <%@page import="java.sql.*"%>
+
 <!DOCTYPE HTML>
 <html>
 
@@ -99,8 +100,8 @@
 				</div>
 					<div>
 						<div style="width:74.7%; float:right;">
-							<ul class="snip1398">
-								<li class="rowLi">
+							<ul class="snip1398 ">
+								<li class="current rowLi">
 										<a href="ProjectInfo.jsp" data-hover="기본정보">
 										기본정보
 									</a>
