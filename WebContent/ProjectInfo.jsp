@@ -139,9 +139,7 @@
 					<hr style="border: solid 1px black;">
 
 			</div>
-			<div class="row" style="margin-Left:5%; margin-right:5%;padding-top:30px; background: #FFFFFF; border-radius: 10px;">
 			<div style="width: 100%;">
-				
 				<%
 				try{
 					String PJNo = request.getParameter("PJNo");
@@ -231,7 +229,6 @@ catch(SQLException ex) {
 		}
 %>
 </div>
-
 				<!-- Sidebar -->
 				<div id="sidebar">
 					<div class="inner">
