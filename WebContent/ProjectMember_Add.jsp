@@ -3,7 +3,7 @@
 <%@page import= "ProjectManagement.MemberDto" %>
 <%@page import= "ProjectManagement.ProjectDao" %>
 <%@page import= "ProjectManagement.ProjectDto" %>
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <!--
 	Editorial by HTML5 UP
@@ -13,7 +13,7 @@
 <html>
 
 <head>
-	<title>(ÁÖ)ÇÏÀÌµ¥ÀÌÅ¸</title>
+	<title>(ì£¼)í•˜ì´ë°ì´íƒ€</title>
 
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -25,7 +25,9 @@
 	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="js/ProjectMember_Add.js"></script>
-
+<%
+    request.setCharacterEncoding("UTF-8");
+%>
 	<%
 	
     ProjectDao pdao = ProjectDao.getInstance();
@@ -35,11 +37,10 @@
     MemberDto mdto = new MemberDto();
     
     List<MemberDto> memlist = mdao.user_name();
-    
-    
-    ProjectDao projectDao = new ProjectDao();
-    List<ProjectDto> plist = projectDao.user_name();
-    ProjectDto projectDto;
+
+//     ProjectDao projectDao = new ProjectDao();
+//     List<ProjectDto> plist = projectDao.user_name();
+//     ProjectDto projectDto;
 
 //     List<ProjectDto> list = pdao.getprj_name(Integer.parseInt((String)session.getAttribute("user_num")));
 	
@@ -115,7 +116,7 @@
 				<div id="main">
 					<div style="height:3px">
 						<br />
-						<a1 class=nanum; style="font-size:28px; color:black; margin-left:2%; padding-top: 250px">ÀÎ¿ø °ü¸®</a1>
+						<a1 class=nanum; style="font-size:28px; color:black; margin-left:2%; padding-top: 250px">ì¸ì› ê´€ë¦¬</a1>
 					</div>
 					<div>
 						<br />
@@ -125,37 +126,35 @@
 
 			<div>
 				<div style="width:74.7%; float:right">
-
 					<ul class="snip1398">
-
 						<li class="rowLi">
-							<a href="project_search.html" data-hover="ÇÁ·ÎÁ§Æ®">
-								ÇÁ·ÎÁ§Æ®
+								<a href="ProjectInfo.jsp" data-hover="ê¸°ë³¸ì •ë³´">
+								ê¸°ë³¸ì •ë³´
 							</a>
 						</li>
 						<li class="rowLi ">
-							<a href="project_document.html" data-hover="¼­·ù°ü¸®">
-								<span>¼­·ù°ü¸®</span>
+							<a href="ProjectDocument1.jsp" data-hover="ì„œë¥˜ê´€ë¦¬">
+								<span>ì„œë¥˜ê´€ë¦¬</span>
 							</a>
 						</li>
 						<li class="rowLi">
-							<a href="project_output.html" data-hover="»êÃâ¹°°ü¸®">
-								<span>»êÃâ¹°°ü¸®</span>
+							<a href="ProjectOutput1.jsp" data-hover="ì‚°ì¶œë¬¼ê´€ë¦¬">
+								<span>ì‚°ì¶œë¬¼ê´€ë¦¬</span>
 							</a>
 						</li>
 						<li class="rowLi">
-							<a href="project_member.html" data-hover="ÀÎ¿ø°ü¸®">
-								<span>ÀÎ¿ø°ü¸®</span>
+							<a href="ProjectMember_Add.jsp" data-hover="ì¸ì›ê´€ë¦¬">
+								<span>ì¸ì›ê´€ë¦¬</span>
 							</a>
 						</li>
 						<li class="rowLi">
-							<a href="project_work.html" data-hover="ÀÛ¾÷°ü¸®">
-								<span>ÀÛ¾÷°ü¸®</span>
+							<a href="project_work.html" data-hover="ì‘ì—…ê´€ë¦¬">
+								<span>ì‘ì—…ê´€ë¦¬</span>
 							</a>
 						</li>
 						<li class="rowLi">
-							<a href="project_cost.html" data-hover="ºñ¿ë°ü¸®">
-								<span>ºñ¿ë°ü¸®</span>
+							<a href="ProjectCost1.jsp" data-hover="ë¹„ìš©ê´€ë¦¬">
+								<span>ë¹„ìš©ê´€ë¦¬</span>
 							</a>
 						</li>
 					</ul>
@@ -181,7 +180,7 @@
 					</colgroup>
 				</table>
 				<div class="form-group">
-                   	<select id="referers_view" multiple="multiple" name="referers" class="referers">
+                   	<select id="referers_view1" multiple="multiple" name="referers1" class="referers">
 						<%
 							for (MemberDto mem : memlist) {
 						%>
@@ -225,11 +224,9 @@
 					<h2 class=nanum> HIDATA PROJECT CENTER</h2>
 				</header>
 				<ul>
-						<li class="nanum"><a href="ProjectCreate.jsp">ÇÁ·ÎÁ§Æ® µî·Ï</a></li>
-						<li class="nanum"><a href="ProjectList.jsp"> ÇÁ·ÎÁ§Æ® ¸ñ·Ï</a></li>
-						<li class="nanum"><a href="">ÇÁ·ÎÁ§Æ® °ü¸®</a></li>
-						<li class="nanum"><a href="project_user.html">»ç¿ëÀÚ °ü¸®</a></li>
-						<li class="nanum"><a></a></li>
+					<li class="nanum"><a href="ProjectCreate.jsp">í”„ë¡œì íŠ¸ ë“±ë¡</a></li>
+					<li class="nanum"><a href="ProjectList.jsp"> í”„ë¡œì íŠ¸ ëª©ë¡</a></li>
+		<!-- 		<li class="nanum"><a href="project_user.html">ì‚¬ìš©ì ê´€ë¦¬</a></li> -->
 				</ul>
 			</nav>
 
@@ -245,5 +242,6 @@
 	<script src="js/breakpoints.min.js"></script>
 	<script src="js/util.js"></script>
 	<script src="js/main.js"></script>
+	<script src="js/jquery.multi-select.js"></script>
 </body>
 </html>

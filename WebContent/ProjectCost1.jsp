@@ -121,8 +121,8 @@
 				<div style="width:74.7%; float:right">
 					<ul class="snip1398">
 						<li class="rowLi">
-								<a href="ProjectInfo.jsp" data-hover="프로젝트">
-								프로젝트
+								<a href="ProjectInfo.jsp" data-hover="기본정보">
+								기본정보
 							</a>
 						</li>
 						<li class="rowLi ">
