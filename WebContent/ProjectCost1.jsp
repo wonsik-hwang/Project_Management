@@ -173,7 +173,10 @@
 						<input type="button" value="검색">
 					</div>
 
-					<!-- 파일 등록 버튼 -->
+
+
+<!-- 파일 등록 버튼 -->
+
 					<div style="float:right; padding-right:10%;">
 						<a href="#layer2" class="btn-example">
 							<input type="button" value="+ 파일 등록">
@@ -184,24 +187,23 @@
 								<div class="pop-container">
 									<div class="pop-conts">
 										<!--content //-->
-										<p><label class=nanum for="ex_filename">파일 업로드</label>
-											<input type="file" id="ex_filename" class="upload-hidden"><br>
-											<div>
-												<font class=nanum style="">
-													<b>프로젝트</b>
-													<br />
-													<br />
-													<select>
-														<option value="">프로젝트를 선택하세요</option>
-														<!-- 옵션 추가 필요하면 할것 -->
-													</select>
-													<br />
-													<b>파일 설명</b>
-													<br />
-													<br />
-													<textarea rows="5"  style = "resize:none;"> </textarea>
-												</font>
-											</div>
+										<p>
+										<div>
+											<label class="nanum" style="margin-top: -15px">파일 등록</label>
+											<hr style="border: solid 1px black; margin-top: 5px">
+											<font class="nanum" style="">
+												<label class="nanum" style="margin-top: -10px"><b>산출물 명</b></label>
+												<input type = "text" style="margin-top: 15px">
+												<br />
+												<div>
+													<label class="nanum">파일 업로드&nbsp;&nbsp;&nbsp;&nbsp; <input type="file" id="ex_filename" class="upload-hidden"> </label>
+												</div>
+												<b>산출물 내용</b>
+												<br />
+												<br />
+												<textarea rows="5"  style = "resize:none;"> </textarea>
+											</font>
+										</div>
 										</p>
 										<div type="button" style="float:right;">
 											<a href="#" class="btn-layerOpen">등록</a>

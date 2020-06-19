@@ -89,12 +89,12 @@ body {
     -ms-transition: none !important;
     transition: none !important; }
     .pop-layer .pop-container {
-      padding: 20px 25px;
+      padding: 0px 20px;
     }
 
     .pop-layer p.ctxt {
       color: #666666;
-      line-height: 25px;
+      line-height: 1px;
     }
 
     .pop-layer .btn-r {
@@ -110,7 +110,7 @@ body {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 410px;
+      width: 600px;
       height: auto;
       background-color: #fff;
       border: 2px solid #000000;
