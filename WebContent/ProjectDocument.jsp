@@ -1,8 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <%@page import="java.util.regex.Pattern" %>
 <%@page import="java.sql.*"%>   
-<% String savePath = request.getServletContext().getRealPath("Document"); %>
 
 
 <!DOCTYPE HTML>
@@ -179,7 +177,7 @@
 					</div>
 
 					<!-- 파일 등록 버튼 -->
-					<div style="float:right; padding-right:7%;">
+					<div style="float:right; padding-right:10%;">
 						<a href="#layer2" class="btn-example">
 							<input type="button" value="+ 파일 등록">
 						</a>
@@ -189,32 +187,32 @@
 								<div class="pop-container">
 									<div class="pop-conts">
 										<!--content //-->
-										<p><label class=nanum for="ex_filename">파일 업로드</label>
-											<input type="file" id="ex_filename" class="upload-hidden"><br>
+										<form name = "sub1" id ="sub1" action="Document_Save.jsp" method="post" enctype="multipart/form-data" onSubmit="return false;">
+										<p>
 										<div>
-											<font class=nanum style="">
-												<b>프로젝트</b>
+											<label class="nanum" style="margin-top: -15px">파일 등록</label>
+											<hr style="border: solid 1px black; margin-top: 5px">
+											<font class="nanum" style="">
+												<label class="nanum" style="margin-top: -10px"><b>서류 명</b></label>
+												<input type = "text"  id="DocNm" name ="DocNm" style="margin-top: 15px">
+												<br />
+												<div>
+													<label class="nanum">파일 업로드&nbsp;&nbsp;&nbsp;&nbsp; <input type="file" id="ex_filename" name="ex_filename"class="upload-hidden"> </label>
+												</div>
+												<b>서류 내용</b>
 												<br />
 												<br />
-												<select>
-													<option value="">프로젝트를 선택하세요</option>
-													<!-- 옵션 추가 필요하면 할것 -->
-												</select>
-												<br />
-												<b>파일 설명</b>
-												<br />
-												<br />
-												<textarea rows="5"  style = "resize:none;"> </textarea>
+												<textarea rows="5"  style = "resize:none;" id="DocContent" name="DocContent"> </textarea>
 											</font>
 										</div>
 										</p>
 										<div type="button" style="float:right;">
-											<a href="#" class="btn-layerOpen">등록</a>
-
-											<a href="#" class="btn-layerClose">닫기</a>
+											<button onclick='document.sub1.submit();'>등록</button>
+											<button onclick="location.href = 'ProjectDocument.jsp'">닫기</button>
 											<br />
 											<br />
 										</div>
+										</form>
 									</div>
 								</div>
 							</div>
@@ -260,13 +258,24 @@
 										<span>
 											비고
 										</span>
-									</th>				
+									</th>		
+									<th scope="col"  data-index="5"  ata-title="파일 명">
+										<span>
+											파일 명
+										</span>
+									</th>		
+									<th scope="col"  data-index="6"  ata-title="파일 경로" style="display: none">
+										<span>
+											파일 경로
+										</span>
+									</th>	
+									
 								</tr>
 							</thead>
 							<tbody>		
 <% 
 try{
-	
+	request.setCharacterEncoding("UTF-8");
 	String dbURL="jdbc:mysql://192.168.0.71:3306/ProjectManagement?useUnicode=true&characterEncoding=UTF-8"; 
 	String dbID="hidata"; 
 	String dbPassword="hidata2312357!";
@@ -279,17 +288,23 @@ try{
 	System.out.println("MySQL 데이터베이스 db에 성공적으로 접속했습니다. ");
 								   
 	Statement stmt = conn.createStatement();
-	String sql = "SELECT * FROM MA_Project ORDER BY PJNo DESC";
+	String sql = "SELECT * FROM MA_Document ORDER BY DocNo DESC";
 	rs = stmt.executeQuery(sql);
+	%>
 	
+	<form action = "FileDownload.jsp" method ="post"> <%
 	int rs_Count = 0; 
 	while(rs.next()){
 		out.print("<tr>");
 		out.print("<td>" + "<span>" + "" + "</span>" + "</td>");
-		out.print("<td>  <a href='ProjectInfo.jsp?PJNo="+ rs.getString("PJNo") +"'>" + "<span>" + rs.getString("DocNm") + "</span>" + " </a></td>");
+		out.print("<td>  <a href='ProjectInfo.jsp?PJNo="+ rs.getString("DocNo") +"'>" + "<span>" + rs.getString("DocNm") + "</span>" + " </a></td>");
 		out.print("<td>" + "<span>" + rs.getString("DocDt") + "</span>" + "</td>");
 		out.print("<td>" + "<span>" + rs.getString("DocUser") + "</span>" + "</td>");
 		out.print("<td>" + "<span>" + rs.getString("DocRemark") + "</span>" + "</td>");
+		out.print("<td name ='fileName'>" + "<span>" +rs.getString("DocBLOB") + "</span>" + "</td>");
+		out.print("<td style='display: none'>" + "<span>" + rs.getString("DocPath") + "</span>" + "</td>");
+		out.print("<td>" + "<input type = 'submit'  value = " + "'"+rs.getString("DocBLOB")+"'>" + "</td>");
+		%>document.write(document.getElementByName("fileName")[0].value);<%
 		out.print("</tr>"); 
 		rs_Count += 1;
 	} 
@@ -338,6 +353,7 @@ catch(SQLException ex) {
 // finally{}				
 	
 %>
+</form>
 </tbody>
 	</table>
 	</section>
@@ -411,6 +427,15 @@ catch(SQLException ex) {
 	<script src="js/breakpoints.min.js"></script>
 	<script src="js/util.js"></script>
 	<script src="js/main.js"></script>
-
+	<script>
+	function FUpload(){
+//         if (document.getElementById("ex_filename").value == "" or document.getElementById("ex_filename").value == null ) {
+//             alert("파일을 등록해주세요");
+//             return false; }
+//        else{
+	   		document.sub1.submit();
+// 	   		}
+		}
+	</script>
 </body>
 </html>
