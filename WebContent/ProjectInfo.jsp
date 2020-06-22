@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.util.regex.Pattern" %>
 <%@page import="java.sql.*"%>
+<%@page import = "ProjectManagement.MySQLConnect" %>
 
 <!DOCTYPE HTML>
 <html>
@@ -141,6 +142,7 @@
 		<div class="row" style="margin-Left:4%; padding-top:30px; background-color: white; margin-Right:5%; border-radius: 10px;">
 			<div style="width: 100%;">
 				<%
+// 				Connection conn = MySQLConnect.getMySQLConnection();
 				try{
 					String PJNo = request.getParameter("PJNo");
 					String dbURL="jdbc:mysql://192.168.0.71:3306/ProjectManagement?serverTimezone=UTC"; 

@@ -304,7 +304,7 @@ try{
 		out.print("<td name ='fileName'>" + "<span>" +rs.getString("DocBLOB") + "</span>" + "</td>");
 		out.print("<td style='display: none'>" + "<span>" + rs.getString("DocPath") + "</span>" + "</td>");
 		out.print("<td>" + "<input type = 'submit'  value = " + "'"+rs.getString("DocBLOB")+"'>" + "</td>");
-		%>document.write(document.getElementByName("fileName")[0].value);<%
+		%><script>document.write(document.getElementByName("fileName")[0].value);</script><%
 		out.print("</tr>"); 
 		rs_Count += 1;
 	} 
