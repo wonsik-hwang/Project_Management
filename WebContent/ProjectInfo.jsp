@@ -137,8 +137,8 @@
 
 					<br />
 					<hr style="border: solid 1px black;">
-
 			</div>
+		<div class="row" style="margin-Left:4%; padding-top:30px; background-color: white; margin-Right:5%; border-radius: 10px;">
 			<div style="width: 100%;">
 				<%
 				try{
@@ -157,7 +157,8 @@
 				   
 				   while(rs.next()){
 				%>
-				<div style="width:50%; float: left">
+
+				<div style="width:50%; float: left;">
 					<div>
 						<label class="toppadding">프로젝트명</label>
 						<label id="PJNm" class="txtlabel"><%=rs.getString("PJNm")%></label>
@@ -180,8 +181,6 @@
 						<label class="toppadding">주관 담당자(부)</label>
 						<label id="HostSubManager" class="txtlabel"><%=rs.getString("HostSubManager")%></label>
 				</div>
-				
-					
 			</div>
 			<div style="width:100%">
 				<div style="width:100%">
@@ -211,7 +210,6 @@
 						<input type="button" value="목록" onClick="location.href = 'ProjectList.jsp'">
 					</div>
 				</div>
-		</div>
 		
 <%
 		 }
@@ -229,6 +227,8 @@ catch(SQLException ex) {
 		}
 %>
 </div>
+</div>
+
 				<!-- Sidebar -->
 				<div id="sidebar">
 					<div class="inner">
