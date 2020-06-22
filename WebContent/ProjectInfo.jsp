@@ -107,12 +107,12 @@
 									</a>
 								</li>
 								<li class="rowLi ">
-									<a href="ProjectDocument1.jsp" data-hover="서류관리">
+									<a href="ProjectDocument.jsp" data-hover="서류관리">
 										<span>서류관리</span>
 									</a>
 								</li>
 								<li class="rowLi">
-									<a href="ProjectOutput1.jsp" data-hover="산출물관리">
+									<a href="ProjectOutput.jsp" data-hover="산출물관리">
 										<span>산출물관리</span>
 									</a>
 								</li>
@@ -127,7 +127,7 @@
 									</a>
 								</li>
 								<li class="rowLi">
-									<a href="ProjectCost1.jsp" data-hover="비용관리">
+									<a href="ProjectCost.jsp" data-hover="비용관리">
 										<span>비용관리</span>
 									</a>
 								</li>
