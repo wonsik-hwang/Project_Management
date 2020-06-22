@@ -11,7 +11,7 @@ public class ProjectNameCheck {
 	{
 		Connection conn = MySQLConnect.getMySQLConnection();
 		
-		String sql = "SELECT mp.`PJNm` FROM MA_Project mp";
+		String sql = "SELECT mp.PJNm FROM MA_Project mp";
 		try
 		{
 			PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -40,4 +40,38 @@ public class ProjectNameCheck {
 		
 		return false;
 	}
+	
+	public static boolean OutputNameCheck (String nm, int no)
+	{
+		Connection conn = MySQLConnect.getMySQLConnection();
+		
+		String sql = "SELECT mo.OPNm FROM MA_Output mo WHERE mo.PJNo = " + no;
+		try
+		{
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next())
+			{
+				if (rs.getString("OPNm").equals(nm))
+				{
+					MySQLConnect.close(rs);
+					MySQLConnect.close(pstmt);
+					MySQLConnect.close(conn);
+					return true;
+				}
+			}
+			
+			MySQLConnect.close(rs);
+			MySQLConnect.close(pstmt);
+			MySQLConnect.close(conn);
+
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return false;
+	}	
 }
