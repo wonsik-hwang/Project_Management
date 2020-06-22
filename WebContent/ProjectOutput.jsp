@@ -94,6 +94,22 @@
 		}
 	</style>
 
+<%
+try{
+	String PJNo = request.getParameter("PJNo");
+	String dbURL="jdbc:mysql://192.168.0.71:3306/ProjectManagement"; 
+	String dbID="hidata"; 
+	String dbPassword="hidata2312357!";
+    Class.forName("com.mysql.jdbc.Driver");
+
+	ResultSet rs = null;
+    Connection conn=DriverManager.getConnection(dbURL, dbID, dbPassword);
+   
+    Statement stmt = conn.createStatement();
+    String sql = "SELECT * FROM MA_Output WHERE PJNo=" + PJNo  + " ORDER BY OPNo DESC";
+    rs = stmt.executeQuery(sql);
+	%>
+
 </head>
 
 <body>
@@ -119,24 +135,24 @@
 				</div>
 				<div>
 					<div style="width:74.7%; float:right">
-						<ul class="snip1398">
+						<ul class="snip1398 ">
 							<li class="rowLi">
-									<a href="ProjectInfo.jsp" data-hover="기본정보">
+								<a href="ProjectInfo.jsp?PJNo=<%= PJNo%>" data-hover="기본정보">
 									기본정보
 								</a>
 							</li>
 							<li class="rowLi ">
-								<a href="ProjectDocument.jsp" data-hover="서류관리">
+								<a href="ProjectDocument.jsp?PJNo=<%= PJNo %>" data-hover="서류관리">
 									<span>서류관리</span>
 								</a>
 							</li>
 							<li class="current rowLi">
-								<a href="ProjectOutput.jsp" data-hover="산출물관리">
+								<a href="ProjectOutput.jsp?PJNo=<%= PJNo %>" data-hover="산출물관리">
 									<span>산출물관리</span>
 								</a>
 							</li>
 							<li class="rowLi">
-								<a href="ProjectMember_Add.jsp" data-hover="인원관리">
+								<a href="ProjectMember_Add.jsp?PJNo=<%= PJNo %>" data-hover="인원관리">
 									<span>인원관리</span>
 								</a>
 							</li>
@@ -146,7 +162,7 @@
 								</a>
 							</li>
 							<li class="rowLi">
-								<a href="ProjectCost.jsp" data-hover="비용관리">
+								<a href="ProjectCost.jsp?PJNo=<%= PJNo %>" data-hover="비용관리">
 									<span>비용관리</span>
 								</a>
 							</li>
@@ -177,12 +193,12 @@
 					<!-- 파일 등록 버튼 -->
 					<form id="OPCreate" name="OPCreate" action="ProjectOutput_OK.jsp"  method="post">
 					<div style="float:right; padding-right:3%;">
-						<a href="#layer2" class="btn-example">
+						<a href="#Insert" class="btn-example">
 							<input type="button" value="+ 파일 등록">
 						</a>
 						<div class="dim-layer">
 							<div class="dimBg"></div>
-							<div id="layer2" class="pop-layer">
+							<div id="Insert" class="pop-layer">
 								<div class="pop-container">
 									<div class="pop-conts">
 										<!--content //-->
@@ -203,9 +219,9 @@
 												<textarea id="OPContent" name="OPContent" rows="5"  style = "resize:none;"> </textarea>
 											</font>
 										</div>
-										<div type="button" style="float:right;">
+										<div type="button" style="float:right; margin-top: 15px">
 											<button id = "btnSave" name = "btnSave" class="primary" type="button">등록</button>
-											<button type="button"  onclick="location.href = 'ProjectOutput.jsp'">취소</button>
+											<button type="button"  onclick="location.href = 'ProjectOutput.jsp?PJNo=<%= PJNo %>'">취소</button>
 											<br />
 											<br />
 										</div>
@@ -275,23 +291,6 @@
 							</thead>
 							<tbody>		
 							<% 
-								try{
-									
-									String dbURL="jdbc:mysql://192.168.0.71:3306/ProjectManagement"; 
-									String dbID="hidata"; 
-									String dbPassword="hidata2312357!";
-									
-									Class.forName("com.mysql.jdbc.Driver");
-									System.out.println("드라이버 로드를 완료 하였습니다.");
-									
-									ResultSet rs = null;
-									Connection conn=DriverManager.getConnection(dbURL, dbID, dbPassword);
-									System.out.println("MySQL 데이터베이스 db에 성공적으로 접속했습니다. ");
-																   
-									Statement stmt = conn.createStatement();
-									String sql = "SELECT * FROM MA_Output ORDER BY OPNo DESC";
-									rs = stmt.executeQuery(sql);
-									
 									int rs_Count = 0; 
 									while(rs.next()){
 										out.print("<tr>");
@@ -344,10 +343,10 @@
 									</div>
 								</td>
 							</tr>
-					<%
-						}
-					// finally{}				
-					%>
+							<%
+								}
+// 							finally{}
+							%>
 					</tbody>
 				</table>
 			</section>

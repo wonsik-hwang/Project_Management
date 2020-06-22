@@ -161,8 +161,8 @@ try{
 
 						<button id = "btnSave" name = "btnSave" class="primary"onClick="btnClick()">등록</button>
 <!-- 						</a> -->
-						&nbsp&nbsp
-						<input type="button" value="취소"  onclick="home()">
+						&nbsp;
+						<button type="button" value="취소"  onclick="location.href = 'ProjectInfo.jsp?PJNo=<%= PJNo %>'">취소</button>
 					</div>
 				</div>
 				<input name = "PJNo" id="PJNo" type="text" value= <%=PJNo%> style="display:none">
