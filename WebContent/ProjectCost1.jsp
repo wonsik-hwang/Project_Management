@@ -110,7 +110,7 @@
 				<div id="main">
 					<div style="height:3px">
 						<br />
-						<a1 class="nanum"; style="font-size:28px; color:black; margin-left:5%;">프로젝트 서류관리</a1>
+						<a1 class="nanum"; style="font-size:28px; color:black; margin-left:5%;">프로젝트 비용관리</a1>
 					</div>
 					<div>
 						<br />
@@ -145,7 +145,7 @@
 								<span>작업관리</span>
 							</a>
 						</li>
-						<li class="rowLi">
+						<li class="current rowLi">
 							<a href="ProjectCost1.jsp" data-hover="비용관리">
 								<span>비용관리</span>
 							</a>
@@ -156,7 +156,7 @@
 			<br />
 			<hr style="border: solid 1px black;">
 	</div>
-			<div class="row" style="margin-Left:5%; padding-top:50px; background-color: white; margin-Right:5%; border-radius: 10px">
+			<div class="row" style="margin-Left:5%; padding-top:50px; background-color: white; margin-Right:5%; border-radius:10px;">
 
 				<div style="width:100%;">
 					<!-- 그리드 -->
@@ -165,11 +165,6 @@
 							<option>프로젝트를 선택하세요</option>
 						</select>
 					</div>
-
-					<div style="float:left; padding-left:20px">
-						<input type="text" name="query" placeholder="서류명을 입력하세요">
-					</div>
-
 					<div style="float:left; padding-left:20px">
 						<input type="text" name="query" id="query" placeholder="작성자를 입력하세요">
 					</div>
@@ -178,7 +173,10 @@
 						<input type="button" value="검색">
 					</div>
 
-					<!-- 파일 등록 버튼 -->
+
+
+<!-- 파일 등록 버튼 -->
+
 					<div style="float:right; padding-right:10%;">
 						<a href="#layer2" class="btn-example">
 							<input type="button" value="+ 파일 등록">
@@ -189,19 +187,18 @@
 								<div class="pop-container">
 									<div class="pop-conts">
 										<!--content //-->
-										<p><label class=nanum for="ex_filename">파일 업로드</label>
-											<input type="file" id="ex_filename" class="upload-hidden"><br>
+										<p>
 										<div>
-											<font class=nanum style="">
-												<b>프로젝트</b>
+											<label class="nanum" style="margin-top: -15px">파일 등록</label>
+											<hr style="border: solid 1px black; margin-top: 5px">
+											<font class="nanum" style="">
+												<label class="nanum" style="margin-top: -10px"><b>산출물 명</b></label>
+												<input type = "text" style="margin-top: 15px">
 												<br />
-												<br />
-												<select>
-													<option value="">프로젝트를 선택하세요</option>
-													<!-- 옵션 추가 필요하면 할것 -->
-												</select>
-												<br />
-												<b>파일 설명</b>
+												<div>
+													<label class="nanum">파일 업로드&nbsp;&nbsp;&nbsp;&nbsp; <input type="file" id="ex_filename" class="upload-hidden"> </label>
+												</div>
+												<b>산출물 내용</b>
 												<br />
 												<br />
 												<textarea rows="5"  style = "resize:none;"> </textarea>
@@ -221,7 +218,7 @@
 						</div>
 					</div>
 				</div>
-				<div style="padding-bottom: 25px">
+				<div style="padding-top: 25px">
 				</div>
 			</div>
 		</div>
