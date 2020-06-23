@@ -4,6 +4,8 @@
 <%@page import= "ProjectManagement.ProjectDao" %>
 <%@page import= "ProjectManagement.ProjectDto" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.util.regex.Pattern" %>
+<%@page import="java.sql.*"%>
 <!DOCTYPE HTML>
 <!--
 	Editorial by HTML5 UP
@@ -28,7 +30,7 @@
 <%
     request.setCharacterEncoding("UTF-8");
 %>
-	<%
+<%
 	
     ProjectDao pdao = ProjectDao.getInstance();
     ProjectDto pdto = new ProjectDto();
@@ -44,8 +46,7 @@
 
 //     List<ProjectDto> list = pdao.getprj_name(Integer.parseInt((String)session.getAttribute("user_num")));
 	
-	%>
-	
+%>
 	<script>
 		$(".hover").mouseleave(
 			function() {
@@ -53,7 +54,6 @@
 			}
 		);
 	</script>
-
 
 	<style>
 		.body {
@@ -101,6 +101,23 @@
 			color: white !important;
 		}
 	</style>
+	
+<%
+try{
+	String PJNo = request.getParameter("PJNo");
+	String dbURL="jdbc:mysql://192.168.0.71:3306/ProjectManagement"; 
+	String dbID="hidata"; 
+	String dbPassword="hidata2312357!";
+    Class.forName("com.mysql.jdbc.Driver");
+
+	ResultSet rs = null;
+    Connection conn=DriverManager.getConnection(dbURL, dbID, dbPassword);
+   
+    Statement stmt = conn.createStatement();
+    String sql = "SELECT * FROM MA_Person WHERE PJNo=" + PJNo  + " ORDER BY UserId DESC";
+    rs = stmt.executeQuery(sql);
+%>
+	
 </head>
 
 <body>
@@ -126,24 +143,24 @@
 
 			<div>
 				<div style="width:74.7%; float:right">
-					<ul class="snip1398">
+					<ul class="snip1398 ">
 						<li class="rowLi">
-								<a href="ProjectInfo.jsp" data-hover="기본정보">
+							<a href="ProjectInfo.jsp?PJNo=<%= PJNo%>" data-hover="기본정보">
 								기본정보
 							</a>
 						</li>
 						<li class="rowLi ">
-							<a href="ProjectDocument.jsp" data-hover="서류관리">
+							<a href="ProjectDocument.jsp?PJNo=<%= PJNo %>" data-hover="서류관리">
 								<span>서류관리</span>
 							</a>
 						</li>
 						<li class="rowLi">
-							<a href="ProjectOutput.jsp" data-hover="산출물관리">
+							<a href="ProjectOutput.jsp?PJNo=<%= PJNo %>" data-hover="산출물관리">
 								<span>산출물관리</span>
 							</a>
 						</li>
 						<li class="current rowLi">
-							<a href="ProjectMember_Add.jsp" data-hover="인원관리">
+							<a href="ProjectMember_Add.jsp?PJNo=<%= PJNo %>" data-hover="인원관리">
 								<span>인원관리</span>
 							</a>
 						</li>
@@ -153,7 +170,7 @@
 							</a>
 						</li>
 						<li class="rowLi">
-							<a href="ProjectCost.jsp" data-hover="비용관리">
+							<a href="ProjectCost.jsp?PJNo=<%= PJNo %>" data-hover="비용관리">
 								<span>비용관리</span>
 							</a>
 						</li>
@@ -211,6 +228,20 @@
 <!-- 		            <input class="btn btn-primary" type="reset" value="취소" onclick="location.href = 'ProjectMember_Add.jsp'" style="float: left"> -->
 		        </div>
 			</div>
+			<%
+			}
+			
+			catch(ClassNotFoundException ex) {
+					System.out.println("드라이버 로드에 실패하였습니다.");
+					System.out.println(ex);
+			}
+			catch(SQLException ex) {
+				System.out.println("DB 접속에 실패 하였습니다.");
+				System.out.println(ex.getMessage());
+				ex.printStackTrace();
+			}
+// 			finally {}
+			%>
 
 <!-- 		</section> -->
 	</div>

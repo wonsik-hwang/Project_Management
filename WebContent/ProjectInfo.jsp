@@ -82,6 +82,22 @@
 			color: white !important;
 		}
 	</style>
+	
+<%
+try{
+	String PJNo = request.getParameter("PJNo");
+	String dbURL="jdbc:mysql://192.168.0.71:3306/ProjectManagement?serverTimezone=UTC"; 
+   	String dbID="hidata"; 
+  	String dbPassword="hidata2312357!";
+	    Class.forName("com.mysql.jdbc.Driver");
+    	
+    ResultSet rs = null;
+    Connection conn=DriverManager.getConnection(dbURL, dbID, dbPassword);
+   
+    Statement stmt = conn.createStatement();
+    String sql = "SELECT * FROM MA_Project WHERE PJNo=" + PJNo;
+    rs = stmt.executeQuery(sql);
+%>
 </head>
 <body>
 	<!-- Wrapper -->
@@ -103,22 +119,22 @@
 						<div style="width:74.7%; float:right;">
 							<ul class="snip1398 ">
 								<li class="current rowLi">
-										<a href="ProjectInfo.jsp" data-hover="기본정보">
+									<a href="ProjectInfo.jsp?PJNo=<%= PJNo%>" data-hover="기본정보">
 										기본정보
 									</a>
 								</li>
 								<li class="rowLi ">
-									<a href="ProjectDocument.jsp" data-hover="서류관리">
+									<a href="ProjectDocument.jsp?PJNo=<%= PJNo %>" data-hover="서류관리">
 										<span>서류관리</span>
 									</a>
 								</li>
 								<li class="rowLi">
-									<a href="ProjectOutput.jsp" data-hover="산출물관리">
+									<a href="ProjectOutput.jsp?PJNo=<%= PJNo %>" data-hover="산출물관리">
 										<span>산출물관리</span>
 									</a>
 								</li>
 								<li class="rowLi">
-									<a href="ProjectMember_Add.jsp" data-hover="인원관리">
+									<a href="ProjectMember_Add.jsp?PJNo=<%= PJNo %>" data-hover="인원관리">
 										<span>인원관리</span>
 									</a>
 								</li>
@@ -128,7 +144,7 @@
 									</a>
 								</li>
 								<li class="rowLi">
-									<a href="ProjectCost.jsp" data-hover="비용관리">
+									<a href="ProjectCost.jsp?PJNo=<%= PJNo %>" data-hover="비용관리">
 										<span>비용관리</span>
 									</a>
 								</li>
@@ -142,21 +158,6 @@
 		<div class="row" style="margin-Left:4%; padding-top:30px; background-color: white; margin-Right:5%; border-radius: 10px;">
 			<div style="width: 100%;">
 				<%
-// 				Connection conn = MySQLConnect.getMySQLConnection();
-				try{
-					String PJNo = request.getParameter("PJNo");
-					String dbURL="jdbc:mysql://192.168.0.71:3306/ProjectManagement?serverTimezone=UTC"; 
-				   	String dbID="hidata"; 
-				  	String dbPassword="hidata2312357!";
-			 	    Class.forName("com.mysql.jdbc.Driver");
-				    	
-				    ResultSet rs = null;
-				    Connection conn=DriverManager.getConnection(dbURL, dbID, dbPassword);
-				   
-				    Statement stmt = conn.createStatement();
-				    String sql = "SELECT * FROM MA_Project WHERE PJNo=" + PJNo;
-				    rs = stmt.executeQuery(sql);
-				   
 				   while(rs.next()){
 				%>
 
@@ -204,11 +205,9 @@
 						<a href="ProjectInfo_Modify.jsp?PJNo=<%=PJNo%>">
 						<input class="primary" type="button" value="수정">
 						</a>
-						
 						<a href='ProjectDelete.jsp?PJNo=<%=PJNo%>'>
 						<input class="primary" type="button" value="삭제">
 						</a>
-						
 						<input type="button" value="목록" onClick="location.href = 'ProjectList.jsp'">
 					</div>
 				</div>
