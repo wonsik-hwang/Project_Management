@@ -1,118 +1,121 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="java.util.regex.Pattern" %>
-<%@page import="java.sql.*"%>   
+<%@ page import = "java.util.regex.Pattern" %>
+<%@ page import = "java.sql.*" %>
+<%@ page import = "ProjectManagement.MySQLConnect" %>
 <%
- response.setHeader("Cache-Control","no-cache");
- response.setHeader("Pragma","no-cache");
- response.setDateHeader("Expires",0);
+	response.setHeader("Cache-Control", "no-cache");
+	response.setHeader("Pragma", "no-cache");
+	response.setDateHeader("Expires", 0);
 %>
 <!DOCTYPE HTML>
 <html>
-
-<head>
-	<title>(주)하이데이타</title>
-
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="CSS/main.css" />
-	<link rel="stylesheet" href="CSS/mouseover3.css" />
-
-	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
-	</script>
-
-	<script>
-		$(".hover").mouseleave(
-			function() {
-				$(this).removeClass("hover");
+	<head>
+		<title>(주)하이데이타</title>
+	
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="CSS/main.css" />
+		<link rel="stylesheet" href="CSS/mouseover3.css" />
+	
+		<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-3.5.1.js"  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+		<script>
+			$(".hover").mouseleave(
+				function() {
+					$(this).removeClass("hover");
+				}
+			);
+	
+			function home() {
+				var msg = confirm("저장하지 않고 취소 하시겠습니까?");
+				if (msg === true) {
+					location.href = 'ProjectList.jsp';
+				} else {
+					return;
+				}
 			}
-		);
-
-		function home() {
-			var msg = confirm("저장하지 않고 취소 하시겠습니까?");
-			if (msg === true) {
-				location.href = 'ProjectList.jsp';
-			} else {
-				return;
-			}
-
-		}
 		</script>
-
-	<style>
-		.body {
-			font-family: 'Nanum Gothic', sans-serif;
-			font-size: 15pt;
-		}
-
-
-		.btn {
-			margin-right: 3%;
-			height: 50px;
-			line-height: 50px;
-			text-align: center;
-			width: auto;
-			padding-left: 5%;
-			padding-right: 5%;
-			min-width: 80px;
-			font-size: 1.2em
-		}
-
-		.toppadding {
-			padding-top: 15px
-		}
-
-		.rowLi {
-			float: left;
-			list-style-type: none;
-			margin-left: 5%
-		}
-
-		.txtbox {
-			border-style: solid;
-			border-width: 1px;
-			border-color: gray;
-		}
-
-		.nanum {
-			font-family: 'Nanum Gothic', sans-serif;
-			font-size: 18px;
-		}
-
-		input[type=button] {
-			background-color: #4F5467;
-			box-shadow: none;
-			color: white !important;
-		}
-	</style>
-</head>
-<body>
-	<!-- Wrapper -->
-	<div id="wrapper">
-
-		<!-- main -->
-		<div id="main" style="background:#F5F5F5">
-			<div style="background: white">
-				<div class="inner">
-
-					<!-- Header -->
-					<div id="main">
-						<div style="height:2px;">
+		
+		<style>
+			.body {
+				font-family: 'Nanum Gothic', sans-serif;
+				font-size: 15pt;
+			}
+	
+	
+			.btn {
+				margin-right: 3%;
+				height: 50px;
+				line-height: 50px;
+				text-align: center;
+				width: auto;
+				padding-left: 5%;
+				padding-right: 5%;
+				min-width: 80px;
+				font-size: 1.2em
+			}
+	
+			.toppadding {
+				padding-top: 15px
+			}
+	
+			.rowLi {
+				float: left;
+				list-style-type: none;
+				margin-left: 5%
+			}
+	
+			.txtbox {
+				border-style: solid;
+				border-width: 1px;
+				border-color: gray;
+			}
+	
+			.nanum {
+				font-family: 'Nanum Gothic', sans-serif;
+				font-size: 18px;
+			}
+	
+			input[type=button] {
+				background-color: #4F5467;
+				box-shadow: none;
+				color: white !important;
+			}
+		</style>
+	
+		<% 
+		try{
+			Connection conn = MySQLConnect.getMySQLConnection();
+		
+			String sql = "SELECT * FROM MA_Project ORDER BY PJNo DESC";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+		%>
+	
+	</head>
+	<body>
+		<!-- Wrapper -->
+		<div id="wrapper">
+	
+			<!-- main -->
+			<div id="main" style="background:#F5F5F5">
+				<div style="background: white">
+					<div class="inner">
+	
+						<!-- Header -->
+						<div id="main">
 							<br />
-							<a1 class="nanum" ; style="font-size:28px; color:black; margin-left:5%;">프로젝트 목록</a1>
-						</div>
-						<div>
-							<br />
+							<div style="height:2px;">
+								<h1 class="nanum"  style="font-size:28px; color:black; margin-left:5%;">프로젝트 목록</h1>
+							</div>
 						</div>
 					</div>
+					<br />
+					<hr style="border: solid 1px black;">
 				</div>
-
-				<br />
-				<hr style="border: solid 1px black;">
-			</div>
+				
 				<!-- Banner -->
-
-				<div class="row" style="margin-Left:5%; padding-top:50px; background-color: white; margin-Right:5%">
+				<div class="row" style="margin-Left:5%; padding-top:40px; background-color: white; margin-Right:5%">
 					<div>
 						<select>
 							<option value="">프로젝트 상태를 선택하세요</option>
@@ -125,7 +128,7 @@
 							<option value="종료">종료</option>
 						</select>
 					</div>
-					&nbsp &nbsp &nbsp &nbsp &nbsp
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<div>
 						<select>
 							<option value="">부서를 선택하세요</option>
@@ -139,29 +142,25 @@
 							<option value="f3ef5eb3-beb0-4a7d-b014-56560472e890">시스템 사업부</option>
 						</select>
 					</div>
-					&nbsp &nbsp &nbsp &nbsp &nbsp
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<div>
 						<input id="search" type="text" class="form-control" placeholder="Search...">
 						<span>
 							<span><i class="la la-search"></i></span>
 						</span>
 					</div>
-					&nbsp &nbsp &nbsp &nbsp &nbsp
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<div style="float:left; padding-left:20px">
 						<input type="button" value="검색">
 					</div>
-					&nbsp &nbsp &nbsp &nbsp &nbsp
-						<div style="width:80px; float:right;">
-					<input type="button" value="프로젝트 등록"  onClick="location.href='ProjectCreate.jsp'">
-					</a>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<div style="width:80px; float:right;">
+						<input type="button" value="프로젝트 등록"  onClick="location.href='ProjectCreate.jsp'">
+					</div>
 				</div>
-
-				</div>
-
-
+	
 				<!-- Section -->
 				<section>
-
 					<div id="grid" style="margin-Left:5%; padding-top:50px; background-color: white; margin-Right:5%">
 						<table>
 							<colgroup>
@@ -210,41 +209,24 @@
 								</tr>
 							</thead>
 							<tbody>		
-<% 
-try{
-	
-	String dbURL="jdbc:mysql://192.168.0.71:3306/ProjectManagement"; 
-	String dbID="hidata"; 
-	String dbPassword="hidata2312357!";
-	
-	Class.forName("com.mysql.jdbc.Driver");
-	System.out.println("드라이버 로드를 완료 하였습니다.");
-	
-	ResultSet rs = null;
-	Connection conn=DriverManager.getConnection(dbURL, dbID, dbPassword);
-	System.out.println("MySQL 데이터베이스 db에 성공적으로 접속했습니다. ");
-								   
-	Statement stmt = conn.createStatement();
-	String sql = "SELECT * FROM MA_Project ORDER BY PJNo DESC";
-	rs = stmt.executeQuery(sql);
-	
-	int rs_Count = 0; 
-	while(rs.next()){
-		out.print("<tr>");
-		out.print("<td>" + "<span>" + "&nbsp" + "</span>" + "</td>");
-		out.print("<td>  <a href='ProjectInfo.jsp?PJNo="+ rs.getString("PJNo") +"'>" + "<span>" + rs.getString("PJNm") + "</span>" + " </a></td>");
-		out.print("<td>" + "<span>" + rs.getString("PJPM") + "</span>" + "</td>");
-		out.print("<td>" + "<span>" + rs.getString("PJState") + "</span>" + "</td>");
-		out.print("<td>" + "<span>" + rs.getString("PJStartDt") + "</span>" + "</td>");
-		out.print("<td>" + "<span>" + rs.getString("PJEndDt") +"</span>" +  "</td>");
-		out.print("</tr>"); 
-		rs_Count += 1;
-	} 
-	
-	if(rs_Count == 0)
-	{
-		%>
-			<tr>
+								<%
+									int rs_Count = 0; 
+									while(rs.next()){
+										out.print("<tr>");
+										out.print("<td>" + "<span>" + "&nbsp" + "</span>" + "</td>");
+										out.print("<td>  <a href='ProjectInfo.jsp?PJNo="+ rs.getString("PJNo") +"'>" + "<span>" + rs.getString("PJNm") + "</span>" + " </a></td>");
+										out.print("<td>" + "<span>" + rs.getString("PJPM") + "</span>" + "</td>");
+										out.print("<td>" + "<span>" + rs.getString("PJState") + "</span>" + "</td>");
+										out.print("<td>" + "<span>" + rs.getString("PJStartDt") + "</span>" + "</td>");
+										out.print("<td>" + "<span>" + rs.getString("PJEndDt") +"</span>" +  "</td>");
+										out.print("</tr>"); 
+										rs_Count += 1;
+									}
+									
+									if(rs_Count == 0)
+									{
+								%>
+								<tr>
 									<td colspan="9">
 										<div style="margin:0 auto;position:static;text-align:center">
 											No records available.
@@ -252,72 +234,53 @@ try{
 									</td>
 								</tr>
 								<%
-	}
-}
-
-catch(ClassNotFoundException ex) {
-		System.out.println("드라이버 로드에 실패하였습니다.");
-		System.out.println(ex);
-		%>
-										<tr>
-									<td colspan="9">
-										<div style="margin:0 auto;position:static;text-align:center">
-											저장된 데이터가 없습니다.
-										</div>
-									</td>
-								</tr>
-	<%
-	}
-catch(SQLException ex) {
-		System.out.println("DB 접속에 실패 하였습니다.");
-		System.out.println(ex.getMessage());
-		ex.printStackTrace();
-		%>
-										<tr>
-									<td colspan="9">
-										<div style="margin:0 auto;position:static;text-align:center">
-											저장된 데이터가 없습니다.
-										</div>
-									</td>
-								</tr>
-						<%
-	}
-// finally{}				
+									}
+								}
 	
-%>
-</tbody>
-	</table>
-	</section>
+								catch(SQLException ex) {
+										System.out.println("DB 접속에 실패 하였습니다.");
+										System.out.println(ex.getMessage());
+										ex.printStackTrace();
+								%>
+								<tr>
+									<td colspan="9">
+										<div style="margin:0 auto;position:static;text-align:center">
+											저장된 데이터가 없습니다.
+										</div>
+									</td>
+								</tr>
+								<%
+									}
+								// finally{}				
+									
+								%>
+							</tbody>
+						</table>
+					</div>
+				</section>
 			</div>
-
-		<!-- Sidebar -->
-		<div id="sidebar">
-			<div class="inner">
-
-				<!-- Menu -->
-
-				<nav id="menu">
-					<header class="major">
-						<h2 class=nanum> HIDATA PROJECT CENTER</h2>
-					</header>
-					<ul>
-						<li class="nanum"><a href="ProjectCreate.jsp">프로젝트 등록</a></li>
-						<li class="nanum"><a href="ProjectList.jsp"> 프로젝트 목록</a></li>
-<!-- 						<li class="nanum"><a href="project_user.html">사용자 관리</a></li> -->
-						<li class=nanum><a></a></li>
-					</ul>
-				</nav>
+			
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+	
+					<!-- Menu -->
+					<nav id="menu">
+						<header class="major">
+							<h2 class=nanum> HIDATA PROJECT CENTER</h2>
+						</header>
+						<ul>
+							<li class="nanum"><a href="ProjectCreate.jsp">프로젝트 등록</a></li>
+							<li class="nanum"><a href="ProjectList.jsp"> 프로젝트 목록</a></li>
+						</ul>
+					</nav>
+				</div>
 			</div>
 		</div>
-
-	</div>
-
-	<!-- Scripts -->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/browser.min.js"></script>
-	<script src="js/breakpoints.min.js"></script>
-	<script src="js/util.js"></script>
-	<script src="js/main.js"></script>
-</body>
-
+		<script src="js/jquery.min.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script src="js/breakpoints.min.js"></script>
+		<script src="js/util.js"></script>
+		<script src="js/main.js"></script>
+	</body>
 </html>
