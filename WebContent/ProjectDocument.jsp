@@ -4,24 +4,34 @@
 <%@page import="java.sql.*"%>   
 
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 
 <head>
 	<title>(주)하이데이타</title>
 
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="CSS/main.css" />
-	<link rel="stylesheet" href="CSS/mouseover3.css" />
-<!-- 	<link rel="stylesheet" href="CSS/style.css" />  -->
-<!-- 	<link rel="stylesheet" href="CSS/demo.css" /> -->
-<link rel="stylesheet" href="https://i.icomoon.io/public/temp/e5c48413e3/UntitledProject/style.css">
-	<script src="js/demo.js""></script>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    
+    <script src="js/jquery.min.js"></script>
+	<script src="js/browser.min.js"></script>
+	<script src="js/breakpoints.min.js"></script>
+	<script src="js/util.js"></script>
+	<script src="js/main.js"></script>
 	
 
+    <!-- Bootstrap CSS -->
+ 	<link rel="stylesheet" href="CSS/bootstrap.min.css">
+	<link rel="stylesheet" href="https://i.icomoon.io/public/temp/e5c48413e3/UntitledProject/style.css">
+	<link rel="stylesheet" href="CSS/main.css" />
+	<link rel="stylesheet" href="CSS/mouseover3.css" />
+   
+	
 	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
-
+	
+	
+	<script>
 		$(".hover").mouseleave(
 			function() {
 				$(this).removeClass("hover");
@@ -48,14 +58,14 @@
 
 		.btn {
 			margin-right: 3%;
-			height: 50px;
-			line-height: 50px;
+			height: 40px;
+/* 			line-height: 10px; */
 			text-align: center;
 			width: auto;
 			padding-left: 5%;
 			padding-right: 5%;
 			min-width: 80px;
-			font-size: 1.2em
+			font-size: 1em
 		}
 
 		.toppadding {
@@ -109,7 +119,7 @@
 				<div id="main">
 					<div style="height:3px">
 						<br />
-						<a1 class="nanum"; style="font-size:28px; color:black; margin-left:5%;">프로젝트 서류관리</a1>
+						<h1 class="nanum" style="font-size:28px; color:black; margin-left:5%;">프로젝트 서류관리</h1>
 					</div>
 					<div>
 						<br />
@@ -178,51 +188,124 @@
 					</div>
 
 					<!-- 파일 등록 버튼 -->
-					<div style="float:right; padding-right:10%;">
-						<a href="#layer2" class="btn-example">
-							<input type="button" value="+ 파일 등록">
-						</a>
-						<div class="dim-layer">
-							<div class="dimBg"></div>
-							<div id="layer2" class="pop-layer">
-								<div class="pop-container">
-									<div class="pop-conts">
-										<!--content //-->
-										<form name = "sub1" id ="sub1" action="Document_Save.jsp" method="post" enctype="multipart/form-data" onSubmit="return false;">
-										<p>
-										<div>
-											<label class="nanum" style="margin-top: -15px">파일 등록</label>
-											<hr style="border: solid 1px black; margin-top: 5px">
-											<font class="nanum" style="">
-												<label class="nanum" style="margin-top: -10px"><b>서류 명</b></label>
-												<input type = "text"  id="DocNm" name ="DocNm" style="margin-top: 15px">
-												<br />
-												<div>
-													<label class="nanum">파일 업로드&nbsp;&nbsp;&nbsp;&nbsp; <input type="file" id="ex_filename" name="ex_filename"class="upload-hidden"> </label>
-												</div>
-												<b>서류 내용</b>
-												<br />
-												<br />
-												<textarea rows="5"  style = "resize:none;" id="DocContent" name="DocContent"> </textarea>
-											</font>
+<!-- 					<div style="float:right; padding-right:10%;"> -->
+<!-- 						<a id="btn" href="#layer2" class="btn-example"> -->
+<!-- 							<input type="button" value="+ 파일 등록"> -->
+<!-- 						</a> -->
+<!-- 					</div> -->
+				
+<!-- 					<div class="dim-layer"> -->
+<!-- 							<div class="dimBg"></div> -->
+<!-- 							<div id="layer2" class="pop-layer"> -->
+<!-- 								<div class="pop-container"> -->
+<!-- 									<div class="pop-conts"> -->
+<!-- 										content  -->
+<!-- 										<form name = "sub1" id ="sub1" action="Document_Save.jsp" method="post" enctype="multipart/form-data" onSubmit="return false;"> -->
+<!-- 										<p> -->
+<!-- 										<div> -->
+<!-- 											<label class="nanum" style="margin-top: -15px">파일 등록</label> -->
+<!-- 											<hr style="border: solid 1px black; margin-top: 5px"> -->
+<!-- 											<font class="nanum" style=""> -->
+<!-- 												<label class="nanum" style="margin-top: -10px"><b>서류 명</b></label> -->
+<!-- 												<input type = "text"  id="DocNm" name ="DocNm" style="margin-top: 15px"> -->
+<!-- 												<br /> -->
+<!-- 												<div> -->
+<!-- 													<label class="nanum">파일 업로드&nbsp;&nbsp;&nbsp;&nbsp; <input type="file" id="ex_filename" name="ex_filename"class="upload-hidden"> </label> -->
+<!-- 												</div> -->
+<!-- 												<b>서류 내용</b> -->
+<!-- 												<br /> -->
+<!-- 												<br /> -->
+<!-- 												<textarea rows="5"  style = "resize:none;" id="DocContent" name="DocContent"> </textarea> -->
+<!-- 											</font> -->
+<!-- 										</div> -->
+<!-- 										</p> -->
+<!-- 										<div type="button" style="float:right;"> -->
+<!-- 											<button onclick='document.sub1.submit();'>등록</button> -->
+<!-- 											<a href="#" class="btn-layerClose" >닫기</a> -->
+<!-- 											<br /> -->
+<!-- 											<br /> -->
+<!-- 										</div> -->
+<!-- 										</form> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+						
+						
+   						<!--파일등록 팝업 -->
+						<div style="float:right; padding-right:5%;">
+						<input type="button" id="layer3" value="+파일 등록" > </div>
+					
+					
+						<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header" style="padding:1rem 1rem 0 1rem;">
+									<h2 class="modal-title" id="exampleModalLabel"><label class="nanum" >파일 등록</label></h2>
+<!-- 										<h5 class="modal-title" id="exampleModalLabel">서류 정보</h5> -->
+<!-- 										<button class="close" type="button" data-dismiss="modal" aria-label="Close"> -->
+<!-- 											<span aria-hidden="true">X</span> -->
+<!-- 										</button> -->
+									</div>
+									<div class="modal-body"><label class="nanum">서류 명</label>
+										<label><input type = "text" value="dasdasdasdasd"></label>
 										</div>
-										</p>
-										<div type="button" style="float:right;">
-											<button onclick='document.sub1.submit();'>등록</button>
-											<button onclick="location.href = 'ProjectDocument.jsp'">닫기</button>
-											<br />
-											<br />
+										<div class="modal-body">
+										<label class="nanum">파일 명 <input type="file" id="ex_filename" name="ex_filename"class="upload-hidden"> </label>
 										</div>
-										</form>
+										<div class="modal-body"><label class="nanum">파일 내용</label>
+										<textarea rows="5"  style = "resize:none;" id="DocContent" name="DocContent"> </textarea>
+									</div>
+									<div class="modal-footer">
+<!--  										<a class="btn" id="modalY" href="#">예</a> -->
+										<button class="btn" style="box-shadow: none" type="button" data-dismiss="modal">등록</button>
+										<button class="btn" style="box-shadow: none" type="button" data-dismiss="modal">취소</button>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+	
+						
+						
+						
+						
+<!-- 						<div>					   -->
+<!-- 					  <a class = 'btn' id='myeong'><span>안녕디지몬</span></a> -->
+<!-- 						</div> -->
+						<!--서류 정보 팝업 -->
+						<div class="modal fade" id="FileInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header" style="padding:1rem 1rem 0 1rem;">
+									<h2 class="modal-title" id="exampleModalLabel"><label class="nanum" >서류 정보</label></h2>
+									</div>
+									<div class="modal-body"><label class="nanum">서류 명</label>
+										<label><input type = "text" value="dasdasdasdasd"></label>
+										</div>
+										<div class="modal-body">
+										<label class="nanum">파일 명 <input type="file" id="ex_filename" name="ex_filename"class="upload-hidden"> </label>
+										</div>
+										<div class="modal-body"><label class="nanum">파일 내용</label>
+										<textarea rows="5"  style = "resize:none;" id="DocContent" name="DocContent"> </textarea>
+									</div>
+									<div class="modal-footer">
+ 										<a class="btn" id="modalY" href="#">예</a>
+										<button class="btn" style="box-shadow: none" type="button" data-dismiss="modal">등록</button>
+										<button class="btn" style="box-shadow: none" type="button" data-dismiss="modal">취소</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						
+						
+						
+						
+						
 					
+
 				<!-- Section -->
 				<section>
-
 					<div id="grid" style="margin-Left:5%; padding-top:115px; background-color: white; margin-Right:5%">
 						<table>
 							<colgroup>
@@ -247,7 +330,7 @@
 									<th data-field="PROJ_STATE" data-index="3" data-title="진행 상황" id="61a94629-97a3-4c89-949c-0e5815cfb721" scope="col">
 										<span> 등록일자 </span>
 									</th>
-									<th style="text-align: center" scope="col"  data-index="5"  ata-title="파일 명">
+									<th style="text-align: center" scope="col"  data-index="5"  data-title="파일 명">
 										<span> 저 장 </span>
 									</th>	
 									<th>
@@ -256,8 +339,9 @@
 								</tr>
 							</thead>
 							<tbody>	
-<% 
-try{
+
+<%
+try{ 
 	request.setCharacterEncoding("UTF-8");
 	String dbURL="jdbc:mysql://192.168.0.71:3306/ProjectManagement?useUnicode=true&characterEncoding=UTF-8"; 
 	String dbID="hidata"; 
@@ -278,45 +362,42 @@ try{
 	while(rs.next()){
 		out.print("<tr>");
 		out.print("<td>" + "<span>" + "" + "</span>" + "</td>");
-		out.print("<td>  <a href='ProjectInfo.jsp?PJNo="+ rs.getString("DocNo") +"'>" + "<span>" + rs.getString("DocNm") + "</span>" + " </a></td>");
-		out.print("<td>" + "<span>" + rs.getString("DocDt") + "</span>" + "</td>");
+		out.print("<td> <a class = 'btn' id='" + rs.getString("DocNo") + "' onclick='FileOpen(this)'> <span>" + rs.getString("DocNm") + "</span>" + " </a></td>");
+		out.print("<td> <span>" + rs.getString("DocDt") + "</span>" + "</td>");
 		out.print("<td>" + "<span>" + rs.getString("DocUser") + "</span>" + "</td>");
 		out.print("<td style='text-align: center'>" + "<a href = " + "'FileDownload.jsp?DocFileNm=" + rs.getString("DocFileNm") + "' class='icon-floppy-disk'>" + "</a></td>");
 		out.print("<td>" + "<span>" + "" + "</span>" + "</td>");
-		out.print("</tr>"); 
+		out.print("</tr>");
 		rs_Count += 1;
 	} 
 	
 	if(rs_Count == 0)
-	{
-		%>
-			<tr>
-									<td colspan="6">
-										<div style="margin:0 auto;position:static;text-align:center">
-											저장된 데이터가 없습니다.
-										</div>
-									</td>
-								</tr>
-								<%
-	}
+	{%>
+							<tr>
+							<td colspan="6">
+								<div style="margin:0 auto;position:static;text-align:center">
+							저장된 데이터가 없습니다.
+									</div>
+								</td>
+							</tr>
+							<%
+	}	
 }
-
 catch(Exception ex) {
-		System.out.println(ex);
-		%>
-										<tr>
-									<td colspan="6">
-										<div style="margin:0 auto;position:static;text-align:center">
-											저장된 데이터가 없습니다.
-										</div>
-									</td>
-								</tr>
+		System.out.println(ex);		%>
+		<tr>
+		<td colspan="6">
+		<div style="margin:0 auto;position:static;text-align:center">
+				저장된 데이터가 없습니다.
+			</div>
+		</td>
+		</tr>
 	<%
 	}
 %>
-
-</tbody>
+	</tbody>
 	</table>
+	</div>
 	</section>
 				</div>
 				<div style="padding-bottom: 25px">
@@ -341,13 +422,43 @@ catch(Exception ex) {
 				</nav>
 			</div>
 		</div>
-	</div>
-
+	</div>									
+						
 	<!-- Scripts -->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/browser.min.js"></script>
-	<script src="js/breakpoints.min.js"></script>
-	<script src="js/util.js"></script>
-	<script src="js/main.js"></script>
+<!-- integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous" -->
+<!--  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous" -->
+<!--      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous" -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+	<script>
+	function openPopUp(){
+
+		var options = 'width=500, height=600, top=30, left=30, resizable=no, scrollbars=no, location=no';
+
+		window.open('http://www.naver.com', 'test', options);
+
+		}
+	</script>
+	
+	<script>
+		$('#layer3').click(function(e){
+			e.preventDefault();
+			$('#testModal').modal("show");
+		});
+		
+		
+		
+		function FileOpen (obj) {
+			alert(obj.id);
+// 			var getId=$(this).attr("id"); 너꺼져
+			e.preventDefault();
+			
+			$('#FileInfo').modal("show");
+		
+		}
+	</script>
+
 </body>
 </html>
