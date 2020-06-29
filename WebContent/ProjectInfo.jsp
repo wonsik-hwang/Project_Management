@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<<<<<<< HEAD
 <%@ page import = "java.util.regex.Pattern" %>
 <%@ page import = "java.sql.*" %>
 <%@ page import = "ProjectManagement.MySQLConnect" %>
+=======
+<%@page import="java.util.regex.Pattern" %>
+<%@page import="java.sql.*"%>
+<%@page import = "ProjectManagement.MySQLConnect" %>
+
+>>>>>>> branch 'master' of https://github.com/wonsik-hwang/Project_Management.git
 <!DOCTYPE HTML>
 <html>
 
@@ -113,6 +120,68 @@ try{
 						</div>
 					</div>
 				</div>
+<<<<<<< HEAD
+=======
+					<div>
+						<div style="width:74.7%; float:right;">
+							<ul class="snip1398 ">
+								<li class="current rowLi">
+									<a href="ProjectInfo.jsp?PJNo=<%= PJNo%>" data-hover="기본정보">
+										기본정보
+									</a>
+								</li>
+								<li class="rowLi ">
+									<a href="ProjectDocument.jsp?PJNo=<%= PJNo %>" data-hover="서류관리">
+										<span>서류관리</span>
+									</a>
+								</li>
+								<li class="rowLi">
+									<a href="ProjectOutput.jsp?PJNo=<%= PJNo %>" data-hover="산출물관리">
+										<span>산출물관리</span>
+									</a>
+								</li>
+								<li class="rowLi">
+									<a href="ProjectMember_Add.jsp?PJNo=<%= PJNo %>" data-hover="인원관리">
+										<span>인원관리</span>
+									</a>
+								</li>
+								<li class="rowLi">
+									<a href="project_work.html" data-hover="작업관리">
+										<span>작업관리</span>
+									</a>
+								</li>
+								<li class="rowLi">
+									<a href="ProjectCost.jsp?PJNo=<%= PJNo %>" data-hover="비용관리">
+										<span>비용관리</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<br />
+					<hr style="border: solid 1px black;">
+			</div>
+		<div class="row" style="margin-Left:4%; padding-top:30px; background-color: white; margin-Right:5%; border-radius: 10px;">
+			<div style="width: 100%;">
+				<%
+				   while(rs.next()){
+				%>
+
+				<div style="width:50%; float: left;">
+					<div>
+						<label class="toppadding">프로젝트명</label>
+						<label id="PJNm" class="txtlabel"><%=rs.getString("PJNm")%></label>
+	
+						<label class="toppadding">업체 명</label>
+						<label id="PartnerNm" class="txtlabel"><%=rs.getString("PartnerNm")%></label>
+	
+						<label class="toppadding">주관 담당자(정)</label>
+						<label id="HostManager" class="txtlabel"><%=rs.getString("HostManager")%></label>
+					</div>
+				</div>
+						
+>>>>>>> branch 'master' of https://github.com/wonsik-hwang/Project_Management.git
 				<div>
 					<div style="width:74.7%; float:right;">
 						<ul class="snip1398 ">

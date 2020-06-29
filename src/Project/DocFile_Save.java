@@ -22,14 +22,14 @@ public class DocFile_Save {
 			
 			request.setCharacterEncoding("UTF-8");
 			//저장할 위치 설정
-//			String uploadDir = "C:/Users/Wonsik/Desktop/Project/ProjectManager/WebContent/Document";
-			String savePath = request.getServletContext().getRealPath("Document");	
+			String uploadDir = "C:/Users/Wonsik/Desktop/Project/ProjectManager/WebContent/Document";
+//			String savePath = request.getServletContext().getRealPath("Document");	
 			
 			
 //			savePath,
 			//multipartRequest객체 생성
-			MultipartRequest multi = new MultipartRequest(request, "C:/Users/Wonsik/Desktop/Project/ProjectManager/WebContent/Document", 8 * 1024 * 1024, "UTF-8", new DefaultFileRenamePolicy());
-
+			MultipartRequest multi = new MultipartRequest(request, uploadDir, /*"C:/Users/Wonsik/Desktop/Project/ProjectManager/WebContent/Document"*/ 8 * 1024 * 1024, "UTF-8", new DefaultFileRenamePolicy());
+			
 			//request에서  name이 image인 데이터를 저장하고, image가 null이 아닐경우 b는 true
 			if(multi.getFilesystemName("image")!=null) b=true;
 			
@@ -37,10 +37,8 @@ public class DocFile_Save {
 			String m_nickname = multi.getParameter("DocContent");
 			String fileName = multi.getFilesystemName("ex_filename");
 			
-			
-			String m_fileFullPath = savePath + "\\" + fileName;
+			String m_fileFullPath = uploadDir + "/" + fileName;
 
-			
 			this.M_name = m_name;
 			this.M_Content = m_nickname;
 			this.M_fileFullPath = m_fileFullPath;
@@ -59,12 +57,10 @@ public class DocFile_Save {
 	    	System.out.println("DB 성공");
 	    	
 
-	    	sql = "INSERT INTO MA_Document (DocNm, DocRemark, DocBLOB, DocPath) VALUES (?, ?, ?, ?)";
+	    	sql = "INSERT INTO MA_Document (DocNm, DocRemark, DocFileNm, DocPath) VALUES (?, ?, ?, ?)";
 	    	
 	    	pstmt = conn.prepareStatement(sql);
 	    	pstmt.setString(1, M_name);
-	    	
-
 	    	pstmt.setString(2, M_Content);
 	    	pstmt.setString(3, M_fileName);
 		    pstmt.setString(4, M_fileFullPath);

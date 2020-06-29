@@ -1,5 +1,6 @@
  <%@page import="java.io.File"%>
  <%@page import="java.io.*"%>
+ <%@page trimDirectiveWhitespaces = "true" %>
  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
  <!DOCTYPE html>
  <html>
@@ -8,23 +9,34 @@
  <title>Insert title here</title>
  </head>
  <body>
-
  <% 
+ 	request.setCharacterEncoding("UTF-8");
+//  	String fileNm = request.getParameter("DocFileNm");
+//  	String fileNo = request.getParameter("DocNo");
+//  	System.out.println(fileNm);
+//  	out.println("<script> location.href = 'ProjectDocument.jsp';</script>");
+
   // 다운받을 파일의 이름을 가져옴
-  String fileName = request.getParameter("fileName");
+  String FileNm = "C:\\Users\\Wonsik\\Desktop\\Project\\ProjectManager\\WebContent\\Document";
+//   String FileNm = request.getParameter("DocPath");
+  String fileName = request.getParameter("DocFileNm");
   // 다운받을 파일이 저장되어 있는 폴더 이름
-  String saveFolder = "Document";
+//   String saveFolder = "Document";
   
   // Context에 대한 정보를 알아옴
   ServletContext context = getServletContext(); // 서블릿에 대한 환경정보를 가져옴
   
   // 실제 파일이 저장되어 있는 폴더의 경로
-  String realFolder = context.getRealPath(saveFolder);
+  String realFolder = "C:\\Users\\Wonsik\\Desktop\\Project\\ProjectManager\\WebContent\\Document";
+//   String realFolder = context.getRealPath(saveFolder);
   // 다운받을 파일의 전체 경로를 filePath에 저장
   String filePath = realFolder + "\\" + fileName;
   
   try{
    // 다운받을 파일을 불러옴
+//    System.out.println(filePath);
+//    System.out.println(fileName);
+//    System.out.println(FileNm);
    File file = new File(filePath);
    byte b[] = new byte[4096];
    
@@ -42,7 +54,7 @@
    FileInputStream in = new FileInputStream(filePath);
   
    // 파일에서 읽어온 세부 정보를 저장하는 파일에 써주기 위해서 선언
-   ServletOutputStream out2 = response.getOutputStream();
+    ServletOutputStream out2 = response.getOutputStream();
    
    int numRead;
    // 바이트 배열 b의 0번 부터 numRead번 까지 파일에 써줌 (출력)

@@ -1,7 +1,7 @@
+<%@page import="com.sun.xml.internal.txw2.Document"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-    <%@page import="java.util.regex.Pattern" %>
+<%@page import="java.util.regex.Pattern" %>
 <%@page import="java.sql.*"%>   
-
 
 <!DOCTYPE HTML>
 <html>
@@ -13,12 +13,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="CSS/main.css" />
 	<link rel="stylesheet" href="CSS/mouseover3.css" />
+<!-- 	<link rel="stylesheet" href="CSS/style.css" />  -->
+<!-- 	<link rel="stylesheet" href="CSS/demo.css" /> -->
+<link rel="stylesheet" href="https://i.icomoon.io/public/temp/e5c48413e3/UntitledProject/style.css">
+	<script src="js/demo.js""></script>
+	
 
 	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
-	</script>
 
-	<script>
 		$(".hover").mouseleave(
 			function() {
 				$(this).removeClass("hover");
@@ -91,9 +94,7 @@
 			color: white !important;
 		}
 	</style>
-
 </head>
-
 <body>
 
 	<!-- Wrapper -->
@@ -225,54 +226,36 @@
 					<div id="grid" style="margin-Left:5%; padding-top:115px; background-color: white; margin-Right:5%">
 						<table>
 							<colgroup>
-								<col style="width:10px" />
-								<col style="width:25%" />
-								<col style="width:100px" />
-								<col style="width:100px" />
-								<col style="width:100px" />
-								<col style="width:10px" />
+								<col style="width:7%" />
+								<col style="width:36%" />
+								<col style="width:20%" />
+								<col style="width:20%" />
+								<col style="width:10%" />
+								<col style="width:7%" />
 							</colgroup>
 							<thead>
 								<tr>
 									<th data-field="PROJ_NAME" data-index="0" data-title="" id="28b4920c-f59e-4d15-aa06-3630ad36d243" scope="col">
-										<span>
-											&nbsp;
-										</span>
+										<span> &nbsp; </span>
 									</th>
 									<th data-field="PROJ_NAME" data-index="1" data-title="프로젝트" id="838d690c-5b5f-419a-99a9-1a8fbbfbb015" scope="col">
-										<span>
-											파일 명
-										</span>
+										<span> &nbsp;&nbsp;파일 명 </span>
 									</th>
 									<th data-field="PROJ_PM" data-index="2" data-title="PM" id="399f3c50-afda-4c52-85d9-e7c527ce14ce" scope="col">
-										<span>
-											등록일자
-										</span>
+										<span> 작성자 </span>
 									</th>
 									<th data-field="PROJ_STATE" data-index="3" data-title="진행 상황" id="61a94629-97a3-4c89-949c-0e5815cfb721" scope="col">
-										<span>
-										 작성자
-										</span>
+										<span> 등록일자 </span>
 									</th>
-									<th data-field="PROJ_START_DATE" data-index="4" data-title="시작일" id="bce59831-42b4-44ec-9399-adae8ddcdd5f" scope="col">
-										<span>
-											비고
-										</span>
-									</th>		
-									<th scope="col"  data-index="5"  ata-title="파일 명">
-										<span>
-											파일 명
-										</span>
-									</th>		
-									<th scope="col"  data-index="6"  ata-title="파일 경로" style="display: none">
-										<span>
-											파일 경로
-										</span>
+									<th style="text-align: center" scope="col"  data-index="5"  ata-title="파일 명">
+										<span> 저 장 </span>
 									</th>	
-									
+									<th>
+									<span> &nbsp; </span>
+									</th>	
 								</tr>
 							</thead>
-							<tbody>		
+							<tbody>	
 <% 
 try{
 	request.setCharacterEncoding("UTF-8");
@@ -290,9 +273,7 @@ try{
 	Statement stmt = conn.createStatement();
 	String sql = "SELECT * FROM MA_Document ORDER BY DocNo DESC";
 	rs = stmt.executeQuery(sql);
-	%>
 	
-	<form action = "FileDownload.jsp" method ="post"> <%
 	int rs_Count = 0; 
 	while(rs.next()){
 		out.print("<tr>");
@@ -300,11 +281,8 @@ try{
 		out.print("<td>  <a href='ProjectInfo.jsp?PJNo="+ rs.getString("DocNo") +"'>" + "<span>" + rs.getString("DocNm") + "</span>" + " </a></td>");
 		out.print("<td>" + "<span>" + rs.getString("DocDt") + "</span>" + "</td>");
 		out.print("<td>" + "<span>" + rs.getString("DocUser") + "</span>" + "</td>");
-		out.print("<td>" + "<span>" + rs.getString("DocRemark") + "</span>" + "</td>");
-		out.print("<td name ='fileName'>" + "<span>" +rs.getString("DocBLOB") + "</span>" + "</td>");
-		out.print("<td style='display: none'>" + "<span>" + rs.getString("DocPath") + "</span>" + "</td>");
-		out.print("<td>" + "<input type = 'submit'  value = " + "'"+rs.getString("DocBLOB")+"'>" + "</td>");
-		%>document.write(document.getElementByName("fileName")[0].value);<%
+		out.print("<td style='text-align: center'>" + "<a href = " + "'FileDownload.jsp?DocFileNm=" + rs.getString("DocFileNm") + "' class='icon-floppy-disk'>" + "</a></td>");
+		out.print("<td>" + "<span>" + "" + "</span>" + "</td>");
 		out.print("</tr>"); 
 		rs_Count += 1;
 	} 
@@ -315,7 +293,7 @@ try{
 			<tr>
 									<td colspan="6">
 										<div style="margin:0 auto;position:static;text-align:center">
-											No records available.
+											저장된 데이터가 없습니다.
 										</div>
 									</td>
 								</tr>
@@ -323,8 +301,7 @@ try{
 	}
 }
 
-catch(ClassNotFoundException ex) {
-		System.out.println("드라이버 로드에 실패하였습니다.");
+catch(Exception ex) {
 		System.out.println(ex);
 		%>
 										<tr>
@@ -336,24 +313,8 @@ catch(ClassNotFoundException ex) {
 								</tr>
 	<%
 	}
-catch(SQLException ex) {
-		System.out.println("DB 접속에 실패 하였습니다.");
-		System.out.println(ex.getMessage());
-		ex.printStackTrace();
-		%>
-										<tr>
-									<td colspan="6">
-										<div style="margin:0 auto;position:static;text-align:center">
-											저장된 데이터가 없습니다.
-										</div>
-									</td>
-								</tr>
-						<%
-	}
-// finally{}				
-	
 %>
-</form>
+
 </tbody>
 	</table>
 	</section>
@@ -361,46 +322,7 @@ catch(SQLException ex) {
 				<div style="padding-bottom: 25px">
 				</div>
 			</div>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 		</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 		<!-- Sidebar -->
 		<div id="sidebar">
@@ -427,15 +349,5 @@ catch(SQLException ex) {
 	<script src="js/breakpoints.min.js"></script>
 	<script src="js/util.js"></script>
 	<script src="js/main.js"></script>
-	<script>
-	function FUpload(){
-//         if (document.getElementById("ex_filename").value == "" or document.getElementById("ex_filename").value == null ) {
-//             alert("파일을 등록해주세요");
-//             return false; }
-//        else{
-	   		document.sub1.submit();
-// 	   		}
-		}
-	</script>
 </body>
 </html>
