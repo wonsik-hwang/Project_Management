@@ -1,11 +1,4 @@
 package Project;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-
-import javax.servlet.http.HttpServletRequest;
-
-import com.mysql.jdbc.Statement;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -25,8 +18,6 @@ public class FileSave {
 	 
 	// --------------------------아래는 전송 받은 데이터들을 DB테이블에 저장시키기 위한 작업들이다.--------------------------
 	// 테이블 설계, 쿼리문, DTO, DAO, Service.. 등은 만들어져 있다고 가정한다.
-	 
-	 
 	 
 	// MultipartRequest로 전송받은 데이터를 불러온다.
 	// enctype을 "multipart/form-data"로 선언하고 submit한 데이터들은 request객체가 아닌 MultipartRequest객체로 불러와야 한다.
