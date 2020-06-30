@@ -1,14 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-<%@ page import = "java.util.regex.Pattern" %>
-<%@ page import = "java.sql.*" %>
-<%@ page import = "ProjectManagement.MySQLConnect" %>
-=======
 <%@page import="java.util.regex.Pattern" %>
 <%@page import="java.sql.*"%>
 <%@page import = "ProjectManagement.MySQLConnect" %>
 
->>>>>>> branch 'master' of https://github.com/wonsik-hwang/Project_Management.git
 <!DOCTYPE HTML>
 <html>
 
@@ -91,19 +85,9 @@
 			color: white !important;
 		}
 	</style>
-
-<% 
-try{
-	Connection conn = MySQLConnect.getMySQLConnection();
-	
-	String PJNo = request.getParameter("PJNo");
-	String sql = "SELECT * FROM MA_Project WHERE PJNo = '" + PJNo + "'";
-	PreparedStatement pstmt = conn.prepareStatement(sql);
-	ResultSet rs = pstmt.executeQuery();
-%>
-
 </head>
 <body>
+<% String PJTNo = request.getParameter("PJTNo"); %>
 	<!-- Wrapper -->
 	<div id="wrapper">
 
@@ -120,28 +104,26 @@ try{
 						</div>
 					</div>
 				</div>
-<<<<<<< HEAD
-=======
 					<div>
 						<div style="width:74.7%; float:right;">
 							<ul class="snip1398 ">
 								<li class="current rowLi">
-									<a href="ProjectInfo.jsp?PJNo=<%= PJNo%>" data-hover="기본정보">
+									<a href="ProjectInfo.jsp?PJTNo=<%= PJTNo%>" data-hover="기본정보">
 										기본정보
 									</a>
 								</li>
 								<li class="rowLi ">
-									<a href="ProjectDocument.jsp?PJNo=<%= PJNo %>" data-hover="서류관리">
+									<a href="ProjectDocument.jsp?PJTNo=<%= PJTNo %>" data-hover="서류관리">
 										<span>서류관리</span>
 									</a>
 								</li>
 								<li class="rowLi">
-									<a href="ProjectOutput.jsp?PJNo=<%= PJNo %>" data-hover="산출물관리">
+									<a href="ProjectOutput.jsp?PJTNo=<%= PJTNo %>" data-hover="산출물관리">
 										<span>산출물관리</span>
 									</a>
 								</li>
 								<li class="rowLi">
-									<a href="ProjectMember_Add.jsp?PJNo=<%= PJNo %>" data-hover="인원관리">
+									<a href="ProjectMember_Add.jsp?PJTNo=<%= PJTNo %>" data-hover="인원관리">
 										<span>인원관리</span>
 									</a>
 								</li>
@@ -151,7 +133,7 @@ try{
 									</a>
 								</li>
 								<li class="rowLi">
-									<a href="ProjectCost.jsp?PJNo=<%= PJNo %>" data-hover="비용관리">
+									<a href="ProjectCost.jsp?PJTNo=<%= PJTNo %>" data-hover="비용관리">
 										<span>비용관리</span>
 									</a>
 								</li>
@@ -165,13 +147,18 @@ try{
 		<div class="row" style="margin-Left:4%; padding-top:30px; background-color: white; margin-Right:5%; border-radius: 10px;">
 			<div style="width: 100%;">
 				<%
-				   while(rs.next()){
+				try{
+					Connection conn = MySQLConnect.getMySQLConnection();
+					String sql = "SELECT * FROM MA_Project WHERE PJTNo = '" + PJTNo + "'";
+					PreparedStatement pstmt = conn.prepareStatement(sql);
+					ResultSet rs = pstmt.executeQuery();
+ 				   while(rs.next()){
 				%>
-
+				
 				<div style="width:50%; float: left;">
 					<div>
 						<label class="toppadding">프로젝트명</label>
-						<label id="PJNm" class="txtlabel"><%=rs.getString("PJNm")%></label>
+						<label id="PJNm" class="txtlabel"><%=rs.getString("PJTNm")%></label>
 	
 						<label class="toppadding">업체 명</label>
 						<label id="PartnerNm" class="txtlabel"><%=rs.getString("PartnerNm")%></label>
@@ -179,70 +166,10 @@ try{
 						<label class="toppadding">주관 담당자(정)</label>
 						<label id="HostManager" class="txtlabel"><%=rs.getString("HostManager")%></label>
 					</div>
-				</div>
-						
->>>>>>> branch 'master' of https://github.com/wonsik-hwang/Project_Management.git
-				<div>
-					<div style="width:74.7%; float:right;">
-						<ul class="snip1398 ">
-							<li class="current rowLi">
-								<a href="ProjectInfo.jsp?PJNo=<%= PJNo%>" data-hover="기본정보">
-									기본정보
-								</a>
-							</li>
-							<li class="rowLi ">
-								<a href="ProjectDocument.jsp?PJNo=<%= PJNo %>" data-hover="서류관리">
-									<span>서류관리</span>
-								</a>
-							</li>
-							<li class="rowLi">
-								<a href="ProjectOutput.jsp?PJNo=<%= PJNo %>" data-hover="산출물관리">
-									<span>산출물관리</span>
-								</a>
-							</li>
-							<li class="rowLi">
-								<a href="ProjectMember_Add.jsp?PJNo=<%= PJNo %>" data-hover="인원관리">
-									<span>인원관리</span>
-								</a>
-							</li>
-							<li class="rowLi">
-								<a href="project_work.html" data-hover="작업관리">
-									<span>작업관리</span>
-								</a>
-							</li>
-							<li class="rowLi">
-								<a href="ProjectCost.jsp?PJNo=<%= PJNo %>" data-hover="비용관리">
-									<span>비용관리</span>
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<br />
-				<hr style="border: solid 1px black;">
-			</div>
-			<div class="row" style="margin-Left:4%; padding-top:30px; background-color: white; margin-Right:5%; border-radius: 10px;">
-				<div style="width: 100%;">
-					<%
-						while(rs.next()) {
-					%>
-	
-					<div style="width:50%; float: left;">
-						<div>
-							<label class="toppadding">프로젝트명</label>
-							<label id="PJNm" class="txtlabel"><%=rs.getString("PJNm")%></label>
-		
-							<label class="toppadding">업체 명</label>
-							<label id="PartnerNm" class="txtlabel"><%=rs.getString("PartnerNm")%></label>
-		
-							<label class="toppadding">주관 담당자(정)</label>
-							<label id="HostManager" class="txtlabel"><%=rs.getString("HostManager")%></label>
-						</div>
-					</div>
-							
+				</div>						
 					<div>
 							<label class="toppadding">프로젝트 PM</label>
-							<label id="PJPM" class="txtlabel"><%=rs.getString("PJPM")%></label>
+							<label id="PJTPMID" class="txtlabel"><%=rs.getString("PJTPMID")%></label>
 		
 							<label class="toppadding">주관 명</label>
 							<label id="HostNm" class="txtlabel"><%=rs.getString("HostNm")%></label>
@@ -255,26 +182,28 @@ try{
 					<div style="width:100%">
 						<label class="toppadding" id="DATE">기간</label>
 					</div>
-					<label style="float: left;"><%= rs.getString("PJStartDt")%></label>
+					<label style="float: left;"><%= rs.getString("PJTStartDt")%></label>
 					<label style="width: 3%; float: left; text-align: center">~</label>
-					<label style="float: left;"><%= rs.getString("PJEndDt")%></label>
+					<label style="float: left;"><%= rs.getString("PJTEndDt")%></label>
 				</div>
 						
 				<div style="width: 100%;">
 					<div>
 						<label class="toppadding">프로젝트 내용</label>
-						<label class="txtlabel" style="min-height: 100px; word-wrap: break-word; padding-right: 20px"><%=rs.getString("PJContent")%></label>
+						<label class="txtlabel" style="min-height: 100px; word-wrap: break-word; padding-right: 20px"><%=rs.getString("PJTContent")%></label>
 					</div>
 					<div style="float:right; padding: 0px 20px 20px 0px ;">
 
-						<a href="ProjectInfo_Modify.jsp?PJNo=<%=PJNo%>"><input class="primary" type="button" value="수정"></a>
-						<a href='ProjectDelete.jsp?PJNo=<%=PJNo%>'><input class="primary" type="button" value="삭제"></a>
+						<a href="ProjectInfo_Modify.jsp?PJTNo=<%=PJTNo%>"><input class="primary" type="button" value="수정"></a>
+						<a href='ProjectDelete.jsp?PJTNo=<%=PJTNo%>'><input class="primary" type="button" value="삭제"></a>
 						<input type="button" value="목록" onClick="location.href = 'ProjectList.jsp'">
 					</div>
 				</div>
 				<%
 						}
 				        conn.close();
+				        pstmt.close();
+				        rs.close();
 					}
 					catch(SQLException ex) {
 						   	System.out.println("DB 접속에 실패 하였습니다.");

@@ -1,3 +1,4 @@
+<%@page import="com.sun.org.apache.bcel.internal.generic.Select"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.util.regex.Pattern" %>
 <%@ page import = "java.sql.*" %>
@@ -42,7 +43,6 @@
 				font-size: 15pt;
 			}
 	
-	
 			.btn {
 				margin-right: 3%;
 				height: 50px;
@@ -85,9 +85,8 @@
 	
 		<% 
 		try{
-			Connection conn = MySQLConnect.getMySQLConnection();
-		
-			String sql = "SELECT * FROM MA_Project ORDER BY PJNo DESC";
+			Connection conn =  MySQLConnect.getMySQLConnection();
+			String sql = "SELECT * FROM MA_Project ORDER BY PJTNo DESC";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 		%>
@@ -214,11 +213,11 @@
 									while(rs.next()){
 										out.print("<tr>");
 										out.print("<td>" + "<span>" + "&nbsp" + "</span>" + "</td>");
-										out.print("<td>  <a href='ProjectInfo.jsp?PJNo="+ rs.getString("PJNo") +"'>" + "<span>" + rs.getString("PJNm") + "</span>" + " </a></td>");
-										out.print("<td>" + "<span>" + rs.getString("PJPM") + "</span>" + "</td>");
-										out.print("<td>" + "<span>" + rs.getString("PJState") + "</span>" + "</td>");
-										out.print("<td>" + "<span>" + rs.getString("PJStartDt") + "</span>" + "</td>");
-										out.print("<td>" + "<span>" + rs.getString("PJEndDt") +"</span>" +  "</td>");
+										out.print("<td>  <a href='ProjectInfo.jsp?PJTNo="+ rs.getString("PJTNo") +"'>" + "<span>" + rs.getString("PJTNm") + "</span>" + " </a></td>");
+										out.print("<td>" + "<span>" + rs.getString("PJTPMID") + "</span>" + "</td>");
+										out.print("<td>" + "<span>" + rs.getString("PJTStateSeq") + "</span>" + "</td>");
+										out.print("<td>" + "<span>" + rs.getString("PJTStartDt") + "</span>" + "</td>");
+										out.print("<td>" + "<span>" + rs.getString("PJTEndDt") +"</span>" +  "</td>");
 										out.print("</tr>"); 
 										rs_Count += 1;
 									}
@@ -229,30 +228,17 @@
 								<tr>
 									<td colspan="9">
 										<div style="margin:0 auto;position:static;text-align:center">
-											No records available.
-										</div>
-									</td>
-								</tr>
-								<%
-									}
-								}
-	
-								catch(SQLException ex) {
-										System.out.println("DB 접속에 실패 하였습니다.");
-										System.out.println(ex.getMessage());
-										ex.printStackTrace();
-								%>
-								<tr>
-									<td colspan="9">
-										<div style="margin:0 auto;position:static;text-align:center">
 											저장된 데이터가 없습니다.
 										</div>
 									</td>
 								</tr>
 								<%
 									}
-								// finally{}				
-									
+									rs.close();
+									pstmt.close();
+									conn.close();
+								}
+							catch(Exception ex){}
 								%>
 							</tbody>
 						</table>
