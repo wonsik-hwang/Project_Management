@@ -17,11 +17,11 @@
 <body>
 <%
 	request.setCharacterEncoding("utf-8");
-// 	String PJNo = request.getParameter("PJNo");
+// 	String PJTNo = request.getParameter("PJTNo");
 	String OPNm = request.getParameter("OPNm");
 	
-	String PJNo = "152";
-	int No_Value = Integer.parseInt(PJNo);
+	String PJTNo = "155";
+	int No_Value = Integer.parseInt(PJTNo);
 
 	if (ProjectNameCheck.OutputNameCheck(OPNm, No_Value))
 	{

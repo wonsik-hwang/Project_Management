@@ -9,14 +9,14 @@ import java.sql.Statement;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLDataException;
 
-public class MySQLConnect {
-	public static Connection getMySQLConnection() {
+public class JinjuDBConnect {
+	public static Connection getJinjuDBConnection() {
 		Connection conn = null;
 		
 		try {
-			String url = "jdbc:mysql://192.168.0.71:3306/ProjectManagement?useUnicode=true&characterEncoding=UTF-8";
-			String user = "hidata";
-			String password = "hidata2312357!";
+			String url = "jdbc:mysql://covit.co.kr:3306/hidataweb?useUnicode=true&characterEncoding=UTF-8";
+			String user = "hidataweb";
+			String password = "hidata335341";
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(url, user, password);
 		}

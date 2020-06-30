@@ -1,6 +1,8 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.util.regex.Pattern" %>
 <%@ page import = "java.sql.*" %>
+<%@ page import = "ProjectManagement.JinjuDBConnect" %>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -65,6 +67,25 @@
 				font-size: 18px;
 			}
 		</style>
+		<%
+			try
+			{
+				ArrayList<String[]> member = new ArrayList<String[]>();
+				Connection conn = JinjuDBConnect.getJinjuDBConnection();
+				
+				String sql = "SELECT mem.id, mem.name FROM members mem";
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery();
+				
+				String sql2 = "SELECT mem.id, mem.name FROM members mem WHERE mem.rank = '사장'";
+				PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+				ResultSet rs2 = pstmt2.executeQuery();
+				
+				while (rs.next())
+				{
+					member.add(new String[]{rs.getString("id"), rs.getString("name")});
+				}
+		%>
 	</head>
 	<body  class="is-preload">
 		<!-- Wrapper -->
@@ -79,7 +100,7 @@
 						<div id="main">
 							<br>
 							<div style="height:2px;">
-								<h1 class="nanum" ; style="font-size:28px; color:black; margin-left:5%;">프로젝트 등록</h1>
+								<h1 class="nanum"  style="font-size:28px; color:black; margin-left:5%;">프로젝트 등록</h1>
 							</div>
 							<br>
 						</div>
@@ -87,11 +108,11 @@
 					<hr style="border: solid 1px black;">
 				</div>
 	
-				<form id="PJCreate" name="PJCreate" action="ProjectCreate_OK.jsp"  method="post">
+				<form id="PJTCreate" name="PJTCreate" action="ProjectCreate_OK.jsp"  method="post">
 					<div class="row" style="margin-Left:5%; margin-right:5%; padding-top:30px;background: #FFFFFF; border-radius: 10px;">
-						<div class="col-5">
+						<div style="width: 48%;">
 							<label>프로젝트명</label>
-							<input name = "PJNm"  id="PJNm"  type="text">
+							<input name = "PJTNm"  id="PJTNm"  type="text">
 		
 							<label class="toppadding">업체 명</label>
 							<input type="text" id="PartnerNm" name="PartnerNm">
@@ -101,15 +122,75 @@
 		
 							<div>
 								<label class="toppadding" id="DATE">기간</label>
-								<input name = "StartDt"  id="StartDt"  type="date">
+								<input name = "PJTStartDt"  id="PJTStartDt"  type="date" style="border: 1px solid">
 								&nbsp;&nbsp;~&nbsp;&nbsp;
-								<input name = "EndDt"  id="EndDt"  type="date">
+								<input name = "PJTEndDt"  id="PJTEndDt"  type="date" style="border: 1px solid">
 							</div>
+							
+							<details class="toppadding" open="open" style="width: 88%">
+								<summary><b>결재자</b></summary>
+								<label class="toppadding">1차 결재자</label>
+								<select id="Approval1" name="Approval1">
+								<%
+									out.println("<option value = '0'>선택 없음</option>");
+									for (int i = 0; member.size() > i; i++)
+									{
+										out.println("<option value = '" + member.get(i)[0] + "'>" + member.get(i)[1] + "</option>");
+									}
+								%>
+								</select>
+								<label class="toppadding">2차 결재자</label>
+								<select id="Approval2" name="Approval2">
+								<%
+									out.println("<option value = '0'>선택 없음</option>");
+									for (int i = 0; member.size() > i; i++)
+									{
+										out.println("<option value = '" + member.get(i)[0] + "'>" + member.get(i)[1] + "</option>");
+									}
+								%>
+								</select>								
+								<label class="toppadding">3차 결재자</label>
+								<select id="Approval3" name="Approval3">
+								<%
+									out.println("<option value = '0'>선택 없음</option>");
+									for (int i = 0; member.size() > i; i++)
+									{
+										out.println("<option value = '" + member.get(i)[0] + "'>" + member.get(i)[1] + "</option>");
+									}
+								%>
+								</select>
+								<label class="toppadding">4차 결재자</label>
+								<select id="Approval4" name="Approval4">
+								<%
+									out.println("<option value = '0'>선택 없음</option>");
+									for (int i = 0; member.size() > i; i++)
+									{
+										out.println("<option value = '" + member.get(i)[0] + "'>" + member.get(i)[1] + "</option>");
+									}
+								%>
+								</select>
+								<label class="toppadding">최종 결재자</label>
+								<select id="Approval5" name="Approval5">
+								<%
+									while (rs2.next())
+									{
+										out.println("<option value = '" + rs2.getString("id") + "'>" + rs2.getString("name") + "</option>");
+									}
+								%>
+								</select>
+							</details>
 						</div>
+						<%
+						}
+						catch (Exception e)
+						{
+							e.getStackTrace();
+						}
+						%>
 		
-						<div class="col-5">
+						<div style="width: 48%; margin-left: 1%">
 							<label>프로젝트 PM</label>
-							<input name = "PJPM" id="PJPM" type="text">
+							<input name = "PJTPMID" id= "PJTPMID" type="text">
 		
 							<label class="toppadding">주관 명</label>
 							<input name = "HostNm" id="HostNm" type="text">
@@ -118,9 +199,9 @@
 							<input name = "HostSubManager" id="HostSubManager" type="text">
 						</div>
 		
-						<div class="col-10">
+						<div style="width: 97%">
 							<label class="toppadding">프로젝트 내용</label>
-							<textarea name = "PJContent" id="PJContent" rows="5"> </textarea>
+							<textarea name = "PJTContent" id="PJTContent" rows="5"> </textarea>
 							<div style="height: 100px; float:right; padding-top: 15px;">
 								<button id = "btnSave" name = "btnSave" class="primary" type="button">등록</button>
 								&nbsp;&nbsp;
@@ -156,12 +237,12 @@
 		<script type="text/javascript" >
 		$(function () {
 			$("#btnSave").click(function () {
-				if ($("#PJNm").val() == "")
+				if ($("#PJTNm").val() == "")
 				{
 					alert('프로젝트 명이 기입되지 않았습니다.');
 					return;
 				}
-				if ($("#PJPM").val() == "")
+				if ($("#PJTPM").val() == "")
 				{
 					alert('프로젝트 PM이 기입되지 않았습니다.');
 					return;
@@ -186,12 +267,12 @@
 					alert('주관 담당자(부)가 기입되지 않았습니다.');
 					return;
 				}
-				if ($("#StartDt").val() == "")
+				if ($("#PJTStartDt").val() == "")
 				{
 					alert('시작 일자가 기입되지 않았습니다.');
 					return;
 				}
-				if ($("#EndDt").val() == "")
+				if ($("#PJTEndDt").val() == "")
 				{
 					alert('종료 일자가 기입되지 않았습니다.');
 					return;
@@ -200,13 +281,13 @@
 				    url:"./ProjectCreate_Check.jsp",
 				    async:false,
 				    type:"POST",
-				    data: { PJNm: $("#PJNm").val() },// 전송할 데이터					 
+				    data: { PJTNm: $("#PJTNm").val() },// 전송할 데이터					 
 				    success:function(data) {
 				    	if(data.indexOf("중복") != -1) {
 			    			alert("중복된 프로젝트 명이 존재합니다.");
 			    		}
 				    	else {
-				    		$("#PJCreate").submit();
+				    		$("#PJTCreate").submit();
 				    	}
 				    }// 요청 완료 시
 				});
@@ -214,8 +295,8 @@
 		})
 		</script>
 		<script type="text/javascript">
-			document.getElementById("StartDt").value = new Date().toISOString().substring(0, 10);;
-			document.getElementById("EndDt").value = new Date().toISOString().substring(0, 10);;
+			document.getElementById("PJTStartDt").value = new Date().toISOString().substring(0, 10);;
+			document.getElementById("PJTEndDt").value = new Date().toISOString().substring(0, 10);;
 		</script>
 	</body>
 </html>

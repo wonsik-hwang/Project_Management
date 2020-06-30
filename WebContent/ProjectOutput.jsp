@@ -9,42 +9,14 @@
 	
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	    <!-- Bootstrap CSS -->
+	 	<link rel="stylesheet" href="CSS/bootstrap.min.css">
+		<link rel="stylesheet" href="https://i.icomoon.io/public/temp/e5c48413e3/UntitledProject/style.css">
 		<link rel="stylesheet" href="CSS/main.css" />
 		<link rel="stylesheet" href="CSS/mouseover3.css" />
 	
 		<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.5.1.js"  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-		<script type="text/javascript" >
-		$(function () {
-			$("#btnSave").click(function () {
-				if ($("#OPNm").val() == "")
-				{
-					alert('산출물 명이 기입되지 않았습니다.');
-					return;
-				}
-				if ($("#OPContent").val() == "")
-				{
-					alert('산출물 내용이 기입되지 않았습니다.');
-					return;
-				}
-				$.ajax({
-				    url:"./ProjectOutput_Check.jsp",
-				    async:false,
-				    type:"POST",
-				    data: { OPNm: $("#OPNm").val() },// 전송할 데이터					 
-				    success:function(data) {
-				    	if(data.indexOf("중복") != -1) {
-			    			alert("중복된 산출물 명이 존재합니다.");
-			    		}
-				    	else {
-				    		$("#OPCreate").submit();
-				    	}
-				    }// 요청 완료 시
-				});
-			})
-		})
-		</script>
-	
 		<script>
 			$(".hover").mouseleave(
 				function() {
@@ -68,17 +40,16 @@
 				font-size: 15pt;
 			}
 	
-	
 			.btn {
 				margin-right: 3%;
 				height: 50px;
-				line-height: 50px;
 				text-align: center;
 				width: auto;
 				padding-left: 5%;
 				padding-right: 5%;
 				min-width: 80px;
-				font-size: 1.2em
+				font-size: 1.2em;
+				font-weight: bold;
 			}
 	
 			.toppadding {
@@ -122,8 +93,8 @@
 	try{
 		Connection conn = MySQLConnect.getMySQLConnection();
 		
-		String PJNo = request.getParameter("PJNo");
-		String sql = "SELECT * FROM MA_Output WHERE PJNo=" + PJNo  + " ORDER BY OPNo DESC";
+		String PJTNo = request.getParameter("PJTNo");
+		String sql = "SELECT * FROM MA_Output WHERE PJTNo=" + PJTNo  + " ORDER BY OPNo DESC";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
 	%>
@@ -150,32 +121,27 @@
 						<div style="width:74.7%; float:right">
 							<ul class="snip1398 ">
 								<li class="rowLi">
-									<a href="ProjectInfo.jsp?PJNo=<%= PJNo%>" data-hover="기본정보">
+									<a href="ProjectInfo.jsp?PJTNo=<%= PJTNo%>" data-hover="기본정보">
 										기본정보
 									</a>
 								</li>
 								<li class="rowLi ">
-									<a href="ProjectDocument.jsp?PJNo=<%= PJNo %>" data-hover="서류관리">
-										<span>서류관리</span>
+									<a href="ProjectDocument.jsp?PJTNo=<%= PJTNo %>" data-hover="문서관리">
+										<span>문서관리</span>
 									</a>
 								</li>
 								<li class="current rowLi">
-									<a href="ProjectOutput.jsp?PJNo=<%= PJNo %>" data-hover="산출물관리">
+									<a href="ProjectOutput.jsp?PJTNo=<%= PJTNo %>" data-hover="산출물관리">
 										<span>산출물관리</span>
 									</a>
 								</li>
 								<li class="rowLi">
-									<a href="ProjectMember_Add.jsp?PJNo=<%= PJNo %>" data-hover="인원관리">
+									<a href="ProjectMember_Add.jsp?PJTNo=<%= PJTNo %>" data-hover="인원관리">
 										<span>인원관리</span>
 									</a>
 								</li>
 								<li class="rowLi">
-									<a href="project_work.html" data-hover="작업관리">
-										<span>작업관리</span>
-									</a>
-								</li>
-								<li class="rowLi">
-									<a href="ProjectCost.jsp?PJNo=<%= PJNo %>" data-hover="비용관리">
+									<a href="ProjectCost.jsp?PJTNo=<%= PJTNo %>" data-hover="비용관리">
 										<span>비용관리</span>
 									</a>
 								</li>
@@ -201,38 +167,29 @@
 							<input type="button" value="검색">
 						</div>
 	
-						<!-- 파일 등록 버튼 -->
-						<form id="OPCreate" name="OPCreate" action="ProjectOutput_OK.jsp"  method="post">
-							<div style="float:right; padding-right:3%;">
-								<a href="#Insert" class="btn-example">
-									<input type="button" value="+ 파일 등록">
-								</a>
-								<div class="dim-layer">
-									<div class="dimBg"></div>
-									<div id="Insert" class="pop-layer">
-										<div class="pop-container">
-											<div class="pop-conts">
-												<!--content //-->
-												<div class="nanum">
-													<label class="nanum" style="margin-top: 15px">파일 등록</label>
-													<hr style="border: solid 1px black; margin-top: -5px">
-													<label class="nanum" style="margin-top: -10px"><b>산출물 명</b></label>
-													<input id="OPNm" name="OPNm" type = "text" style="margin-top: 15px">
-													<br>
-													<label class="nanum">파일 업로드&nbsp;&nbsp;&nbsp;&nbsp; <input type="file" id="OPFile"  name="OPFile" class="upload-hidden"  onchange="getFilePath(this.value)"></label>
-													<b>산출물 내용</b>
-													<br>
-													<br>
-													<textarea id="OPContent" name="OPContent" rows="5"  style = "resize:none;"></textarea>
-												</div>
-												<br>
-												<div style="float:right;">
-													<button id = "btnSave" name = "btnSave" class="primary" type="button">등록</button>
-													<button type="button"  onclick="location.href = 'ProjectOutput.jsp?PJNo=<%= PJNo %>'">취소</button>
-													<br>
-													<br>
-												</div>
-											</div>
+   						<!--파일등록 팝업 -->
+						<div style="float:right; padding-right:2%;">
+							<input type="button" id="OutputCreatebtn" value="+ 파일 등록" >
+						</div>
+						<form id="PJTOutputCreate" name="PJTOutputCreate" action="ProjectOutput_OK.jsp" method="post">
+							<div class="modal fade" id="OutputCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header" style="padding:1rem 1rem 0 1rem;">
+											<h2 class="modal-title" id="exampleModalLabel"><label class="nanum" >파일 등록</label></h2>
+										</div>
+										<div class="modal-body"><label class="nanum">산출물 명</label>
+											<label><input id="OPNm" name="OPNm" type = "text"></label>
+										</div>
+										<div class="modal-body">
+											<label class="nanum">파일 등록&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" id="ex_filename" name="ex_filename"class="upload-hidden"> </label>
+										</div>
+										<div class="modal-body"><label class="nanum">산출물 내용</label>
+											<textarea id="OPContent" name="OPContent" rows="5"  style = "resize:none;"> </textarea>
+										</div>
+										<div class="modal-footer">
+											<button id="btnSave" name="btnSave" class="btn" style="box-shadow: none" type="button" data-dismiss="modal">등록</button>
+											<button class="btn" style="box-shadow: none" type="button" data-dismiss="modal">취소</button>
 										</div>
 									</div>
 								</div>
@@ -254,13 +211,10 @@
 								<colgroup>
 									<col style="width:30px" />
 									<col style="width:25%" />
-									<col style="width:100px" />
-									<col style="width:100px" />
-									<col style="width:100px" />
-									<col style="width:100px" />
-	<!-- 								<col style="width:100px" /> -->
-	<!-- 								<col style="width:70px" /> -->
-	<!-- 								<col style="width:70px" /> -->
+									<col style="width:50px" />
+									<col style="width:50px" />
+									<col style="width:50px" />
+									<col style="width:50px" />
 								</colgroup>
 								<thead>
 									<tr>
@@ -296,13 +250,13 @@
 										</th>
 									</tr>
 								</thead>
-								<tbody>		
+								<tbody>
 									<% 
 											int rs_Count = 0; 
 											while(rs.next()){
 												out.print("<tr>");
 												out.print("<td>" + "<span>" + "&nbsp" + "</span>" + "</td>");
-												out.print("<td>  <a href='ProjectInfo.jsp?PJNo="+ rs.getString("OPNo") +"'>" + "<span>" + rs.getString("OPNm") + "</span>" + " </a></td>");
+												out.print("<td>  <a href='ProjectInfo.jsp?PJTNo="+ rs.getString("OPNo") +"'>" + "<span>" + rs.getString("OPNm") + "</span>" + " </a></td>");
 												out.print("<td>" + "<span>" + rs.getDate("InsertDt") + "</span>" + "</td>");
 												out.print("<td>" + "<span>" + rs.getString("InsertNm") + "</span>" + "</td>");
 												out.print("<td>" + "<span>" + rs.getDate("UpdateDt") + "</span>" + "</td>");
@@ -317,14 +271,13 @@
 									<tr>
 										<td colspan="9">
 											<div style="margin:0 auto;position:static;text-align:center">
-												No records available.
+												작성된 글이 없습니다.
 											</div>
 										</td>
 									</tr>
 									<%
 											}
 										}
-	
 										catch(SQLException ex) {
 											System.out.println("DB 접속에 실패 하였습니다.");
 											System.out.println(ex.getMessage());
@@ -333,13 +286,12 @@
 									<tr>
 										<td colspan="9">
 											<div style="margin:0 auto;position:static;text-align:center">
-												저장된 데이터가 없습니다.
+												작성된 글이 없습니다.
 											</div>
 										</td>
 									</tr>
 									<%
 										}
-										//finally{}
 									%>
 								</tbody>
 							</table>
@@ -365,10 +317,51 @@
 				</div>
 			</div>
 		</div>
-		<script src="js/jquery.min.js"></script>
+	    <script src="js/jquery.min.js"></script>
 		<script src="js/browser.min.js"></script>
 		<script src="js/breakpoints.min.js"></script>
 		<script src="js/util.js"></script>
 		<script src="js/main.js"></script>
+<!-- 	    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" ></script> -->
+	    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	    <script src="js/bootstrap.min.js"></script>
+	    <script type="text/javascript">
+		$('#OutputCreatebtn').click(function(e){
+			e.preventDefault();
+			$('#OutputCreate').modal("show");
+		});
+	    	
+	    </script>
+	    
+		<script type="text/javascript" >
+		$(function () {
+			$("#btnSave").click(function () {
+				if ($("#OPNm").val() == "")
+				{
+					alert('산출물 명이 기입되지 않았습니다.');
+					return;
+				}
+				if ($("#OPContent").val() == "")
+				{
+					alert('산출물 내용이 기입되지 않았습니다.');
+					return;
+				}
+				$.ajax({
+				    url:"./ProjectOutput_Check.jsp",
+				    async:false,
+				    type:"POST",
+				    data: { OPNm: $("#OPNm").val() },// 전송할 데이터					 
+				    success:function(data) {
+				    	if(data.indexOf("중복") != -1) {
+			    			alert("중복된 산출물 명이 존재합니다.");
+			    		}
+				    	else {
+				    		$("#PJTOutputCreate").submit();
+				    	}
+				    }// 요청 완료 시
+				});
+			})
+		})
+		</script>
 	</body>
 </html>

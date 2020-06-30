@@ -17,9 +17,9 @@
 <body>
 <%
 	request.setCharacterEncoding("utf-8");
-	String PJNm = request.getParameter("PJNm");
+	String PJTNm = request.getParameter("PJTNm");
 
-	if (ProjectNameCheck.NameCheck(PJNm))
+	if (ProjectNameCheck.NameCheck(PJTNm))
 	{
 		out.println("ม฿บน");
 	}

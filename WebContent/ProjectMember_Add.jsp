@@ -2,7 +2,8 @@
 <%@page import="ProjectManagement.MySQLConnect"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="java.util.*,java.text.*"%>
+<%@page import="java.util.*"%>
+<%@ page import = "java.text.*" %>
 <%@page import="java.util.regex.Pattern" %>
 <%@page import="java.sql.*"%>
 <!DOCTYPE HTML>
