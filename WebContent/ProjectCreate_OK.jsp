@@ -64,7 +64,10 @@
     	pstmt.setString(15, Approval5);
     	
     	pstmt.executeUpdate();
-    	out.println(PJTNm);
+    	
+    	String sql2 = "INSERT INTO MA_Output (PJTNo, FormGB, FormNo) SELECT DISTINCT (SELECT MAX(PJTNO) FROM MA_Project), FormGB, FormNo FROM MA_Form WHERE FormGB = 2";
+    	PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+    	pstmt2.executeUpdate();
     	
     	pstmt.close();
     	conn.close();

@@ -7,12 +7,12 @@
 <%@page import = "java.sql.PreparedStatement" %>
 <%@page import = "java.sql.Connection" %>
 <%@page import = "java.sql.Timestamp" %>
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>(аж)гоюл╣╔юле╦</title>
+<meta charset="UTF-8">
+<title>(Лё╪)М∙≤Л²╢К█╟Л²╢М┐─</title>
 </head>
 <body>
 <%
@@ -21,11 +21,11 @@
 
 	if (ProjectNameCheck.NameCheck(PJTNm))
 	{
-		out.println("аъ╨╧");
+		out.println("К╤┬М∙╘");
 	}
 	else
 	{
-		out.println("еК╟З");
+		out.println("М├╣ЙЁ╪");
 	}
 %>
 </body>

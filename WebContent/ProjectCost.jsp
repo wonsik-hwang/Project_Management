@@ -92,8 +92,8 @@
 			try{
 				Connection conn = MySQLConnect.getMySQLConnection();
 				
-				String PJNo = request.getParameter("PJNo");
-				String sql = "SELECT * FROM MA_Cost WHERE PJNo=" + PJNo + " ORDER BY CostNo DESC";
+				String PJTNo = request.getParameter("PJTNo");
+				String sql = "SELECT * FROM MA_Cost WHERE PJTNo = " + PJTNo + " ORDER BY CostNo DESC";
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery();
 		%>
@@ -119,32 +119,27 @@
 						<div style="width:74.7%; float:right">
 							<ul class="snip1398 ">
 								<li class="rowLi">
-									<a href="ProjectInfo.jsp?PJNo=<%= PJNo%>" data-hover="기본정보">
+									<a href="ProjectInfo.jsp?PJNo=<%= PJTNo%>" data-hover="기본정보">
 										기본정보
 									</a>
 								</li>
 								<li class="rowLi ">
-									<a href="ProjectDocument.jsp?PJNo=<%= PJNo %>" data-hover="서류관리">
+									<a href="ProjectDocument.jsp?PJNo=<%= PJTNo %>" data-hover="서류관리">
 										<span>서류관리</span>
 									</a>
 								</li>
 								<li class="rowLi">
-									<a href="ProjectOutput.jsp?PJNo=<%= PJNo %>" data-hover="산출물관리">
+									<a href="ProjectOutput.jsp?PJNo=<%= PJTNo %>" data-hover="산출물관리">
 										<span>산출물관리</span>
 									</a>
 								</li>
 								<li class="rowLi">
-									<a href="ProjectMember_Add.jsp?PJNo=<%= PJNo %>" data-hover="인원관리">
+									<a href="ProjectMember_Add.jsp?PJNo=<%= PJTNo %>" data-hover="인원관리">
 										<span>인원관리</span>
 									</a>
 								</li>
-								<li class="rowLi">
-									<a href="project_work.html" data-hover="작업관리">
-										<span>작업관리</span>
-									</a>
-								</li>
 								<li class="current rowLi">
-									<a href="ProjectCost.jsp?PJNo=<%= PJNo %>" data-hover="비용관리">
+									<a href="ProjectCost.jsp?PJNo=<%= PJTNo %>" data-hover="비용관리">
 										<span>비용관리</span>
 									</a>
 								</li>
@@ -196,7 +191,7 @@
 												</div>
 												<div style="float:right; margin-top: 15px">
 													<button id = "btnSave" name = "btnSave" class="primary" type="button">등록</button>
-													<button type="button"  onclick="location.href = 'ProjectCost.jsp?PJNo=<%= PJNo %>'">취소</button>
+													<button type="button"  onclick="location.href = 'ProjectCost.jsp?PJNo=<%= PJTNo %>'">취소</button>
 													<br>
 													<br>
 												</div>
@@ -226,9 +221,6 @@
 									<col style="width:100px" />
 									<col style="width:100px" />
 									<col style="width:100px" />
-	<!-- 								<col style="width:100px" /> -->
-	<!-- 								<col style="width:70px" /> -->
-	<!-- 								<col style="width:70px" /> -->
 								</colgroup>
 								<thead>
 									<tr>

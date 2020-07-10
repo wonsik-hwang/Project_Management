@@ -283,7 +283,7 @@
 				    type:"POST",
 				    data: { PJTNm: $("#PJTNm").val() },// 전송할 데이터					 
 				    success:function(data) {
-				    	if(data.indexOf("중복") != -1) {
+				    	if(data.indexOf("불합") != -1) {
 			    			alert("중복된 프로젝트 명이 존재합니다.");
 			    		}
 				    	else {

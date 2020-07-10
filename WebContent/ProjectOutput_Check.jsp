@@ -18,19 +18,19 @@
 <%
 	request.setCharacterEncoding("utf-8");
 // 	String PJTNo = request.getParameter("PJTNo");
-	String OPNm = request.getParameter("OPNm");
-	
-	String PJTNo = "155";
+	String FormNm = request.getParameter("FormNm");
+	String PJTNo = "1";
 	int No_Value = Integer.parseInt(PJTNo);
 
-	if (ProjectNameCheck.OutputNameCheck(OPNm, No_Value))
-	{
-		out.println("중복");
-	}
-	else
-	{
-		out.println("통과");
-	}
+	out.println("통과");
+// 	if (ProjectNameCheck.OutputFormNameCheck(OPNm, No_Value))
+// 	{
+// 		out.println("중복");
+// 	}
+// 	else
+// 	{
+// 		out.println("통과");
+// 	}
 %>
 </body>
 </html>

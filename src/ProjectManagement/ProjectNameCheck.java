@@ -21,17 +21,16 @@ public class ProjectNameCheck {
 			{
 				if (rs.getString("PJTNm").equals(nm))
 				{
-					MySQLConnect.close(rs);
-					MySQLConnect.close(pstmt);
-					MySQLConnect.close(conn);
+					rs.close();
+					pstmt.close();
+					conn.close();
 					return true;
 				}
 			}
 			
-			MySQLConnect.close(rs);
-			MySQLConnect.close(pstmt);
-			MySQLConnect.close(conn);
-
+			rs.close();
+			pstmt.close();
+			conn.close();
 		}
 		catch (SQLException e)
 		{
@@ -55,17 +54,16 @@ public class ProjectNameCheck {
 			{
 				if (rs.getString("OPNm").equals(nm))
 				{
-					MySQLConnect.close(rs);
-					MySQLConnect.close(pstmt);
-					MySQLConnect.close(conn);
+					rs.close();
+					pstmt.close();
+					conn.close();
 					return true;
 				}
 			}
 			
-			MySQLConnect.close(rs);
-			MySQLConnect.close(pstmt);
-			MySQLConnect.close(conn);
-
+			rs.close();
+			pstmt.close();
+			conn.close();
 		}
 		catch (SQLException e)
 		{
@@ -73,5 +71,38 @@ public class ProjectNameCheck {
 		}
 		
 		return false;
-	}	
+	}
+
+	public static boolean OutputFormNameCheck (String nm, int no)
+	{
+		Connection conn = MySQLConnect.getMySQLConnection();
+		
+		String sql = "SELECT mf.FormNm FROM MA_Form mf WHERE mf.FormGB = 2";
+		try
+		{
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next())
+			{
+				if (rs.getString("FormNm").equals(nm))
+				{
+					rs.close();
+					pstmt.close();
+					conn.close();
+					return true;
+				}
+			}
+			
+			rs.close();
+			pstmt.close();
+			conn.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
 }

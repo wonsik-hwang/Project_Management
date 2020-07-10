@@ -81,20 +81,45 @@
 				box-shadow: none;
 				color: white !important;
 			}
+			
+			.ms-container{
+			  background: transparent url('../img/switch.png') no-repeat 50% 50%;
+			  width: 80%;
+			}
+
+			.ms-container .ms-list{
+			  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+			  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+			  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+			  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+			  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+			  -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+			  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+			  transition: border linear 0.2s, box-shadow linear 0.2s;
+			  border: 1px solid #ccc;
+			  -webkit-border-radius: 3px;
+			  -moz-border-radius: 3px;
+			  border-radius: 3px;
+			  position: relative;
+			  height: 400px;
+			  padding: 0;
+			  overflow-y: auto;
+			}
 		</style>
 		
 	<%
+	String PJTNo = request.getParameter("PJTNo");
+	PJTNo = "158";
+
 	try{
 		Connection conn = MySQLConnect.getMySQLConnection();
-		
-		String PJNo = request.getParameter("PJNo");
-	    String sql = "SELECT * FROM MA_Person WHERE PJNo=" + PJNo  + " ORDER BY UserId DESC";
+	    String sql = "SELECT * FROM MA_Person WHERE PJTNo=" + PJTNo  + " ORDER BY UserID DESC";
 	
 	    PreparedStatement pstmt = conn.prepareStatement(sql);
 	    ResultSet rs = pstmt.executeQuery();
 	   
-		String sql1 = "SELECT * FROM members mem WHERE mem.member_num NOT IN (	SELECT mem.member_num FROM members mem, MA_Person mp WHERE mem.member_num = mp.UserId ORDER BY mem.member_num ASC) ORDER BY mem.member_num ASC";
-	    String sql2 = "SELECT * FROM members mem, MA_Person mp WHERE mem.member_num = mp.UserId ORDER BY mem.member_num";
+		String sql1 = "SELECT * FROM members mem WHERE mem.id NOT IN (SELECT mem.id FROM members mem, MA_Person mp WHERE mem.id = mp.UserId ORDER BY mem.member_num ASC) ORDER BY mem.member_num ASC";
+	    String sql2 = "SELECT * FROM members mem, MA_Person mp WHERE mem.id = mp.UserID AND mp.PJTNo = " + PJTNo + " ORDER BY mem.member_num";
 		PreparedStatement pstmt1 = conn.prepareStatement(sql1);
 		PreparedStatement pstmt2 = conn.prepareStatement(sql2);
 		ResultSet rs1 = pstmt1.executeQuery();
@@ -116,7 +141,7 @@
 						<div id="main">
 							<br />
 							<div style="height:2px;">
-								<h1 class="nanum"; style="font-size:28px; color:black; margin-left:5%;">프로젝트 정보</h1>
+								<h1 class="nanum" style="font-size:28px; color:black; margin-left:5%;">프로젝트 배치 인원 수정</h1>
 							</div>
 						</div>
 					</div>
@@ -124,32 +149,27 @@
 						<div style="width:74.7%; float:right">
 							<ul class="snip1398 ">
 								<li class="rowLi">
-									<a href="ProjectInfo.jsp?PJNo=<%= PJNo%>" data-hover="기본정보">
+									<a href="ProjectInfo.jsp?PJNo=<%= PJTNo%>" data-hover="기본정보">
 										기본정보
 									</a>
 								</li>
 								<li class="rowLi ">
-									<a href="ProjectDocument.jsp?PJNo=<%= PJNo %>" data-hover="서류관리">
-										<span>서류관리</span>
+									<a href="ProjectDocument.jsp?PJNo=<%= PJTNo %>" data-hover="서류관리">
+										<span>문서관리</span>
 									</a>
 								</li>
 								<li class="rowLi">
-									<a href="ProjectOutput.jsp?PJNo=<%= PJNo %>" data-hover="산출물관리">
+									<a href="ProjectOutput.jsp?PJNo=<%= PJTNo %>" data-hover="산출물관리">
 										<span>산출물관리</span>
 									</a>
 								</li>
 								<li class="current rowLi">
-									<a href="ProjectMember_Add.jsp?PJNo=<%= PJNo %>" data-hover="인원관리">
+									<a href="ProjectMember_Add.jsp?PJNo=<%= PJTNo %>" data-hover="인원관리">
 										<span>인원관리</span>
 									</a>
 								</li>
 								<li class="rowLi">
-									<a href="project_work.html" data-hover="작업관리">
-										<span>작업관리</span>
-									</a>
-								</li>
-								<li class="rowLi">
-									<a href="ProjectCost.jsp?PJNo=<%= PJNo %>" data-hover="비용관리">
+									<a href="ProjectCost.jsp?PJNo=<%= PJTNo %>" data-hover="비용관리">
 										<span>비용관리</span>
 									</a>
 								</li>
@@ -159,63 +179,46 @@
 						<hr style="1px;">
 					</div>
 				</div>
-					<Section>
-						<div id="grid" style="height: 70%; margin-Left:5%; padding-top:50px; background-color: white; margin-Right:5%">
-							<table>
-								<colgroup>
-									<col style="width:30px" />
-									<col style="width:25%" />
-									<col style="width:100px" />
-									<col style="width:100px" />
-									<col style="width:100px" />
-									<col style="width:100px" />
-									<col style="width:100px" />
-									<col style="width:70px" />
-									<col style="width:70px" />
-								</colgroup>
-							</table>
-							<div>
-								<select multiple="multiple" id="Selection" name="Selection" size="10">
-									<%
-									while (rs1.next())
-									{
-										out.println("<option value='" + rs1.getString("member_num") + "'>" + rs1.getString("name") + "</option>");
-									}
-									while (rs2.next())
-									{
-										out.println("<option value='" + rs2.getString("member_num") + "' selected>" + rs2.getString("name") + "</option>");
-									}
-									%>
-								</select>
-							</div>
-							<div class="k-pager-wrap k-grid-pager">
-								<a aria-label="Go to the first page" class="k-link k-pager-nav k-state-disabled k-pager-first" data-page="1" href="#" title="Go to the first page">
-									<span class="k-icon k-i-arrow-end-left">
-									</span>
-								</a>
-								<a aria-label="Go to the previous page" class="k-link k-pager-nav k-state-disabled" data-page="0" href="#" title="Go to the previous page">
-									<span class="k-icon k-i-arrow-60-left">
-									</span>
-								</a>
-							</div>
-							<div style="float: right; margin-top: 20px">
-								<button id = "btnSave" name = "btnSave" class="primary" type="button">등록</button>
-			<!-- 					<input type="reset" value="취소"  onclick="location.href = 'ProjectMember_Add.jsp'"> -->
-			<!-- 		            <input class="btn btn-primary" type="button" value="저장" onclick="infoConfirm()" style="float: left"> -->
-			<!-- 		            <input class="btn btn-primary" type="reset" value="취소" onclick="location.href = 'ProjectMember_Add.jsp'" style="float: left"> -->
-					        </div>
-						</div>
-						<%
-								}
-							
-							catch(SQLException ex) {
-								System.out.println("DB 접속에 실패 하였습니다.");
-								System.out.println(ex.getMessage());
-								ex.printStackTrace();
+				<div id="grid" style="height: 80%; margin: 2% 5% 2% 5%; padding: 20px; background-color: white; border-radius: 10px;">
+					<div align="center">
+						<select multiple="multiple" id="Selection" name="Selection" size="10">
+							<%
+							while (rs1.next())
+							{
+								out.println("<option value='" + rs1.getString("id") + "'>" + rs1.getString("name") + "</option>");
 							}
-				// 			finally {}
-						%>
-					</section>
+							while (rs2.next())
+							{
+								out.println("<option value='" + rs2.getString("id") + "' selected>" + rs2.getString("name") + "</option>");
+							}
+							%>
+						</select>
+					</div>
+					<div class="k-pager-wrap k-grid-pager">
+						<a aria-label="Go to the first page" class="k-link k-pager-nav k-state-disabled k-pager-first" data-page="1" href="#" title="Go to the first page">
+							<span class="k-icon k-i-arrow-end-left">
+							</span>
+						</a>
+						<a aria-label="Go to the previous page" class="k-link k-pager-nav k-state-disabled" data-page="0" href="#" title="Go to the previous page">
+							<span class="k-icon k-i-arrow-60-left">
+							</span>
+						</a>
+					</div>
+					<div style="width: 100%; margin-top: 2%;">
+						<input type="button" value="취소"  onclick="location.href = 'ProjectMember.jsp'" style="float: right; margin-left: 10px;">
+						<button id = "btnSave" name = "btnSave" class="primary" type="button" style="float: right;">저장</button>
+			        </div>
+				</div>
+				<%
+						}
+					
+					catch(SQLException ex) {
+						System.out.println("DB 접속에 실패 하였습니다.");
+						System.out.println(ex.getMessage());
+						ex.printStackTrace();
+					}
+		// 			finally {}
+				%>
 				</div>
 		
 			<!-- Sidebar -->
@@ -246,8 +249,8 @@
 	<script type="text/javascript" src="js/jquery.quicksearch.js"></script>
 	<script type="text/javascript">
 		$('#Selection').multiSelect({
-			selectableHeader: "<div class = 'custom-header'>참여 시킬 멤버를 선택해 주십시오.</div>" + "<input type='text' class='search-input' autocomplete='off' placeholder='이름을 입력해 주십시오'>",
-			selectionHeader: "<div class = 'custom-header'>제외 시킬 멤버를 선택해 주십시오.</div>" + "<input type='text' class='search-input' autocomplete='off' placeholder='이름을 입력해 주십시오'>",
+			selectableHeader: "<div class = 'custom-header' style = 'margin-bottom: 10px;'>참여 시킬 멤버를 선택해 주십시오.</div>" + "<input type='text' class='search-input' autocomplete='off' placeholder='이름을 입력해 주십시오'>",
+			selectionHeader: "<div class = 'custom-header' style = 'margin-bottom: 10px;'>제외 시킬 멤버를 선택해 주십시오.</div>" + "<input type='text' class='search-input' autocomplete='off' placeholder='이름을 입력해 주십시오'>",
 			afterInit: function(ms){
 			    var that = this,
 			        $selectableSearch = that.$selectableUl.prev(),
@@ -283,16 +286,17 @@
 		<script type="text/javascript" >
 		$(function () {
 			$("#btnSave").click(function () {
-				alert( $('#Selection').val() );
 				jQuery.ajaxSettings.traditional = true;
 				$.ajax({
-				    url:"./ProjectMemberAdd_OK.jsp",
+				    url:"./ProjectMember_OK.jsp",
 				    async:false,
-				    dataType: "json",
 				    type:"POST",
-				    data: { SelectMember: $('#Selection').val() }, // 전송할 데이터					 
+				    data: {	SelectMember: $('#Selection').val(),
+				    			PJTNo : <%=PJTNo%>
+				    	}, // 전송할 데이터					 
 				    success:function(data) {
 				    	alert('저장이 완료되었습니다.');
+				    	location.href = 'ProjectMember.jsp';
 				    }// 요청 완료 시
 				});
 			});
