@@ -320,9 +320,9 @@ input[type=button] {
 									<label class="nanum" style="margin-top: -3%">산출물 내용</label> <label id="OPContent" style="word-break: break-all"></label>
 								</div>
 								<div class="modal-footer">
-									<button id="btnUpdate" name="btnUpdate" class="btn" style="box-shadow: none" type="button" data-dismiss="modal">수정</button>
+									<button id="btnUpdate" name="btnUpdate" class="btn" style="box-shadow: none" type="button">수정</button>
 									<button class="btn" style="box-shadow: none" type="button"
-										data-dismiss="modal">취소</button>
+										data-dismiss="modal">닫기</button>
 								</div>
 							</div>
 						</div>
@@ -344,12 +344,8 @@ input[type=button] {
 										id="OPNmUpdate" style="margin-top: -4%"></label>
 								</div>
 								<div class="modal-body">
-									<label class="nanum">파일 등록&nbsp;&nbsp;&nbsp;&nbsp;<input
-										type="file" id="OutputFileNm" name="OutputFileNm"
-										class="upload-hidden"
-										onchange="javascript: document.getElementById('FileName').value = document.getElementById('OutputFileNm').value.split('\\')[2]"></label>
-									<input id="FileNameUpdate" name="FileNameUpdate" type="text"
-										hidden="hidden">
+									<label class="nanum">파일 등록&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" id="OutputFileNm" name="OutputFileNm" class="upload-hidden" onchange="javascript: document.getElementById('FileName').value = document.getElementById('OutputFileNm').value.split('\\')[2]"></label>
+									<input id="FileNameUpdate" name="FileNameUpdate" type="text" hidden="hidden">
 								</div>
 								<div class="modal-body">
 									<label class="nanum" style="margin-top: -3%">산출물 내용</label>
@@ -391,21 +387,21 @@ input[type=button] {
 							</colgroup>
 							<thead>
 								<tr>
-									<th data-field="PROJ_NAME" data-index="0" data-title=""
-										id="28b4920c-f59e-4d15-aa06-3630ad36d243" scope="col"><span>
-											&nbsp; </span></th>
-									<th data-field="OPNm" data-index="1" data-title="산출물 명"
-										id="838d690c-5b5f-419a-99a9-1a8fbbfbb015" scope="col"><span>
-											산출물 명 </span></th>
-									<th data-field="InsertDt" data-index="2" data-title="등록 일자"
-										id="399f3c50-afda-4c52-85d9-e7c527ce14ce" scope="col"
-										style="text-align: center;"><span> 양식 버전 </span></th>
-									<th data-field="InsertNm" data-index="3" data-title="등록자"
-										id="61a94629-97a3-4c89-949c-0e5815cfb721" scope="col"
-										style="text-align: center;"><span> 양식 파일 </span></th>
-									<th data-field="UpdateDt" data-index="4" data-title="수정 일자"
-										id="bce59831-42b4-44ec-9399-adae8ddcdd5f" scope="col"
-										style="text-align: center;"><span> 파일 다운 </span>
+									<th data-field="PROJ_NAME" data-index="0" data-title="" id="28b4920c-f59e-4d15-aa06-3630ad36d243" scope="col">
+										<span>&nbsp;</span>
+									</th>
+									<th data-field="OPNm" data-index="1" data-title="산출물 명" id="838d690c-5b5f-419a-99a9-1a8fbbfbb015" scope="col">
+										<span>산출물 명</span>
+									</th>
+									<th data-field="InsertDt" data-index="2" data-title="등록 일자" id="399f3c50-afda-4c52-85d9-e7c527ce14ce" scope="col" style="text-align: center;">
+										<span>양식 버전</span>
+									</th>
+									<th data-field="InsertNm" data-index="3" data-title="등록자" id="61a94629-97a3-4c89-949c-0e5815cfb721" scope="col" style="text-align: center;">
+										<span>양식 파일</span>
+									</th>
+									<th data-field="UpdateDt" data-index="4" data-title="수정 일자" id="bce59831-42b4-44ec-9399-adae8ddcdd5f" scope="col" style="text-align: center;">
+										<span>파일 다운</span>
+									</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -415,8 +411,7 @@ input[type=button] {
 									for (int i = 0; i < Form.size(); i++) {
 										out.println("<tr>");
 										out.println("<td>" + "<span>" + "&nbsp;" + "</span>" + "</td>");
-										out.println("<td><a class = 'btn' id = '" + Form.get(i)[1] + "' name = '" + Form.get(i)[1]
-										+ "' onclick = 'OutputInfo(this)' style='margin-left: -5%'><span>" + Form.get(i)[2] + "</span></a></td>");
+										out.println("<td><a class = 'btn' id = '" + Form.get(i)[1] + "' name = '" + Form.get(i)[1] + "' onclick = 'OutputInfo(this)' style='margin-left: -5%'><span>" + Form.get(i)[2] + "</span></a></td>");
 										out.println("<td><select>");
 										for (int j = (FormVer.size() - 1); j >= 0; j--) {
 											if (FormVer.get(j)[0].equals(Form.get(i)[1])) {
@@ -572,11 +567,6 @@ input[type=button] {
 
 		// 산출물 수정 팝업 띄우기
 		$('#btnUpdate').click(function() {
-			if ($('#OPContent').val() == "산출물이 등록되지 않았습니다.")
-			{
-				alert("산출물이 등록되지 않았습니다.");
-				return;
-			}
 			$('#OutputInfo').modal("hide").on('hidden.bs.modal', function(e) {
 				$('#OutputUpdate').modal({
 					backdrop : 'static',
@@ -593,9 +583,14 @@ input[type=button] {
 			ClickId = document.getElementById(obj.getAttribute('id')).getAttribute('id');
 			$('#OPContent').text(document.getElementById(ClickId + "a").outerText);
 			$('#OPNmLabel').text($(obj).text());
+			if ($('#OPContent').text() == "산출물이 등록되지 않았습니다.")
+			{
+				document.getElementById('btnUpdate').setAttribute('hidden', 'hidden');
+			}
 
 			$('#OPContentUpdate').val(document.getElementById(ClickId + "a").outerText);
 			$('#OPNmUpdate').text(document.getElementById(obj.id).outerText);
+			
 			$('#OutputInfo').modal({
 				backdrop : 'static',
 				keyboard : false

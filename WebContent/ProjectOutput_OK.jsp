@@ -20,8 +20,8 @@
 <body>
 <%
 	request.setCharacterEncoding("UTF-8");
-	FileUpload upload = new FileUpload();	
-	if (upload.OutputFileUpload(request)) {
+	FileUpload Upload = new FileUpload();	
+	if (Upload.OutputFileUpload(request)) {
 	%>
 	<script type="text/javascript">
 		alert("산출물이 저장되었습니다.");
