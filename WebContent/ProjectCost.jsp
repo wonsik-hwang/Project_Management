@@ -12,8 +12,14 @@
 		<link rel="stylesheet" href="CSS/main.css" />
 		<link rel="stylesheet" href="CSS/mouseover3.css" />
 	
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="CSS/bootstrap.min.css">
+		<link rel="stylesheet" href="https://i.icomoon.io/public/temp/e5c48413e3/UntitledProject/style.css">
+		<link rel="stylesheet" href="CSS/main.css" />
+		<link rel="stylesheet" href="CSS/mouseover3.css" />
+		
 		<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
-		<script src="https://code.jquery.com/jquery-3.5.1.js"  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 		<script>
 			$(".hover").mouseleave(
 				function() {
@@ -42,13 +48,12 @@
 			.btn {
 				margin-right: 3%;
 				height: 50px;
-				line-height: 50px;
 				text-align: center;
 				width: auto;
 				padding-left: 5%;
 				padding-right: 5%;
 				min-width: 80px;
-				font-size: 1.2em
+				font-size: 1em
 			}
 	
 			.toppadding {
@@ -125,7 +130,7 @@
 								</li>
 								<li class="rowLi ">
 									<a href="ProjectDocument.jsp?PJNo=<%= PJTNo %>" data-hover="서류관리">
-										<span>서류관리</span>
+										<span>문서관리</span>
 									</a>
 								</li>
 								<li class="rowLi">
@@ -150,57 +155,67 @@
 					<hr style="border: solid 1px black;">
 				</div>
 
-				<div class="row" style="margin-Left:4%; padding-top:40px; background-color: white; margin-Right:5%; border-radius:10px;">
-					<div style="width:100%;">
+				<div class="row" style="margin: 0% 4% 0% 4%; padding-top:40px; background-color: white; border-radius:10px;">
+					<div style="width:100%; margin-top: -1%;">
 						<!-- 그리드 -->
 						<div style="float:left; padding-left:20px">
-							<input type="text" name="query" placeholder="산출물 명을 입력하세요">
+							<input type="text" name="query" placeholder="제목을 입력해 주십시오">
 						</div>
 	
 						<div style="float:left; padding-left:20px">
-							<input type="text" name="query" id="query" placeholder="작성자를 입력하세요">
+							<input type="text" name="query" id="query" placeholder="작성자를 입력해 주십시오">
 						</div>
 	
 						<div style="float:left; padding-left:20px">
 							<input type="button" value="검색">
 						</div>
-	
-						<!-- 파일 등록 버튼 -->
-						<form id="OPCreate" name="OPCreate" action="ProjectOutput_OK.jsp"  method="post">
-							<div style="float:right; padding-right:3%;">
-								<a href="#Insert" class="btn-example">
-									<input type="button" value="+ 파일 등록">
-								</a>
-								<div class="dim-layer">
-									<div class="dimBg"></div>
-									<div id="Insert" class="pop-layer">
-										<div class="pop-container">
-											<div class="pop-conts">
-												<!--content //-->
-												<div>
-													<label class="nanum" style="margin-top: 15px">등록</label>
-													<hr style="border: solid 1px black; margin-top: -5px">
-													<label class="nanum" style="margin-top: -10px"><b>비용 제목</b></label>
-													<input id="OPNm" name="OPNm" type = "text" style="margin-top: 15px">
-													<br>
-													<label class="nanum">파일 업로드&nbsp;&nbsp;&nbsp;&nbsp; <input type="file" id="OPFile"  name="OPFile" class="upload-hidden"  onchange="getFilePath(this.value)"></label>
-													<b>비용 내용</b>
-													<br>
-													<br>
-													<textarea id="OPContent" name="OPContent" rows="5"  style = "resize:none;"> </textarea>
-												</div>
-												<div style="float:right; margin-top: 15px">
-													<button id = "btnSave" name = "btnSave" class="primary" type="button">등록</button>
-													<button type="button"  onclick="location.href = 'ProjectCost.jsp?PJNo=<%= PJTNo %>'">취소</button>
-													<br>
-													<br>
-												</div>
-											</div>
+						
+						
+						<!--비용 등록 팝업 -->
+						<div style="float: right; padding-right: 2%;">
+							<input type="button" id="CostCreatebtn" value="+ 비용 등록">
+						</div>
+						<form id="PJTCostCreate" name="PJTCostCreate" action="ProjectCost_OK.jsp" method="post" enctype="multipart/form-data">
+							<div class="modal fade" id="CostCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header" style="padding: 1rem 1rem 0 1rem;">
+											<h2 class="modal-title" id="exampleModalLabel">
+												<label class="nanum">비용 등록</label>
+											</h2>
+										</div>
+										<div class="modal-body">
+											<label class="nanum">비용 명</label>
+											<input class="nanum" id="CostNm" name="CostNm" type="text" placeholder="제목을 입력해 주십시오">
+										</div>
+										<div class="modal-body" style="margin-top: -10px;">
+											<label class="nanum">비용 구분</label> <select id="CostGB" name="CostGB">
+												<option value="0">구매품의서</option>
+												<option value="1">지출결의서</option>
+											</select>
+										</div>
+										<div class="modal-body">
+											<label class="nanum">파일&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" id="CostFileNm" name="CostFileNm" class="upload-hidden" onchange="javascript: document.getElementById('CoFileNm').value = document.getElementById('CostFileNm').value.split('\\')[2]"></label>
+											<input id="CoFileNm" name="CoFileNm" type="text" hidden="hidden">
+										</div>
+										<div class="modal-body" style="margin-top: -20px">
+											<label class="nanum">가격</label>
+											<input id="CostPrice" name="CostPrice" type="text" placeholder="가격을 입력해 주십시오">
+										</div>
+										<div class="modal-body" style="margin-top: -15px;">
+											<label class="nanum">비용 내용</label>
+											<textarea id="CostContent" name="CostContent" rows="5" style="resize: none;"> </textarea>
+										</div>
+										<div class="modal-footer">
+											<button id="btnInsert" name="btnInsert" class="btn" style="box-shadow: none" type="button">등록</button>
+											<button class="btn" style="box-shadow: none" type="button" data-dismiss="modal">취소</button>
 										</div>
 									</div>
 								</div>
 							</div>
 						</form>
+	
+						
 						<div style="padding-top: 25px">
 							<colgroup>
 								<col style="width:100%">
@@ -299,7 +314,6 @@
 									</tr>
 									<%
 										}
-										//finally{}				
 									%>
 								</tbody>
 							</table>
@@ -330,5 +344,24 @@
 		<script src="js/breakpoints.min.js"></script>
 		<script src="js/util.js"></script>
 		<script src="js/main.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			$('#CostCreatebtn').click(function() {
+				$('#CostCreate').modal({
+					backdrop : 'static',
+					keyboard : false
+				});
+			});
+			
+			$('#btnInsert').click(function() {
+				if ($('#CostNm').val() == "")
+				{
+					alert('제목을 입력해 주십시오.');
+					return;
+				}
+				$('#PJTCostCreate').submit();
+			})
+		</script>
 	</body>
 </html>

@@ -118,11 +118,19 @@
 	    PreparedStatement pstmt = conn.prepareStatement(sql);
 	    ResultSet rs = pstmt.executeQuery();
 	   
-		String sql1 = "SELECT * FROM members mem WHERE mem.id NOT IN (SELECT mem.id FROM members mem, MA_Person mp WHERE mem.id = mp.UserId ORDER BY mem.member_num ASC) ORDER BY mem.member_num ASC";
-	    String sql2 = "SELECT * FROM members mem, MA_Person mp WHERE mem.id = mp.UserID AND mp.PJTNo = " + PJTNo + " ORDER BY mem.member_num";
+	    String sql1 =	"SELECT * FROM members mem WHERE " +
+	    						"mem.id NOT IN (SELECT mem.id FROM members mem, MA_Person mp WHERE mem.id = mp.UserID) AND " +
+	    						"mem.rank NOT IN (SELECT mem.rank FROM members mem WHERE mem.rank = '사장' OR mem.rank = '관리') AND " +
+	    						"mem.name NOT IN (SELECT mem.name FROM members mem WHERE mem.name = 'test' OR mem.name = '시험맨')" +
+	    						"ORDER BY FIELD (mem.rank, '이사', '부장', '차장', '과장', '대리', '주임', '사원')";
 		PreparedStatement pstmt1 = conn.prepareStatement(sql1);
-		PreparedStatement pstmt2 = conn.prepareStatement(sql2);
 		ResultSet rs1 = pstmt1.executeQuery();
+	    
+	    String sql2 =	"SELECT * FROM members mem, MA_Person mp WHERE " +
+	    						"mem.id = mp.UserID AND " +
+	    						"mp.PJTNo = " + PJTNo +
+	    						" ORDER BY FIELD (mem.rank, '이사', '부장', '차장', '과장', '대리', '주임', '사원')";
+		PreparedStatement pstmt2 = conn.prepareStatement(sql2);
 		ResultSet rs2 = pstmt2.executeQuery();
 	    
 	%>
@@ -164,7 +172,7 @@
 									</a>
 								</li>
 								<li class="current rowLi">
-									<a href="ProjectMember_Add.jsp?PJNo=<%= PJTNo %>" data-hover="인원관리">
+									<a href="ProjectMember.jsp?PJNo=<%= PJTNo %>" data-hover="인원관리">
 										<span>인원관리</span>
 									</a>
 								</li>
@@ -185,11 +193,11 @@
 							<%
 							while (rs1.next())
 							{
-								out.println("<option value='" + rs1.getString("id") + "'>" + rs1.getString("name") + "</option>");
+								out.println("<option value='" + rs1.getString("id") + "'>" + rs1.getString("rank") + " : " + rs1.getString("name") + "</option>");
 							}
 							while (rs2.next())
 							{
-								out.println("<option value='" + rs2.getString("id") + "' selected>" + rs2.getString("name") + "</option>");
+								out.println("<option value='" + rs2.getString("id") + "' selected>" + rs2.getString("rank") + " : " + rs2.getString("name") + "</option>");
 							}
 							%>
 						</select>

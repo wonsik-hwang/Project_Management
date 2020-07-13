@@ -66,25 +66,46 @@
 				font-family: 'Nanum Gothic', sans-serif;
 				font-size: 18px;
 			}
+			
+			details summary::-webkit-details-marker {
+/* 			  display:none; */
+			}
 		</style>
 		<%
 			try
 			{
-				ArrayList<String[]> member = new ArrayList<String[]>();
+				ArrayList<String[]> PJTManager = new ArrayList<String[]>();
+				ArrayList<String[]> ProjectList = new ArrayList<String[]>();
 				Connection conn = JinjuDBConnect.getJinjuDBConnection();
 				
-				String sql = "SELECT mem.id, mem.name FROM members mem";
+				// PM이 될 수 있는 인원 조회
+				String sql =	"SELECT * FROM members mem WHERE " +
+									"mem.rank NOT IN (SELECT mem.rank FROM members mem WHERE mem.rank = '사장' OR mem.rank = '관리' OR mem.rank = '사원' OR mem.rank = '계약직') " +
+									"AND mem.name NOT IN (SELECT mem.name FROM members mem WHERE mem.name = 'test' OR mem.name = '시험맨') " +
+									"ORDER BY FIELD (mem.rank, '이사', '부장', '차장', '과장', '대리', '주임')";
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery();
 				
-				String sql2 = "SELECT mem.id, mem.name FROM members mem WHERE mem.rank = '사장'";
-				PreparedStatement pstmt2 = conn.prepareStatement(sql2);
-				ResultSet rs2 = pstmt2.executeQuery();
+				while (rs.next())
+				{
+					PJTManager.add(new String[] {rs.getString("id"), rs.getString("name"), rs.getString("rank")});
+				}
+				
+				// 진주 업무일지 프로젝트 목록
+				sql = "SELECT * FROM project ORDER BY prj_num DESC";
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
 				
 				while (rs.next())
 				{
-					member.add(new String[]{rs.getString("id"), rs.getString("name")});
+					ProjectList.add(new String[] {rs.getString("prj_num"), rs.getString("prj_name")});
 				}
+				
+				// 사장님만 조회
+				sql = "SELECT mem.id, mem.name FROM members mem WHERE mem.rank = '사장'";
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
 		%>
 	</head>
 	<body  class="is-preload">
@@ -128,75 +149,86 @@
 							</div>
 							
 							<details class="toppadding" open="open" style="width: 88%">
-								<summary><b>결재자</b></summary>
+								<summary><b>결재자 선택</b></summary>
 								<label class="toppadding">1차 결재자</label>
 								<select id="Approval1" name="Approval1">
+								<option value="0">선택 없음</option>
 								<%
-									out.println("<option value = '0'>선택 없음</option>");
-									for (int i = 0; member.size() > i; i++)
+									for (int i = 0; i < PJTManager.size(); i++)
 									{
-										out.println("<option value = '" + member.get(i)[0] + "'>" + member.get(i)[1] + "</option>");
+										out.println("<option value = '" + PJTManager.get(i)[0] + "'>" + PJTManager.get(i)[2] + " : " + PJTManager.get(i)[1] + "</option>");
 									}
 								%>
 								</select>
 								<label class="toppadding">2차 결재자</label>
 								<select id="Approval2" name="Approval2">
+								<option value="0">선택 없음</option>
 								<%
-									out.println("<option value = '0'>선택 없음</option>");
-									for (int i = 0; member.size() > i; i++)
+									for (int i = 0; i < PJTManager.size(); i++)
 									{
-										out.println("<option value = '" + member.get(i)[0] + "'>" + member.get(i)[1] + "</option>");
+										out.println("<option value = '" + PJTManager.get(i)[0] + "'>" + PJTManager.get(i)[2] + " : " + PJTManager.get(i)[1] + "</option>");
 									}
 								%>
 								</select>								
 								<label class="toppadding">3차 결재자</label>
 								<select id="Approval3" name="Approval3">
+								<option value="0">선택 없음</option>
 								<%
-									out.println("<option value = '0'>선택 없음</option>");
-									for (int i = 0; member.size() > i; i++)
+									for (int i = 0; i < PJTManager.size(); i++)
 									{
-										out.println("<option value = '" + member.get(i)[0] + "'>" + member.get(i)[1] + "</option>");
+										out.println("<option value = '" + PJTManager.get(i)[0] + "'>" + PJTManager.get(i)[2] + " : " + PJTManager.get(i)[1] + "</option>");
 									}
 								%>
 								</select>
 								<label class="toppadding">4차 결재자</label>
 								<select id="Approval4" name="Approval4">
+								<option value="0">선택 없음</option>
 								<%
-									out.println("<option value = '0'>선택 없음</option>");
-									for (int i = 0; member.size() > i; i++)
+									for (int i = 0; i < PJTManager.size(); i++)
 									{
-										out.println("<option value = '" + member.get(i)[0] + "'>" + member.get(i)[1] + "</option>");
+										out.println("<option value = '" + PJTManager.get(i)[0] + "'>" + PJTManager.get(i)[2] + " : " + PJTManager.get(i)[1] + "</option>");
 									}
 								%>
 								</select>
 								<label class="toppadding">최종 결재자</label>
 								<select id="Approval5" name="Approval5">
 								<%
-									while (rs2.next())
+									while (rs.next())
 									{
-										out.println("<option value = '" + rs2.getString("id") + "'>" + rs2.getString("name") + "</option>");
+										out.println("<option value = '" + rs.getString("id") + "'>" + rs.getString("name") + "</option>");
 									}
 								%>
 								</select>
 							</details>
 						</div>
-						<%
-						}
-						catch (Exception e)
-						{
-							e.getStackTrace();
-						}
-						%>
-		
 						<div style="width: 48%; margin-left: 1%">
-							<label>프로젝트 PM</label>
-							<input name = "PJTPMID" id= "PJTPMID" type="text">
+							<label>PM</label>
+							<select id="PJTPMID" name="PJTPMID">
+								<option value="0">선택 없음</option>
+								<%
+									for (int i = 0; i < PJTManager.size(); i++)
+									{
+										out.println("<option value = '" + PJTManager.get(i)[0] + "'>" + PJTManager.get(i)[2] + " : " + PJTManager.get(i)[1] + "</option>");
+									}
+								%>
+							</select>
 		
 							<label class="toppadding">주관 명</label>
 							<input name = "HostNm" id="HostNm" type="text">
 		
 							<label class="toppadding">주관 담당자(부)</label>
 							<input name = "HostSubManager" id="HostSubManager" type="text">
+							
+							<label class="toppadding">업무 일지 프로젝트 목록</label>
+							<select id="JinjuWeb" name="JinjuWeb">
+								<option value="0">선택 없음</option>
+								<%
+									for (int i = 0; i < ProjectList.size(); i++)
+									{
+										out.println("<option value = '" + ProjectList.get(i)[0] + "'>" + ProjectList.get(i)[1] + "</option>");
+									}
+								%>
+							</select>
 						</div>
 		
 						<div style="width: 97%">
@@ -210,6 +242,13 @@
 						</div>
 					</div>
 				</form>
+				<%
+					}
+					catch (Exception e)
+					{
+						e.getStackTrace();
+					}
+				%>
 			</div>
 	
 			<!-- Sidebar -->
@@ -242,9 +281,9 @@
 					alert('프로젝트 명이 기입되지 않았습니다.');
 					return;
 				}
-				if ($("#PJTPM").val() == "")
+				if ($("#PJTPMID").val() == "0")
 				{
-					alert('프로젝트 PM이 기입되지 않았습니다.');
+					alert('PM이 선택되지 않았습니다.');
 					return;
 				}
 				if ($("#PartnerNm").val() == "")

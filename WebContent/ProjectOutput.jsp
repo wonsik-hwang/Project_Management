@@ -11,8 +11,8 @@
 <title>(주)하이데이타</title>
 
 <meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="CSS/bootstrap.min.css">
 <link rel="stylesheet" href="https://i.icomoon.io/public/temp/e5c48413e3/UntitledProject/style.css">
@@ -20,9 +20,7 @@
 <link rel="stylesheet" href="CSS/mouseover3.css" />
 
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.js"
-	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
 <script>
 	$(".hover").mouseleave(function() {
@@ -96,7 +94,6 @@ input[type=button] {
 	request.setCharacterEncoding("UTF-8");
 	String PJTNo = request.getParameter("PJTNo");
 	String UserId = session.getAttribute("UserId") == null ? "0" : (String)session.getAttribute("UserId");
-	System.out.println(UserId);
 	PJTNo = "158";
 
 	ArrayList<String> OPCheck = new ArrayList<String>();
@@ -186,7 +183,7 @@ input[type=button] {
 									<span>산출물관리</span>
 							</a></li>
 							<li class="rowLi"><a
-								href="ProjectMember_Add.jsp?PJTNo=<%=PJTNo%>" data-hover="인원관리">
+								href="ProjectMember.jsp?PJTNo=<%=PJTNo%>" data-hover="인원관리">
 									<span>인원관리</span>
 							</a></li>
 							<li class="rowLi"><a href="ProjectCost.jsp?PJTNo=<%=PJTNo%>"
@@ -201,15 +198,14 @@ input[type=button] {
 
 			<div class="row"
 				style="margin-Left: 4%; padding-top: 40px; background-color: white; margin-Right: 5%; border-radius: 10px;">
-				<div style="width: 100%;">
+				<div style="width: 100%; margin-top: -1%;">
 					<!--그리드 -->
 					<div style="float: left; padding-left: 20px">
-						<input type="text" name="query" placeholder="산출물 명을 입력하세요">
+						<input type="text" name="query" placeholder="제목을 입력해 주십시오">
 					</div>
 
 					<div style="float: left; padding-left: 20px">
-						<input type="text" name="query" id="query"
-							placeholder="작성자를 입력하세요">
+						<input type="text" name="query" id="query" placeholder="작성자를 입력해 주십시오">
 					</div>
 
 					<div style="float: left; padding-left: 20px">
@@ -265,12 +261,8 @@ input[type=button] {
 					<div style="float: right; padding-right: 2%;">
 						<input type="button" id="OutputCreatebtn" value="+ 산출물 등록">
 					</div>
-					<form id="PJTOutputCreate" name="PJTOutputCreate"
-						action="ProjectOutput_OK.jsp" method="post"
-						enctype="multipart/form-data">
-						<div class="modal fade" id="OutputCreate" tabindex="-1"
-							role="dialog" aria-labelledby="exampleModalLabel"
-							aria-hidden="true">
+					<form id="PJTOutputCreate" name="PJTOutputCreate" action="ProjectOutput_OK.jsp" method="post" enctype="multipart/form-data">
+						<div class="modal fade" id="OutputCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header" style="padding: 1rem 1rem 0 1rem;">
@@ -279,8 +271,7 @@ input[type=button] {
 										</h2>
 									</div>
 									<div class="modal-body">
-										<label class="nanum">산출물</label> <select id="OutputNm"
-											name="OutputNm">
+										<label class="nanum">산출물</label> <select id="OutputNm" name="OutputNm">
 											<%
 												for (int i = 0; i < Form.size(); i++) {
 												out.println("<option value = '" + Form.get(i)[1] + "'>" + Form.get(i)[2] + "</option>");
@@ -319,16 +310,14 @@ input[type=button] {
 									</h2>
 								</div>
 								<div class="modal-body">
-									<label class="nanum">산출물 명</label> &nbsp;&nbsp;<label
-										id="OPNmLabel" style="margin-top: -4%"></label>
+									<label class="nanum">산출물 명</label> &nbsp;&nbsp;<label id="OPNmLabel" style="margin-top: -6%"></label>
 								</div>
 								<div class="modal-body" style="margin-top: -3%">
 									<label class="nanum">파일&nbsp;&nbsp;&nbsp;&nbsp;</label> <label
 										id="OPFileNmLabel"></label>
 								</div>
 								<div class="modal-body">
-									<label class="nanum" style="margin-top: -3%">산출물 내용</label> <label
-										id="OPContent" style="word-break: break-all"></label>
+									<label class="nanum" style="margin-top: -3%">산출물 내용</label> <label id="OPContent" style="word-break: break-all"></label>
 								</div>
 								<div class="modal-footer">
 									<button id="btnUpdate" name="btnUpdate" class="btn" style="box-shadow: none" type="button" data-dismiss="modal">수정</button>
@@ -583,6 +572,11 @@ input[type=button] {
 
 		// 산출물 수정 팝업 띄우기
 		$('#btnUpdate').click(function() {
+			if ($('#OPContent').val() == "산출물이 등록되지 않았습니다.")
+			{
+				alert("산출물이 등록되지 않았습니다.");
+				return;
+			}
 			$('#OutputInfo').modal("hide").on('hidden.bs.modal', function(e) {
 				$('#OutputUpdate').modal({
 					backdrop : 'static',

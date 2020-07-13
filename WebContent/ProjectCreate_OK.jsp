@@ -33,7 +33,8 @@
 	String Approval3 = request.getParameter("Approval3");
 	String Approval4 = request.getParameter("Approval4");
 	String Approval5 = request.getParameter("Approval5");
-		
+	String JinjuProject = request.getParameter("JinjuWeb");
+	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	java.util.Date SDt = sdf.parse(PJTStartDt);
 	java.util.Date EDt = sdf.parse(PJTEndDt);
@@ -45,7 +46,9 @@
     {
 		Connection conn = MySQLConnect.getMySQLConnection();
 		
-    	String sql = "INSERT INTO MA_Project (PJTNm, PJTPMID, PartnerNm, HostNm, HostManager, HostSubManager, PJTStartDt, PJTEndDt, PJTContent, PJTStateSeq, Approval_line1, Approval_line2, Approval_line3, Approval_line4, Approval_line5) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		// 프로젝트 정보 등록
+    	String sql =	"INSERT INTO MA_Project (PJTNm, PJTPMID, PartnerNm, HostNm, HostManager, HostSubManager, PJTStartDt, PJTEndDt, PJTContent, PJTStateSeq, Approval_line1, Approval_line2, Approval_line3, Approval_line4, Approval_line5) " +
+    						"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     	PreparedStatement pstmt = conn.prepareStatement(sql);
     	pstmt.setString(1, PJTNm);
     	pstmt.setString(2, PJTPMID);
@@ -62,12 +65,19 @@
     	pstmt.setString(13, Approval3);
     	pstmt.setString(14, Approval4);
     	pstmt.setString(15, Approval5);
-    	
     	pstmt.executeUpdate();
     	
-    	String sql2 = "INSERT INTO MA_Output (PJTNo, FormGB, FormNo) SELECT DISTINCT (SELECT MAX(PJTNO) FROM MA_Project), FormGB, FormNo FROM MA_Form WHERE FormGB = 2";
-    	PreparedStatement pstmt2 = conn.prepareStatement(sql2);
-    	pstmt2.executeUpdate();
+    	// 프로젝트 산출물 양식 목록 등록
+    	sql = "INSERT INTO MA_Output (PJTNo, FormGB, FormNo) SELECT DISTINCT (SELECT MAX(PJTNo) FROM MA_Project), FormGB, FormNo FROM MA_Form WHERE FormGB = 2";
+    	pstmt = conn.prepareStatement(sql);
+    	pstmt.executeUpdate();
+    	
+    	// PM 등록
+    	sql =	"INSERT INTO MA_Person (PJTNo, UserID, InputDt) " +
+    			"SELECT DISTINCT (SELECT MAX(PJTNo) FROM MA_Project), ?, NOW()";
+    	pstmt = conn.prepareStatement(sql);
+    	pstmt.setString(1, PJTPMID);
+    	pstmt.executeUpdate();
     	
     	pstmt.close();
     	conn.close();

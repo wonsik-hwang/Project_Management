@@ -167,6 +167,7 @@
 		MemDtInfo.add(new String[] { rs.getString("PJTNo"), rs.getString("PJTNm"), rs.getString("UserID"), Dt[0], Dt[1], Dt[2] });
 	}
 	
+	// 현재 프로젝트 이름 조회
 	sql = "SELECT * FROM MA_Project WHERE PJTNo = " + PJTNo;
 	pstmt = conn.prepareStatement(sql);
 	rs = pstmt.executeQuery();
@@ -238,7 +239,7 @@
 									<span>산출물관리</span>
 							</a></li>
 							<li class="current rowLi"><a
-								href="ProjectMember_Add.jsp?PJTNo=<%=PJTNo%>" data-hover="인원관리">
+								href="ProjectMember.jsp?PJTNo=<%=PJTNo%>" data-hover="인원관리">
 									<span>인원관리</span>
 							</a></li>
 							<li class="rowLi"><a href="ProjectCost.jsp?PJTNo=<%=PJTNo%>"
