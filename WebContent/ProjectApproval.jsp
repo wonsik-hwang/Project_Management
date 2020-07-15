@@ -128,7 +128,7 @@
 						<div id="main">
 							<br />
 							<div style="height:2px;">
-								<h1 class="nanum"  style="font-size:28px; color:black; margin-left:5%;">프로젝트 목록</h1>
+								<h1 class="nanum"  style="font-size:28px; color:black; margin-left:5%;">프로젝트 결재 목록</h1>
 							</div>
 						</div>
 					</div>
@@ -142,7 +142,6 @@
 						<input class="nanum" id="Nm" type="text" style="float:left; width: 15%; margin: 10px;" placeholder="제목">
 						<input class="nanum" id="InsertUser" type="text" style="float:left; width: 15%; margin: 10px;" placeholder="작성자">
 						<input type="button" value="검색" style="margin: 10px;">
-						<input type="button" value="프로젝트 등록"  onClick="location.href='ProjectCreate.jsp'" style="float: right; margin: 10px;">
 					</div>
 					
 					<!--산출물 정보 팝업 -->
@@ -176,7 +175,7 @@
 					</div>
 					
 					<div id="grid" style="width: 100%; margin: 5px 5px 5px 5px; margin-top: -450px; background: white;">
-						<table>
+						<table style="margin-left: -10px;">
 							<colgroup>
 								<col style="width:30px" />
 								<col style="width:30%" />
