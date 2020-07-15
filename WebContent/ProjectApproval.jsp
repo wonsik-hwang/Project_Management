@@ -1,13 +1,10 @@
-<%@page import="com.sun.org.apache.bcel.internal.generic.Select"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="com.sun.org.apache.bcel.internal.generic.Select"%>
 <%@ page import = "java.util.regex.Pattern" %>
 <%@ page import = "java.sql.*" %>
 <%@ page import = "ProjectManagement.MySQLConnect" %>
-<%
-	response.setHeader("Cache-Control", "no-cache");
-	response.setHeader("Pragma", "no-cache");
-	response.setDateHeader("Expires", 0);
-%>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -15,8 +12,12 @@
 	
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="CSS/main.css" />
-		<link rel="stylesheet" href="CSS/mouseover3.css" />
+		
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="CSS/bootstrap.min.css">
+	<link rel="stylesheet" href="https://i.icomoon.io/public/temp/e5c48413e3/UntitledProject/style.css">
+	<link rel="stylesheet" href="CSS/main.css" />
+	<link rel="stylesheet" href="CSS/mouseover3.css" />
 	
 		<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.5.1.js"  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
@@ -46,13 +47,12 @@
 			.btn {
 				margin-right: 3%;
 				height: 50px;
-				line-height: 50px;
 				text-align: center;
 				width: auto;
 				padding-left: 5%;
 				padding-right: 5%;
 				min-width: 80px;
-				font-size: 1.2em
+				font-size: 1em
 			}
 	
 			.toppadding {
@@ -90,6 +90,7 @@
 		<%
 		    //로그인 유무 확인
 			request.setCharacterEncoding("UTF-8");
+			ArrayList<String[]> CostInfo = new ArrayList<String[]>();
 			String UserNm = session.getAttribute("UserNm") == null ? "" : (String)session.getAttribute("UserNm");
 			String Rank = session.getAttribute("Rank") == null ? "" : (String)session.getAttribute("Rank");
 			
@@ -101,9 +102,16 @@
 			
 		try{
 			Connection conn =  MySQLConnect.getMySQLConnection();
-			String sql = "SELECT * FROM MA_Project ORDER BY PJTNo DESC";
+			String sql = "SELECT * FROM MA_Cost mc, MA_Project mp, members mem WHERE mc.PJTNo = mp.PJTNo AND mc.InsertUserID = mem.id";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			while (rs.next())
+			{
+				String InsertDate = sdf.format(rs.getDate("InsertDt"));
+				CostInfo.add(new String[] {rs.getString("CostNm"), rs.getString("CostNo"), rs.getString("PJTNo"), rs.getString("PJTNm"), rs.getString("CostType"), rs.getString("name"), InsertDate, rs.getString("CostContent")});
+			}
 		%>
 	
 	</head>
@@ -129,64 +137,52 @@
 				</div>
 				
 				<!-- Banner -->
-				<div class="row" style="margin-Left:5%; padding-top:40px; background-color: white; margin-Right:5%">
-					<div>
-						<select>
-							<option value="">프로젝트 상태를 선택하세요</option>
-							<option value="시작전">시작전</option>
-							<option value="정상진행">정상진행</option>
-							<option value="지연진행">지연진행</option>
-							<option value="완료">Success</option>
-							<option value="홀드">홀드</option>
-							<option value="드롭">드롭</option>
-							<option value="종료">종료</option>
-						</select>
+				<div class="row" style="width: 90%; height: 80%; margin: 40px 30% 3% 5%; padding: 10px; background-color: white; border-radius: 10px;">
+					<div style="width: 100%; height: 50px;">
+						<input class="nanum" id="Nm" type="text" style="float:left; width: 15%; margin: 10px;" placeholder="제목">
+						<input class="nanum" id="InsertUser" type="text" style="float:left; width: 15%; margin: 10px;" placeholder="작성자">
+						<input type="button" value="검색" style="margin: 10px;">
+						<input type="button" value="프로젝트 등록"  onClick="location.href='ProjectCreate.jsp'" style="float: right; margin: 10px;">
 					</div>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<div>
-						<select>
-							<option value="">부서를 선택하세요</option>
-							<option value="afc2df2d-4577-47ef-b449-174b78a8a8bf">솔루션 사업부</option>
-							<option value="26280bbc-eea2-4fb6-8ee4-b4daba1cd0e7">팀프로젝트</option>
-							<option value="351ea3d6-762e-4ece-bf0d-e54faa4794b0">팀클라우드</option>
-							<option value="639f1cd3-e4c8-48ed-85d0-96ee4ffa2901">디자인 사업부</option>
-							<option value="8d334f75-ebb2-4f8b-a069-5b1820aa56d9">템플릿 디자인팀</option>
-							<option value="9a8251b4-daac-4a0d-8e81-632f01cd922b">간트차트 디자인팀</option>
-							<option value="7b9568c5-9cae-41bd-829b-69a471a22306">집에가고싶어요</option>
-							<option value="f3ef5eb3-beb0-4a7d-b014-56560472e890">시스템 사업부</option>
-						</select>
+					
+					<!--산출물 정보 팝업 -->
+					<div class="modal fade" id="ApprovalInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header" style="padding: 1rem 1rem 0 1rem;">
+									<h2 class="modal-title" id="exampleModalLabel">
+										<label class="nanum">품의서 정보</label>
+									</h2>
+								</div>
+								<div class="modal-body">
+									<label class="nanum">제목</label> &nbsp;&nbsp;<label id="ApprovalNmLabel" style="margin-top: -6%"></label>
+								</div>
+								<div class="modal-body" style="margin-top: -3%">
+									<label class="nanum">파일&nbsp;&nbsp;&nbsp;&nbsp;</label> <label id="ApprovalFileNmLabel"></label>
+								</div>
+								<div class="modal-body" style="margin-top: -3%">
+									<label class="nanum">가격&nbsp;&nbsp;&nbsp;&nbsp;</label> <label id="ApprovalUseCost"></label>
+								</div>
+								<div class="modal-body">
+									<label class="nanum" style="margin-top: -3%">내용</label> <label id="ApprovalContent" style="word-break: break-all"></label>
+								</div>
+								<div class="modal-footer">
+									<button id="OKbtn" name="btnUpdate" class="btn" style="box-shadow: none" type="button">결재</button>
+									<button id="Nobtn" name="btnUpdate" class="btn" style="box-shadow: none" type="button">반려</button>
+									<button class="btn" style="box-shadow: none" type="button" data-dismiss="modal">닫기</button>
+								</div>
+							</div>
+						</div>
 					</div>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<div>
-						<input id="search" type="text" class="form-control" placeholder="Search...">
-						<span>
-							<span><i class="la la-search"></i></span>
-						</span>
-					</div>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<div style="float:left; padding-left:20px">
-						<input type="button" value="검색">
-					</div>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<div style="width:80px; float:right;">
-						<input type="button" value="프로젝트 등록"  onClick="location.href='ProjectCreate.jsp'">
-					</div>
-				</div>
-	
-				<!-- Section -->
-				<section>
-					<div id="grid" style="margin-Left:5%; padding-top:50px; background-color: white; margin-Right:5%">
+					
+					<div id="grid" style="width: 100%; margin: 5px 5px 5px 5px; margin-top: -450px; background: white;">
 						<table>
 							<colgroup>
 								<col style="width:30px" />
-								<col style="width:25%" />
-								<col style="width:100px" />
-								<col style="width:100px" />
-								<col style="width:100px" />
-								<col style="width:100px" />
-								<col style="width:100px" />
-								<col style="width:70px" />
-								<col style="width:70px" />
+								<col style="width:30%" />
+								<col style="width:20%" />
+								<col style="width:15%" />
+								<col style="width:15%" />
 							</colgroup>
 							<thead>
 								<tr>
@@ -196,43 +192,38 @@
 										</span>
 									</th>
 									<th data-field="PROJ_NAME" data-index="1" data-title="프로젝트" id="838d690c-5b5f-419a-99a9-1a8fbbfbb015" scope="col">
-										<span>
-											프로젝트명
-										</span>
+										<span>제목</span>
 									</th>
 									<th data-field="PROJ_PM" data-index="2" data-title="PM" id="399f3c50-afda-4c52-85d9-e7c527ce14ce" scope="col">
-										<span>
-											PM
-										</span>
+										<span>프로젝트 명</span>
 									</th>
 									<th data-field="PROJ_STATE" data-index="3" data-title="진행 상황" id="61a94629-97a3-4c89-949c-0e5815cfb721" scope="col">
-										<span>
-										 진행 상황
-										</span>
+										<span>구분</span>
 									</th>
 									<th data-field="PROJ_START_DATE" data-index="4" data-title="시작일" id="bce59831-42b4-44ec-9399-adae8ddcdd5f" scope="col">
-										<span>
-											시작일
-										</span>
+										<span>등록 일자</span>
 									</th>				
 									<th data-field="PROJ_FINISH_DATE" data-index="5" data-title="완료일" id="c9ba7385-2956-46e8-a4f8-eaec4dbd5c90" scope="col">
-										<span>
-											완료일
-										</span>
+										<span>등록자</span>
 									</th>
 								</tr>
 							</thead>
 							<tbody>		
 								<%
 									int rs_Count = 0; 
-									while(rs.next()){
+									for (int i = 0; i < CostInfo.size(); i++)
+									{
 										out.print("<tr>");
 										out.print("<td>" + "<span>" + "&nbsp" + "</span>" + "</td>");
-										out.print("<td>  <a href='ProjectInfo.jsp?PJTNo="+ rs.getString("PJTNo") +"'>" + "<span>" + rs.getString("PJTNm") + "</span>" + " </a></td>");
-										out.print("<td>" + "<span>" + rs.getString("PJTPMID") + "</span>" + "</td>");
-										out.print("<td>" + "<span>" + rs.getString("PJTStateSeq") + "</span>" + "</td>");
-										out.print("<td>" + "<span>" + rs.getString("PJTStartDt") + "</span>" + "</td>");
-										out.print("<td>" + "<span>" + rs.getString("PJTEndDt") +"</span>" +  "</td>");
+										out.println("<td><a class = 'btn' id = '" + CostInfo.get(i)[1] + "' name = '" + CostInfo.get(i)[1] + "' onclick = 'ApprovalInfo(this)' style = 'margin-left: -5%'><span>" + CostInfo.get(i)[0] + "</span></a></td>");
+										out.print("<td>" + "<span>" + CostInfo.get(i)[3] + "</span>" + "</td>");
+										if (CostInfo.get(i)[4].equals("0"))
+										{
+											out.print("<td>" + "<span>구매품의서</span>" + "</td>");
+										}
+										out.print("<td>" + "<span>" + CostInfo.get(i)[6] + "</span>" + "</td>");
+										out.print("<td>" + "<span>" + CostInfo.get(i)[5] +"</span>" +  "</td>");
+										out.print("<td id = '" + CostInfo.get(i)[1] + "Content" + "' hidden = 'hidden'>" + "<span>" + CostInfo.get(i)[7] +"</span>" +  "</td>");
 										out.print("</tr>"); 
 										rs_Count += 1;
 									}
@@ -258,7 +249,7 @@
 							</tbody>
 						</table>
 					</div>
-				</section>
+				</div>
 			</div>
 			
 			<!-- Sidebar -->
@@ -299,5 +290,19 @@
 		<script src="js/breakpoints.min.js"></script>
 		<script src="js/util.js"></script>
 		<script src="js/main.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			function ApprovalInfo(obj)
+			{
+				ClickId = document.getElementById(obj.getAttribute('id')).getAttribute('id');
+				$('#ApprovalNmLabel').text($(obj).text());
+				$('#ApprovalContent').text(document.getElementById(ClickId + "Content").outerText);
+				$('#ApprovalInfo').modal({
+					backdrop : 'static',
+					keyboard : false
+				})
+			}
+		</script>
 	</body>
 </html>

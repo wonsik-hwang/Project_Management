@@ -259,7 +259,6 @@
 	
 	// 로그인한 사용자가 속한 프로젝트를 찾는 쿼리문
 // 	String projectjoin = "SELECT ";
-	System.out.println("아이디 : " + session.getAttribute("UserId"));
 %>
 
 <body onload="showClock()">
@@ -373,7 +372,7 @@
 								out.println("<details open = 'open'>");
 								out.println("<summary style = 'margin: 9px 0px 16px 0px'>관리 페이지</summary>");
 								out.println("<ul>");
-								out.println("<li class = 'nanum'><a href = '#'>결재 목록</a></li>");
+								out.println("<li class = 'nanum'><a href = 'ProjectApproval.jsp'>결재 목록</a></li>");
 								out.println("<li class = 'nanum'><a href = '#'>양식 목록</a></li>");
 								out.println("</ul>");
 								out.println("</details>");
@@ -384,11 +383,8 @@
 						<li></li>
 					</ul>
 				</nav>
-
-
 			</div>
 		</div>
-
 	</div>
 
 
