@@ -185,7 +185,7 @@
 									</a>
 								</li>
 								<li class="rowLi">
-									<a href="ProjectMember_Add.jsp?PJNo=<%= PJTNo %>" data-hover="인원관리">
+									<a href="ProjectMember.jsp?PJNo=<%= PJTNo %>" data-hover="인원관리">
 										<span>인원관리</span>
 									</a>
 								</li>
@@ -218,7 +218,7 @@
 
 						<!--비용 등록 팝업 -->
 						<div style="float: right; padding-right: 2%;">
-							<input type="button" id="CostCreatebtn" value="+ 비용 등록">
+							<input type="button" id="CostCreatebtn" value="+ 품의서 등록">
 						</div>
 						<form id="PJTCostCreate" name="PJTCostCreate" action="ProjectCost_OK.jsp" method="post" enctype="multipart/form-data">
 							<div class="modal fade" id="CostCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -226,44 +226,44 @@
 									<div class="modal-content">
 										<div class="modal-header" style="padding: 1rem 1rem 0 1rem;">
 											<h2 class="modal-title" id="exampleModalLabel">
-												<label class="nanum">비용 등록</label>
+												<label class="nanum">품의서 등록</label>
 											</h2>
 										</div>
 										<div class="modal-body">
-											<label class="nanum">비용 명</label>
+											<label class="nanum">제목</label>
 											<input class="nanum" id="CostNm" name="CostNm" type="text" placeholder="제목을 입력해 주십시오">
 										</div>
-										<div class="modal-body" style="float: left; margin-top: -10px;">
-											<div style="float: left; width: 45%">
-												<label class="nanum">비용 구분</label>
-												<select id="CostGB" name="CostGB" onchange="CostGBChange(this)">
-													<option value="0">구매품의서</option>
-													<option value="1">지출결의서</option>
-												</select>
-											</div>
+<!-- 										<div class="modal-body" style="float: left; margin-top: -10px;"> -->
+<!-- 											<div style="float: left; width: 45%"> -->
+<!-- 												<label class="nanum">비용 구분</label> -->
+<!-- 												<select id="CostGB" name="CostGB" onchange="CostGBChange(this)"> -->
+<!-- 													<option value="0">구매품의서</option> -->
+<!-- 													<option value="1">지출결의서</option> -->
+<!-- 												</select> -->
+<!-- 											</div> -->
 											
-											<div style="float: right; width: 45%">
-												<label class="nanum">비용 종류</label>
-												<select id="CostCd" name="CostCd">
-													<%
-														while (rs2.next())
-														{
-															out.println("<option value = '" + rs2.getString("CodeValue") + "'>" + rs2.getString("DisplayValue") + "</option>");
-														}
-													%>
-												</select>
-											</div>
-										</div>
+<!-- 											<div style="float: right; width: 45%"> -->
+<!-- 												<label class="nanum">비용 종류</label> -->
+<!-- 												<select id="CostCd" name="CostCd"> -->
+<%-- 													<% --%>
+<!-- 														while (rs2.next()) -->
+<!-- 														{ -->
+<!-- 															out.println("<option value = '" + rs2.getString("CodeValue") + "'>" + rs2.getString("DisplayValue") + "</option>"); -->
+<!-- 														} -->
+<!-- 													%> -->
+<!-- 												</select> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
 										<div class="modal-body">
 											<label class="nanum">파일&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" id="CostFileNm" name="CostFileNm" class="upload-hidden" onchange="javascript: document.getElementById('CoFileNm').value = document.getElementById('CostFileNm').value.split('\\')[2]"></label>
 											<input id="CoFileNm" name="CoFileNm" type="text" hidden="hidden">
 										</div>
 										<div class="modal-body" style="margin-top: -20px">
 											<label class="nanum">가격</label>
-											<input id="CostPrice" name="CostPrice" type="text" placeholder="가격을 입력해 주십시오">
+											<input class="nanum" id="CostPrice" name="CostPrice" type="text" placeholder="가격을 입력해 주십시오">
 										</div>
 										<div class="modal-body" style="margin-top: -15px;">
-											<label class="nanum">비용 내용</label>
+											<label class="nanum">내용</label>
 											<textarea id="CostContent" name="CostContent" rows="5" style="resize: none;"> </textarea>
 										</div>
 										<div class="modal-footer">
@@ -281,24 +281,24 @@
 									<div class="modal-content">
 										<div class="modal-header" style="padding: 1rem 1rem 0 1rem;">
 											<h2 class="modal-title" id="exampleModalLabel">
-												<label class="nanum">비용 정보</label>
+												<label class="nanum">품의서 정보</label>
 											</h2>
 										</div>
 										<div class="modal-body">
-											<label class="nanum">비용 명</label>
+											<label class="nanum">제목</label>
 											<label id="CostNmLabel"></label>
 										</div>
-										<div class="modal-body" style="float: left; margin-top: -20px;">
-											<div style="float: left; width: 45%">
-												<label class="nanum">비용 구분</label>
-												<label id="CostGBLabel"></label>
-											</div>
+<!-- 										<div class="modal-body" style="float: left; margin-top: -20px;"> -->
+<!-- 											<div style="float: left; width: 45%"> -->
+<!-- 												<label class="nanum">비용 구분</label> -->
+<!-- 												<label id="CostGBLabel"></label> -->
+<!-- 											</div> -->
 											
-											<div style="float: right; width: 45%">
-												<label class="nanum">비용 종류</label>
-												<label id="CostCdLabel"></label>
-											</div>
-										</div>
+<!-- 											<div style="float: right; width: 45%"> -->
+<!-- 												<label class="nanum">비용 종류</label> -->
+<!-- 												<label id="CostCdLabel"></label> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
 										<div class="modal-body">
 											<label class="nanum">파일&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" id="CostFileNm" name="CostFileNm" class="upload-hidden" onchange="javascript: document.getElementById('CoFileNm').value = document.getElementById('CostFileNm').value.split('\\')[2]"></label>
 											<input id="CoFileNm" name="CoFileNm" type="text" hidden="hidden">
@@ -308,7 +308,7 @@
 											<label id="CostPriceLabel"></label>
 										</div>
 										<div class="modal-body" style="margin-top: -15px;">
-											<label class="nanum">비용 내용</label>
+											<label class="nanum">내용</label>
 											<label id="CostContentLabel" style="word-break: break-all;"></label>
 										</div>
 										<div class="modal-body">
@@ -361,13 +361,13 @@
 											<span>&nbsp;</span>
 										</th>
 										<th data-field="CostNm" data-index="1" data-title="산출물 명" id="838d690c-5b5f-419a-99a9-1a8fbbfbb015" scope="col">
-											<span>비용 명</span>
+											<span>제목</span>
 										</th>
 										<th data-field="InsertDt" data-index="2" data-title="등록 일자" id="399f3c50-afda-4c52-85d9-e7c527ce14ce" scope="col">
-											<span>비용 구분</span>
+											<span>구분</span>
 										</th>
 										<th data-field="InsertNm" data-index="3" data-title="등록자" id="61a94629-97a3-4c89-949c-0e5815cfb721" scope="col">
-											<span>결재 상태</span>
+											<span>결재</span>
 										</th>
 										<th data-field="UpdateDt" data-index="4" data-title="수정 일자" id="bce59831-42b4-44ec-9399-adae8ddcdd5f" scope="col">
 											<span>등록 일자</span>
