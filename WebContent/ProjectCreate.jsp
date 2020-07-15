@@ -98,7 +98,7 @@
 				
 				while (rs.next())
 				{
-					ProjectList.add(new String[] {rs.getString("prj_num"), rs.getString("prj_name")});
+					ProjectList.add(new String[] {rs.getString("prj_num"), rs.getString("prj_name"), rs.getString("cp_code")});
 				}
 				
 				// 사장님만 조회
@@ -225,7 +225,7 @@
 								<%
 									for (int i = 0; i < ProjectList.size(); i++)
 									{
-										out.println("<option value = '" + ProjectList.get(i)[0] + "'>" + ProjectList.get(i)[1] + "</option>");
+										out.println("<option value = '" + ProjectList.get(i)[0] + "'>" + ProjectList.get(i)[1] + "(" + ProjectList.get(i)[2] + ")" + "</option>");
 									}
 								%>
 							</select>
