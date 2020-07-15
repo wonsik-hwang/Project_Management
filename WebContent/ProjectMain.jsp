@@ -76,7 +76,7 @@
 			
 			if(answer==true)
 			{
-<%-- 				<%session.setAttribute("UserId", "");%> --%>
+				<%session.setAttribute("UserId", "");%>
 				location.href = 'ProjectLogin.jsp';
 			}
 		}
